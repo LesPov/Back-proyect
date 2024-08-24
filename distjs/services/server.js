@@ -18,6 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const loginController_1 = require("../apiServices/login/loginController");
 class Server {
     /**
      * Constructor de la clase Server.
@@ -42,6 +43,7 @@ class Server {
      * Configura las rutas de la aplicación.
      */
     routes() {
+        this.app.use('/api/auth', loginController_1.loginUser);
     }
     /**
      * Configura los middlewares de la aplicación.

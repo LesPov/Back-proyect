@@ -5,6 +5,7 @@
 
 import express, { Application } from 'express';
 import cors from 'cors';
+import { loginUser } from '../apiServices/login/loginController';
 
 
 class Server {
@@ -37,6 +38,8 @@ class Server {
      * Configura las rutas de la aplicación.
      */
     routes() {
+        this.app.use('/api/auth', loginUser);
+
     }
 
     /**
