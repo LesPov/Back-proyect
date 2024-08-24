@@ -1,4 +1,8 @@
-import { UsuarioModel } from "../interface/UsuarioModel";
+import { errorMessages } from "../../../middleware/erros/errorMessages";
+import Usuario from "../../../models/UserModel";
+import { Response } from 'express';
+import { UserModel } from "../interface/UsuarioModel";
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
@@ -7,8 +11,8 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * @param res Objeto de respuesta HTTP.
  * @returns Usuario encontrado.
  */
-export const findUserByUsernameLogin = async (usernameOrEmail: string, res: Response): Promise<UsuarioModel> => {
-    let user: UsuarioModel | null = null;
+export const findUserByUsernameLogin = async (usernameOrEmail: string, res: Response): Promise<UserModel> => {
+    let user: UserModel | null = null;
 
     if (EMAIL_REGEX.test(usernameOrEmail)) {
         user = await Usuario.findOne({

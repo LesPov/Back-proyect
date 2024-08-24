@@ -1,7 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
-import { UsuarioModel } from './interface/UsuarioModel';
+import { UserModel } from '../apiServices/login/interface/UsuarioModel';
+import sequelize from '../database/connnection';
 
-export const Usuario = sequelize.define<UsuarioModel>('usuarios', {
+export const Usuario = sequelize.define<UserModel>('usuarios', {
     usuario_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -65,11 +66,10 @@ export const Usuario = sequelize.define<UsuarioModel>('usuarios', {
     },
     estado: {
         type: DataTypes.ENUM('Activado', 'Desactivado'), // Define un enum para limitar los valores posibles
-    allowNull: false,
-    defaultValue: 'Activado',
+        allowNull: false,
+        defaultValue: 'Activado',
     },
 }, {
     timestamps: false, // Desactivar las columnas createdAt y updatedAt
 });
 export default Usuario;
- 

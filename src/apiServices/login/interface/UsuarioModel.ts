@@ -2,7 +2,7 @@
 import { DataTypes, Model } from 'sequelize';
 
 // Modelo para la tabla 'usuarios'
-export interface UsuarioModel extends Model {
+export interface UserModel extends Model {
     [x: string]: any;
 
     usuario_id: number;

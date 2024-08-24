@@ -8,8 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findUserByUsernameLogin = void 0;
+const errorMessages_1 = require("../../../middleware/erros/errorMessages");
+const UserModel_1 = __importDefault(require("../../../models/UserModel"));
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 /**
  * Buscar un usuario por nombre de usuari o email  incluyendo su información de verificación y rol.
@@ -20,19 +25,19 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const findUserByUsernameLogin = (usernameOrEmail, res) => __awaiter(void 0, void 0, void 0, function* () {
     let user = null;
     if (EMAIL_REGEX.test(usernameOrEmail)) {
-        user = yield Usuario.findOne({
+        user = yield UserModel_1.default.findOne({
             where: { email: usernameOrEmail },
             include: [Verificacion, Rol],
         });
     }
     else {
-        user = yield Usuario.findOne({
+        user = yield UserModel_1.default.findOne({
             where: { usuario: usernameOrEmail },
             include: [Verificacion, Rol],
         });
     }
     if (!user) {
-        res.status(400).json({ msg: errorMessages.userNotExists(usernameOrEmail) });
+        res.status(400).json({ msg: errorMessages_1.errorMessages.userNotExists(usernameOrEmail) });
         throw new Error("Usuario no encontrado");
     }
     return user;
