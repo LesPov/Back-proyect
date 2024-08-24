@@ -3,10 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.UserModel = void 0;
 const sequelize_1 = require("sequelize");
 const connnection_1 = __importDefault(require("../database/connnection"));
-exports.User = connnection_1.default.define('usuarios', {
+/**
+ * Modelo Sequelize que mapea la tabla `user` en la base de datos.
+ * Define la estructura de la tabla, incluyendo tipos de datos, restricciones y relaciones.
+ */
+exports.UserModel = connnection_1.default.define('usuarios', {
     usuario_id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
@@ -76,4 +80,4 @@ exports.User = connnection_1.default.define('usuarios', {
 }, {
     timestamps: false, // Desactivar las columnas createdAt y updatedAt
 });
-exports.default = exports.User;
+exports.default = exports.UserModel;

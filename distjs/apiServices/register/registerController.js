@@ -9,15 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = void 0;
-const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.newUser = void 0;
+/**
+ * Controlador para registrar un nuevo usuario.
+ * @param req La solicitud HTTP entrante.
+ * @param res La respuesta HTTP saliente.
+ */
+const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        //traer usernameOrEmail y contrasena
+        const { usuario, contrasena, email, rol } = req.body;
         // Validar la entrada de datos
-        // Buscar al usuario por nombre de usuario
+        const inputValidationErrors = validateInput(usuario, contrasena, email, rol);
+        handleInputValidationErrors(inputValidationErrors, res);
     }
     catch (error) {
         // Manejar errores internos del servidor
     }
 });
-exports.loginUser = loginUser;
+exports.newUser = newUser;

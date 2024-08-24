@@ -1,8 +1,30 @@
 import { DataTypes, Model } from 'sequelize';
-import { UserModel } from '../apiServices/login/interface/UsuarioModel';
 import sequelize from '../database/connnection';
+// Modelo para la tabla 'usuarios'
+export interface userInterface extends Model {
+    [x: string]: any;
 
-export const User = sequelize.define<UserModel>('usuarios', {
+    usuario_id: number;
+    usuario: string;
+    contrasena: string;
+    nombre: string;
+    apellido_paterno: string;
+    apellido_materno: string;
+    sexo: string;
+    dni: string;
+    direccion: string;
+    celular: string;
+    email: string;
+    fecha_nacimiento: Date;
+    fecha_registro: Date;
+    fecha_actualizacion: Date;
+    estado: string;
+} 
+/**
+ * Modelo Sequelize que mapea la tabla `user` en la base de datos.
+ * Define la estructura de la tabla, incluyendo tipos de datos, restricciones y relaciones.
+ */
+export const UserModel = sequelize.define<userInterface>('usuarios', {
     usuario_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -72,4 +94,4 @@ export const User = sequelize.define<UserModel>('usuarios', {
 }, {
     timestamps: false, // Desactivar las columnas createdAt y updatedAt
 });
-export default User;
+export default UserModel;
