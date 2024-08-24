@@ -21,6 +21,7 @@ const cors_1 = __importDefault(require("cors"));
 const rolModel_1 = __importDefault(require("../models/rolModel"));
 const userModel_1 = __importDefault(require("../models/userModel"));
 const verificationModel_1 = __importDefault(require("../models/verificationModel"));
+const registerController_1 = require("../apiServices/register/registerController");
 class Server {
     /**
      * Constructor de la clase Server.
@@ -45,7 +46,7 @@ class Server {
      * Configura las rutas de la aplicación.
      */
     routes() {
-        this.app.use('/api/auth');
+        this.app.use('/api/auth', registerController_1.newUser);
     }
     /**
      * Configura los middlewares de la aplicación.

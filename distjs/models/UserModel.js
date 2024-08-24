@@ -16,7 +16,7 @@ exports.UserModel = connnection_1.default.define('usuarios', {
         primaryKey: true,
         autoIncrement: true,
     },
-    usuario: {
+    username: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         unique: true,

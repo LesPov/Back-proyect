@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { validateInput } from './utils/validateInput';
+import { handleInputValidationErrors } from './utils/handleInputValidationErrors';
 
 
 /**
@@ -8,10 +10,10 @@ import { Request, Response } from 'express';
  */
 export const newUser = async (req: Request, res: Response) => {
     try {
-        const { usuario, contrasena, email, rol } = req.body;
+        const { username, contrasena, email, rol } = req.body;
 
         // Validar la entrada de datos
-        const inputValidationErrors = validateInput(usuario, contrasena, email, rol);
+        const inputValidationErrors = validateInput(username, contrasena, email, rol);
         handleInputValidationErrors(inputValidationErrors, res);
 
     } catch (error) {

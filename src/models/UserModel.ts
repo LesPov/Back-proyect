@@ -5,7 +5,7 @@ export interface userInterface extends Model {
     [x: string]: any;
 
     usuario_id: number;
-    usuario: string;
+    username: string;
     contrasena: string;
     nombre: string;
     apellido_paterno: string;
@@ -28,9 +28,9 @@ export const UserModel = sequelize.define<userInterface>('usuarios', {
     usuario_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true, 
     },
-    usuario: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,

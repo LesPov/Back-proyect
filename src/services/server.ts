@@ -8,10 +8,11 @@ import cors from 'cors';
 import RolModel from '../models/rolModel';
 import UserModel from '../models/userModel';
 import verificacionModel from '../models/verificationModel';
+import { newUser } from '../apiServices/register/registerController';
 
 
 class Server {
-
+ 
     private app: Application;
     private port: string;
 
@@ -40,7 +41,7 @@ class Server {
      * Configura las rutas de la aplicación.
      */
     routes() {
-        this.app.use('/api/auth',);
+        this.app.use('/api/auth',newUser);
 
     }
 

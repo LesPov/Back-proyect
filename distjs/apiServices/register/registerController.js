@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.newUser = void 0;
+const validateInput_1 = require("./utils/validateInput");
+const handleInputValidationErrors_1 = require("./utils/handleInputValidationErrors");
 /**
  * Controlador para registrar un nuevo usuario.
  * @param req La solicitud HTTP entrante.
@@ -17,10 +19,10 @@ exports.newUser = void 0;
  */
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { usuario, contrasena, email, rol } = req.body;
+        const { username, contrasena, email, rol } = req.body;
         // Validar la entrada de datos
-        const inputValidationErrors = validateInput(usuario, contrasena, email, rol);
-        handleInputValidationErrors(inputValidationErrors, res);
+        const inputValidationErrors = (0, validateInput_1.validateInput)(username, contrasena, email, rol);
+        (0, handleInputValidationErrors_1.handleInputValidationErrors)(inputValidationErrors, res);
     }
     catch (error) {
         // Manejar errores internos del servidor
