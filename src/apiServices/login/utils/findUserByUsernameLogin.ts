@@ -1,5 +1,5 @@
 import { errorMessages } from "../../../middleware/erros/errorMessages";
-import Usuario from "../../../models/UserModel";
+import User from "../../../models/UserModel";
 import { Response } from 'express';
 import { UserModel } from "../interface/UsuarioModel";
 
@@ -15,12 +15,12 @@ export const findUserByUsernameLogin = async (usernameOrEmail: string, res: Resp
     let user: UserModel | null = null;
 
     if (EMAIL_REGEX.test(usernameOrEmail)) {
-        user = await Usuario.findOne({
+        user = await User.findOne({
             where: { email: usernameOrEmail },
             include: [Verificacion, Rol],
         });
     } else {
-        user = await Usuario.findOne({
+        user = await User.findOne({
             where: { usuario: usernameOrEmail },
             include: [Verificacion, Rol],
         });

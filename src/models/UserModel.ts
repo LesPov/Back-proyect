@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import { UserModel } from '../apiServices/login/interface/UsuarioModel';
 import sequelize from '../database/connnection';
 
-export const Usuario = sequelize.define<UserModel>('usuarios', {
+export const User = sequelize.define<UserModel>('usuarios', {
     usuario_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -72,4 +72,4 @@ export const Usuario = sequelize.define<UserModel>('usuarios', {
 }, {
     timestamps: false, // Desactivar las columnas createdAt y updatedAt
 });
-export default Usuario;
+export default User;
