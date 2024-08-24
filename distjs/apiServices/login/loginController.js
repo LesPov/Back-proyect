@@ -10,9 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUser = void 0;
+const validateVerificationFieldslogin_1 = require("./utils/userValidation/validateVerificationFieldslogin");
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { usernameOrEmail, contrasena } = req.body;
+        // Validar la entrada de datos
+        const inputValidationErrors = (0, validateVerificationFieldslogin_1.validateVerificationFieldslogin)(usernameOrEmail, contrasena);
     }
     catch (error) {
         // Manejar errores internos del servidor
