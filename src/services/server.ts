@@ -5,14 +5,12 @@
 
 import express, { Application } from 'express';
 import cors from 'cors';
-import RolModel from '../models/rolModel';
-import UserModel from '../models/userModel';
-import verificacionModel from '../models/verificationModel';
-import { newUser } from '../apiServices/register/registerController';
+
+import { newUser } from '../apiServices/auth/register/registerController';
 
 
 class Server {
- 
+
     private app: Application;
     private port: string;
 
@@ -41,7 +39,7 @@ class Server {
      * Configura las rutas de la aplicación.
      */
     routes() {
-        this.app.use('/api/auth',newUser);
+        this.app.use('/api/auth', newUser);
 
     }
 
@@ -61,9 +59,7 @@ class Server {
      */
     async dbConnect() {
         try {
-            await UserModel.sync();
-            await RolModel.sync();
-            await verificacionModel.sync();
+
 
         } catch (error) {
             console.error('Unable to connect to the database:', error);
