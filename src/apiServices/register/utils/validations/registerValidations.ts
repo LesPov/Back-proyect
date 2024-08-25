@@ -1,5 +1,4 @@
-import { Response } from 'express';
-import { errorMessages } from '../../../middleware/erros/errorMessages';
+import { errorMessages } from '../../../../middleware/erros/errorMessages';
 
 const PASSWORD_MIN_LENGTH = 10;
 const PASSWORD_REGEX_NUMBER = /\d/;
@@ -20,33 +19,10 @@ export const validateInput = (username: string, contrasena: string, email: strin
     if (!username) {
         errors.push(errorMessages.requiredFields);
     }
-    // ... (validar otros campos)
     return errors;
 };
 
-/**
- * Maneja los errores de validación de la entrada de datos.
- * @param errors Lista de errores de validación.
- * @param res La respuesta HTTP saliente.
- * @throws {Error} Si hay errores de validación, se lanza un error con el mensaje "Input validation failed".
- */
-export const handleInputValidationErrors = (errors: string[], res: Response): void => {
-    if (errors.length > 0) {
-        console.log("Validation errors:", errors); // Agrega esta línea para imprimir los errores
 
-        // Concatenar los mensajes de error en una cadena
-        const errorMessage = errors.join('. ');
-
-        // Responder con un JSON de error y código de estado 400  
-        res.status(400).json({
-            msg: errorMessage,
-            errors: `Error en la validación de la entrada de datos`,
-        });
-
-        // Lanzar un error para indicar que la validación de entrada ha fallado
-        throw new Error("Input validation failed");
-    }
-};
 /**
  * Valida la contraseña según los requisitos.
  * @param contrasena La contraseña a validar.
@@ -88,20 +64,6 @@ export const validateCharacterClass = (contrasena: string, characterClass: RegEx
     }
 };
 
-/**
- * Maneja los errores de validación de la contraseña.
- * @param errors Lista de errores de validación de la contraseña.
- * @param res La respuesta HTTP saliente.
- */
-export const handlePasswordValidationErrors = (errors: string[], res: Response) => {
-    if (errors.length > 0) {
-        res.status(400).json({
-            msg: errors,
-            errors: 'Error en la validación de la contraseña',
-        });
-        throw new Error("Password validation failed");
-    }
-};
 
 
 /**
@@ -118,18 +80,4 @@ export const validateEmail = (email: string): string[] => {
 
     return errors;
 };
-    
-/**
- * Maneja los errores de validación del correo electrónico.
- * @param errors Lista de errores de validación del correo electrónico.
- * @param res La respuesta HTTP saliente.
- */
-export const handleEmailValidationErrors = (errors: string[], res: Response) => {
-    if (errors.length > 0) {
-        res.status(400).json({
-            msg: errors,
-            errors: 'Error en la validación del correo electrónico',
-        });
-        throw new Error("Email validation failed"); 
-    }
-};
+

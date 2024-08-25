@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleEmailValidationErrors = exports.validateEmail = exports.handlePasswordValidationErrors = exports.validateCharacterClass = exports.validateLength = exports.validatePassword = exports.validateInput = void 0;
-const errorMessages_1 = require("../../../middleware/erros/errorMessages");
+exports.validateEmail = exports.validateCharacterClass = exports.validateLength = exports.validatePassword = exports.validateInput = void 0;
+const errorMessages_1 = require("../../../../middleware/erros/errorMessages");
 const PASSWORD_MIN_LENGTH = 10;
 const PASSWORD_REGEX_NUMBER = /\d/;
 const PASSWORD_REGEX_UPPERCASE = /[A-Z]/;
@@ -20,7 +20,6 @@ const validateInput = (username, contrasena, email, rol) => {
     if (!username) {
         errors.push(errorMessages_1.errorMessages.requiredFields);
     }
-    // ... (validar otros campos)
     return errors;
 };
 exports.validateInput = validateInput;
@@ -64,21 +63,6 @@ const validateCharacterClass = (contrasena, characterClass, errorMessage, errors
 };
 exports.validateCharacterClass = validateCharacterClass;
 /**
- * Maneja los errores de validación de la contraseña.
- * @param errors Lista de errores de validación de la contraseña.
- * @param res La respuesta HTTP saliente.
- */
-const handlePasswordValidationErrors = (errors, res) => {
-    if (errors.length > 0) {
-        res.status(400).json({
-            msg: errors,
-            errors: 'Error en la validación de la contraseña',
-        });
-        throw new Error("Password validation failed");
-    }
-};
-exports.handlePasswordValidationErrors = handlePasswordValidationErrors;
-/**
  * Valida el formato del correo electrónico.
  * @param email El correo electrónico a validar.
  * @returns Lista de errores de validación del correo electrónico.
@@ -91,18 +75,3 @@ const validateEmail = (email) => {
     return errors;
 };
 exports.validateEmail = validateEmail;
-/**
- * Maneja los errores de validación del correo electrónico.
- * @param errors Lista de errores de validación del correo electrónico.
- * @param res La respuesta HTTP saliente.
- */
-const handleEmailValidationErrors = (errors, res) => {
-    if (errors.length > 0) {
-        res.status(400).json({
-            msg: errors,
-            errors: 'Error en la validación del correo electrónico',
-        });
-        throw new Error("Email validation failed");
-    }
-};
-exports.handleEmailValidationErrors = handleEmailValidationErrors;

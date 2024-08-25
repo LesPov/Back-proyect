@@ -1,5 +1,5 @@
-import { errorMessages } from "../../../middleware/erros/errorMessages";
 import { Response } from 'express';
+import { errorMessages } from '../../../../middleware/erros/errorMessages';
 
 const VERIFICATION_CODE_EXPIRATION_HOURS = 24;
 const VERIFICATION_CODE_EXPIRATION_MINUTES = 1;
