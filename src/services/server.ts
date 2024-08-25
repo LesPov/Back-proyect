@@ -6,7 +6,8 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 
-import { newUser } from '../apiServices/auth/register/registerController';
+import { newUser } from '../apiServices/Auth/register/registerController';
+import { AuthModel } from '../apiServices/Auth/register/models/authModel';
 
 
 class Server {
@@ -60,6 +61,7 @@ class Server {
     async dbConnect() {
         try {
 
+            await AuthModel.sync();
 
         } catch (error) {
             console.error('Unable to connect to the database:', error);

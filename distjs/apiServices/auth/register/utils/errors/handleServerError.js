@@ -2,8 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleServerError = void 0;
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
-const VERIFICATION_CODE_EXPIRATION_HOURS = 24;
-const VERIFICATION_CODE_EXPIRATION_MINUTES = 1;
 /**
  * Maneja errores internos del servidor.
  * @param error El error ocurrido.
@@ -16,6 +14,7 @@ const handleServerError = (error, res) => {
             msg: error.message || errorMessages_1.errorMessages.databaseError,
             error,
         });
+        throw new Error("Controller NewUser error");
     }
 };
 exports.handleServerError = handleServerError;

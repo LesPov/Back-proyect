@@ -1,0 +1,15 @@
+import { Response } from 'express';
+/** 
+ * Maneja los errores relacionados con la existencia de un usuario.
+ * @param error Mensaje de error si el usuario ya existe, de lo contrario, null.
+ * @param res La respuesta HTTP saliente.
+ */
+export const handleExistingUserError = (errors: string | null, res: Response) => {
+    if (errors) {
+        res.status(400).json({
+            msg: errors,
+            errors: 'Error usuario o correo ya existe.',
+        });
+        throw new Error("Register ExistingUser validation failed");
+    }
+};

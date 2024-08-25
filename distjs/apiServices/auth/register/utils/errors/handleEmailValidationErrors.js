@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleEmailValidationErrors = void 0;
+/**
+ * Maneja los errores de validación del correo electrónico.
+ * @param errors Lista de errores de validación del correo electrónico.
+ * @param res La respuesta HTTP saliente.
+ */
+const handleEmailValidationErrors = (errors, res) => {
+    if (errors.length > 0) {
+        res.status(400).json({
+            msg: errors,
+            errors: 'Error en la validación del correo electrónico',
+        });
+        throw new Error("Register Email validation failed");
+    }
+};
+exports.handleEmailValidationErrors = handleEmailValidationErrors;

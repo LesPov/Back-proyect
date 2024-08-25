@@ -18,7 +18,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const registerController_1 = require("../apiServices/auth/register/registerController");
+const registerController_1 = require("../apiServices/Auth/register/registerController");
+const authModel_1 = require("../apiServices/Auth/register/models/authModel");
 class Server {
     /**
      * Constructor de la clase Server.
@@ -60,6 +61,7 @@ class Server {
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                yield authModel_1.AuthModel.sync();
             }
             catch (error) {
                 console.error('Unable to connect to the database:', error);
