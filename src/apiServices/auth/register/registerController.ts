@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
+
 import { checkExistingUserOrEmail } from './utils/check/checkExistingUserOrEmail';
 import { handleEmailValidationErrors } from './utils/errors/handleEmailValidationErrors';
 import { handleExistingUserError } from './utils/errors/handleExistingUserError';
@@ -6,6 +8,7 @@ import { handleInputValidationErrors } from './utils/errors/handleInputValidatio
 import { handlePasswordValidationErrors } from './utils/errors/handlePasswordValidationErrors';
 import { handleServerError } from './utils/errors/handleServerError';
 import { validateInput, validatePassword, validateEmail } from './utils/validations/registerValidations';
+import { createNewUser } from './utils/userCreation/createNewUser';
 
 
 /**
@@ -15,6 +18,7 @@ import { validateInput, validatePassword, validateEmail } from './utils/validati
  */
 export const newUser = async (req: Request, res: Response) => {
     try {
+
         // Extraer los datos del cuerpo de la solicitud
         const { username, contrasena, email, rol } = req.body;
 
@@ -27,7 +31,7 @@ export const newUser = async (req: Request, res: Response) => {
         const passwordValidationErrors = validatePassword(contrasena);
         // Manejar cualquier error de validación de la contraseña
         handlePasswordValidationErrors(passwordValidationErrors, res);
- 
+
         // Validar el formato del correo electrónico
         const emailErrors = validateEmail(email);
         // Manejar cualquier error de validación del correo electrónico
@@ -36,6 +40,12 @@ export const newUser = async (req: Request, res: Response) => {
         // Verificar si el usuario o el correo electrónico ya existen
         const existingUserError = await checkExistingUserOrEmail(username, email);
         handleExistingUserError(existingUserError, res);
+
+        // Hash de la contraseña antes de guardarla en la base de datos 
+        const hashedPassword = await bcrypt.hash(contrasena, 10);
+
+        // Crear un nuevo usuario en la base de datos
+        const newUser = await createNewUser(username, hashedPassword, email, rol);
 
     } catch (error) {
         // Manejar errores internos del servidor

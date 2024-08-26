@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.newUser = void 0;
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const checkExistingUserOrEmail_1 = require("./utils/check/checkExistingUserOrEmail");
 const handleEmailValidationErrors_1 = require("./utils/errors/handleEmailValidationErrors");
 const handleExistingUserError_1 = require("./utils/errors/handleExistingUserError");
@@ -17,6 +21,7 @@ const handleInputValidationErrors_1 = require("./utils/errors/handleInputValidat
 const handlePasswordValidationErrors_1 = require("./utils/errors/handlePasswordValidationErrors");
 const handleServerError_1 = require("./utils/errors/handleServerError");
 const registerValidations_1 = require("./utils/validations/registerValidations");
+const createNewUser_1 = require("./utils/userCreation/createNewUser");
 /**
  * Controlador para registrar un nuevo usuario.
  * @param req La solicitud HTTP entrante.
@@ -41,6 +46,10 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Verificar si el usuario o el correo electrónico ya existen
         const existingUserError = yield (0, checkExistingUserOrEmail_1.checkExistingUserOrEmail)(username, email);
         (0, handleExistingUserError_1.handleExistingUserError)(existingUserError, res);
+        // Hash de la contraseña antes de guardarla en la base de datos 
+        const hashedPassword = yield bcryptjs_1.default.hash(contrasena, 10);
+        // Crear un nuevo usuario en la base de datos
+        const newUser = yield (0, createNewUser_1.createNewUser)(username, hashedPassword, email, rol);
     }
     catch (error) {
         // Manejar errores internos del servidor
