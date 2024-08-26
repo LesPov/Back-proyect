@@ -11,6 +11,7 @@ import { validateInput, validatePassword, validateEmail } from './utils/validati
 import { createNewUser } from './utils/userCreation/createNewUser';
 import { initializeUserProfile } from './utils/userCreation/initializeUserProfile ';
 import { createVerificationEntry } from './utils/verificationCode/createVerificationEntry ';
+import { sendVerificationEmail } from './utils/email/sendEmailVerificationCode';
 
 
 /**
@@ -54,6 +55,9 @@ export const newUser = async (req: Request, res: Response) => {
 
         // Generar y guardar el código de verificación
         const verificationCode = await createVerificationEntry(newUser.id, email);
+
+        // Enviar correo electrónico de verificación
+        await sendVerificationEmail(email, username, verificationCode);
 
     } catch (error) {
         // Manejar errores internos del servidor

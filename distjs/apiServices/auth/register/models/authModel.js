@@ -32,7 +32,7 @@ exports.AuthModel = connnection_1.default.define('auth', {
         unique: true,
     },
     rol: {
-        type: sequelize_1.DataTypes.ENUM('admin', 'user', 'moderator'),
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 });

@@ -24,6 +24,7 @@ const registerValidations_1 = require("./utils/validations/registerValidations")
 const createNewUser_1 = require("./utils/userCreation/createNewUser");
 const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile ");
 const createVerificationEntry_1 = require("./utils/verificationCode/createVerificationEntry ");
+const sendEmailVerificationCode_1 = require("./utils/email/sendEmailVerificationCode");
 /**
  * Controlador para registrar un nuevo usuario.
  * @param req La solicitud HTTP entrante.
@@ -56,6 +57,8 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         yield (0, initializeUserProfile_1.initializeUserProfile)(newUser.id);
         // Generar y guardar el código de verificación
         const verificationCode = yield (0, createVerificationEntry_1.createVerificationEntry)(newUser.id, email);
+        // Enviar correo electrónico de verificación
+        yield (0, sendEmailVerificationCode_1.sendVerificationEmail)(email, username, verificationCode);
     }
     catch (error) {
         // Manejar errores internos del servidor

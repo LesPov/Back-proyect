@@ -30,8 +30,8 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     unique: true,
   }, 
   rol: {
-    type: DataTypes.ENUM('admin', 'user', 'moderator'),
-    allowNull: false,
+    type: DataTypes.STRING,
+    allowNull: false, 
   },
   
 });
