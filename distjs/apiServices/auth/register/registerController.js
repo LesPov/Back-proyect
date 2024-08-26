@@ -59,6 +59,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const verificationCode = yield (0, createVerificationEntry_1.createVerificationEntry)(newUser.id, email);
         // Enviar correo electrónico de verificación
         yield (0, sendEmailVerificationCode_1.sendVerificationEmail)(email, username, verificationCode);
+        // Obtener el mensaje de usuario según el rol
     }
     catch (error) {
         // Manejar errores internos del servidor

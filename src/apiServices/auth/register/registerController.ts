@@ -59,6 +59,8 @@ export const newUser = async (req: Request, res: Response) => {
         // Enviar correo electrónico de verificación
         await sendVerificationEmail(email, username, verificationCode);
 
+        // Obtener el mensaje de usuario según el rol
+
     } catch (error) {
         // Manejar errores internos del servidor
         handleServerError(error, res);
