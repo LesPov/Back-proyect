@@ -22,6 +22,7 @@ const handlePasswordValidationErrors_1 = require("./utils/errors/handlePasswordV
 const handleServerError_1 = require("./utils/errors/handleServerError");
 const registerValidations_1 = require("./utils/validations/registerValidations");
 const createNewUser_1 = require("./utils/userCreation/createNewUser");
+const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile ");
 /**
  * Controlador para registrar un nuevo usuario.
  * @param req La solicitud HTTP entrante.
@@ -50,6 +51,10 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const hashedPassword = yield bcryptjs_1.default.hash(contrasena, 10);
         // Crear un nuevo usuario en la base de datos
         const newUser = yield (0, createNewUser_1.createNewUser)(username, hashedPassword, email, rol);
+        // Inicializar el perfil de usuario
+        yield (0, initializeUserProfile_1.initializeUserProfile)(newUser.id);
+        // Generar y guardar el código de verificación
+        // const verificationCode = await generateAndSaveVerificationCode(newUser.id, email);
     }
     catch (error) {
         // Manejar errores internos del servidor

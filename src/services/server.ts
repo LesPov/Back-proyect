@@ -8,6 +8,7 @@ import cors from 'cors';
 
 import { newUser } from '../apiServices/Auth/register/registerController';
 import { AuthModel } from '../apiServices/Auth/register/models/authModel';
+import { UserProfile } from '../apiServices/Auth/profile/models/userProfileModel';
 
 
 class Server {
@@ -62,11 +63,13 @@ class Server {
         try {
 
             await AuthModel.sync();
+            await UserProfile.sync();
 
         } catch (error) {
             console.error('Unable to connect to the database:', error);
         }
-    }
+    } 
 }
 
 export default Server;
+console.log(new Date());

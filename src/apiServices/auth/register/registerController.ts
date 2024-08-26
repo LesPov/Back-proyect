@@ -9,6 +9,7 @@ import { handlePasswordValidationErrors } from './utils/errors/handlePasswordVal
 import { handleServerError } from './utils/errors/handleServerError';
 import { validateInput, validatePassword, validateEmail } from './utils/validations/registerValidations';
 import { createNewUser } from './utils/userCreation/createNewUser';
+import { initializeUserProfile } from './utils/userCreation/initializeUserProfile ';
 
 
 /**
@@ -46,6 +47,12 @@ export const newUser = async (req: Request, res: Response) => {
 
         // Crear un nuevo usuario en la base de datos
         const newUser = await createNewUser(username, hashedPassword, email, rol);
+
+        // Inicializar el perfil de usuario
+        await initializeUserProfile(newUser.id);
+
+        // Generar y guardar el código de verificación
+        // const verificationCode = await generateAndSaveVerificationCode(newUser.id, email);
 
     } catch (error) {
         // Manejar errores internos del servidor

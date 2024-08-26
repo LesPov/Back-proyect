@@ -20,6 +20,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const registerController_1 = require("../apiServices/Auth/register/registerController");
 const authModel_1 = require("../apiServices/Auth/register/models/authModel");
+const userProfileModel_1 = require("../apiServices/Auth/profile/models/userProfileModel");
 class Server {
     /**
      * Constructor de la clase Server.
@@ -62,6 +63,7 @@ class Server {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield authModel_1.AuthModel.sync();
+                yield userProfileModel_1.UserProfile.sync();
             }
             catch (error) {
                 console.error('Unable to connect to the database:', error);
@@ -70,3 +72,4 @@ class Server {
     }
 }
 exports.default = Server;
+console.log(new Date());
