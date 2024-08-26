@@ -1,21 +1,26 @@
+import { VerificationModel } from "../../models/VerificationModel";
+import { generateRandomVerificationCode } from "./generateRandomVerificationCode ";
+
+const VERIFICATION_CODE_EXPIRATION_HOURS = 24;
+
+
 /**
- * Genera y guarda un código de verificación en la base de datos.
- * @param usuarioId ID del usuario.
- * @param email Dirección de correo electrónico.
+ * Generar y guardar un código de verificación para un usuario.
+ * @param userId - ID del usuario para el cual se generará el código.
+ * @param email - Correo electrónico del usuario.
  * @returns El código de verificación generado.
  */
-export const createVerificationEntry  = async (usuarioId: number, email: string) => {
-    const verificationCode = generateVerificationCode();
+export const createVerificationEntry = async (userId: number, email: string) => {
+    const verificationCode = generateRandomVerificationCode();
     const expirationDate = new Date();
-    expirationDate.setMinutes(expirationDate.getHours() + VERIFICATION_CODE_EXPIRATION_HOURS);
-
-    await Verificacion.create({
-        usuario_id: usuarioId,
-        verificado: false,
-        correo_verificado: false,
-        codigo_verificacion: verificationCode,
-        expiracion_codigo_verificacion: expirationDate,
+    expirationDate.setHours(expirationDate.getHours() + VERIFICATION_CODE_EXPIRATION_HOURS);
+  
+    await VerificationModel.create({
+      isVerified: false,
+      verificationCode: verificationCode,
+      verificationCodeExpiration: expirationDate,
+      userId: userId,
     });
-
+  
     return verificationCode;
-};
+  };  

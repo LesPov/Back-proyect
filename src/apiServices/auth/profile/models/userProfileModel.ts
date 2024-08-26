@@ -3,7 +3,7 @@ import sequelize from "../../../../database/connnection";
 import { UserProfileinterface } from "../interfaces/userProfileInterface";
 import { AuthModel } from "../../register/models/authModel";
 
-export const UserProfile = sequelize.define<UserProfileinterface>('userProfile', {
+export const UserProfileModel = sequelize.define<UserProfileinterface>('userProfile', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -27,7 +27,7 @@ export const UserProfile = sequelize.define<UserProfileinterface>('userProfile',
       allowNull: false,
     },
     lastName: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, 
       allowNull: false,
     },
     biography: {
@@ -56,6 +56,6 @@ export const UserProfile = sequelize.define<UserProfileinterface>('userProfile',
   });
   
   // Relación entre Auth (usuario) y UserProfile (perfil de usuario)
-  AuthModel.hasOne(UserProfile, { foreignKey: 'userId' });
-  UserProfile.belongsTo(AuthModel, { foreignKey: 'userId' });
+  AuthModel.hasOne(UserProfileModel, { foreignKey: 'userId' });
+  UserProfileModel.belongsTo(AuthModel, { foreignKey: 'userId' });
   

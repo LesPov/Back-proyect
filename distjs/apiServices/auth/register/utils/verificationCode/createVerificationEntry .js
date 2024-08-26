@@ -10,22 +10,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createVerificationEntry = void 0;
+const VerificationModel_1 = require("../../models/VerificationModel");
+const generateRandomVerificationCode_1 = require("./generateRandomVerificationCode ");
+const VERIFICATION_CODE_EXPIRATION_HOURS = 24;
 /**
- * Genera y guarda un código de verificación en la base de datos.
- * @param usuarioId ID del usuario.
- * @param email Dirección de correo electrónico.
+ * Generar y guardar un código de verificación para un usuario.
+ * @param userId - ID del usuario para el cual se generará el código.
+ * @param email - Correo electrónico del usuario.
  * @returns El código de verificación generado.
  */
-const createVerificationEntry = (usuarioId, email) => __awaiter(void 0, void 0, void 0, function* () {
-    const verificationCode = generateVerificationCode();
+const createVerificationEntry = (userId, email) => __awaiter(void 0, void 0, void 0, function* () {
+    const verificationCode = (0, generateRandomVerificationCode_1.generateRandomVerificationCode)();
     const expirationDate = new Date();
-    expirationDate.setMinutes(expirationDate.getHours() + VERIFICATION_CODE_EXPIRATION_HOURS);
-    yield Verificacion.create({
-        usuario_id: usuarioId,
-        verificado: false,
-        correo_verificado: false,
-        codigo_verificacion: verificationCode,
-        expiracion_codigo_verificacion: expirationDate,
+    expirationDate.setHours(expirationDate.getHours() + VERIFICATION_CODE_EXPIRATION_HOURS);
+    yield VerificationModel_1.VerificationModel.create({
+        isVerified: false,
+        verificationCode: verificationCode,
+        verificationCodeExpiration: expirationDate,
+        userId: userId,
     });
     return verificationCode;
 });

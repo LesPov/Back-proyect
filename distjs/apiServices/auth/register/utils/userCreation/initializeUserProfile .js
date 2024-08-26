@@ -16,7 +16,7 @@ const userProfileModel_1 = require("../../../profile/models/userProfileModel");
  * @param userId - ID del usuario para el cual se inicializará el perfil.
  */
 const initializeUserProfile = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    yield userProfileModel_1.UserProfile.create({
+    yield userProfileModel_1.UserProfileModel.create({
         userId: userId,
         firstName: '',
         lastName: '',

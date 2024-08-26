@@ -23,6 +23,7 @@ const handleServerError_1 = require("./utils/errors/handleServerError");
 const registerValidations_1 = require("./utils/validations/registerValidations");
 const createNewUser_1 = require("./utils/userCreation/createNewUser");
 const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile ");
+const createVerificationEntry_1 = require("./utils/verificationCode/createVerificationEntry ");
 /**
  * Controlador para registrar un nuevo usuario.
  * @param req La solicitud HTTP entrante.
@@ -54,7 +55,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Inicializar el perfil de usuario
         yield (0, initializeUserProfile_1.initializeUserProfile)(newUser.id);
         // Generar y guardar el código de verificación
-        // const verificationCode = await generateAndSaveVerificationCode(newUser.id, email);
+        const verificationCode = yield (0, createVerificationEntry_1.createVerificationEntry)(newUser.id, email);
     }
     catch (error) {
         // Manejar errores internos del servidor

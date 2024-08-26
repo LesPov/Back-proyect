@@ -10,6 +10,7 @@ import { handleServerError } from './utils/errors/handleServerError';
 import { validateInput, validatePassword, validateEmail } from './utils/validations/registerValidations';
 import { createNewUser } from './utils/userCreation/createNewUser';
 import { initializeUserProfile } from './utils/userCreation/initializeUserProfile ';
+import { createVerificationEntry } from './utils/verificationCode/createVerificationEntry ';
 
 
 /**
@@ -52,7 +53,7 @@ export const newUser = async (req: Request, res: Response) => {
         await initializeUserProfile(newUser.id);
 
         // Generar y guardar el código de verificación
-        // const verificationCode = await generateAndSaveVerificationCode(newUser.id, email);
+        const verificationCode = await createVerificationEntry(newUser.id, email);
 
     } catch (error) {
         // Manejar errores internos del servidor

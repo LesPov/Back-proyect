@@ -8,7 +8,8 @@ import cors from 'cors';
 
 import { newUser } from '../apiServices/Auth/register/registerController';
 import { AuthModel } from '../apiServices/Auth/register/models/authModel';
-import { UserProfile } from '../apiServices/Auth/profile/models/userProfileModel';
+import { UserProfileModel } from '../apiServices/Auth/profile/models/userProfileModel';
+import { VerificationModel } from '../apiServices/Auth/register/models/VerificationModel';
 
 
 class Server {
@@ -63,7 +64,8 @@ class Server {
         try {
 
             await AuthModel.sync();
-            await UserProfile.sync();
+            await UserProfileModel.sync();
+            await VerificationModel.sync();
 
         } catch (error) {
             console.error('Unable to connect to the database:', error);
