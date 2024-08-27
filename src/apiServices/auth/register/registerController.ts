@@ -12,6 +12,8 @@ import { createNewUser } from './utils/userCreation/createNewUser';
 import { initializeUserProfile } from './utils/userCreation/initializeUserProfile ';
 import { createVerificationEntry } from './utils/verificationCode/createVerificationEntry ';
 import { sendVerificationEmail } from './utils/email/sendEmailVerificationCode';
+import { getRoleMessage } from './utils/rols/getRoleMessage';
+import { successMessages } from '../../../middleware/success/successMessages';
 
 
 /**
@@ -60,9 +62,14 @@ export const newUser = async (req: Request, res: Response) => {
         await sendVerificationEmail(email, username, verificationCode);
 
         // Obtener el mensaje de usuario según el rol
+        const userMessage = getRoleMessage(rol);
 
+        // Responder con un mensaje de éxito
+        res.json({
+            msg: successMessages.userRegistered(username, userMessage),
+        });
     } catch (error) {
-        // Manejar errores internos del servidor
+        // Manejar errores generales del servidor
         handleServerError(error, res);
     }
 };

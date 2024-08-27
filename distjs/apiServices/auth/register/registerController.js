@@ -25,6 +25,8 @@ const createNewUser_1 = require("./utils/userCreation/createNewUser");
 const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile ");
 const createVerificationEntry_1 = require("./utils/verificationCode/createVerificationEntry ");
 const sendEmailVerificationCode_1 = require("./utils/email/sendEmailVerificationCode");
+const getRoleMessage_1 = require("./utils/rols/getRoleMessage");
+const successMessages_1 = require("../../../middleware/success/successMessages");
 /**
  * Controlador para registrar un nuevo usuario.
  * @param req La solicitud HTTP entrante.
@@ -60,9 +62,14 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Enviar correo electrónico de verificación
         yield (0, sendEmailVerificationCode_1.sendVerificationEmail)(email, username, verificationCode);
         // Obtener el mensaje de usuario según el rol
+        const userMessage = (0, getRoleMessage_1.getRoleMessage)(rol);
+        // Responder con un mensaje de éxito
+        res.json({
+            msg: successMessages_1.successMessages.userRegistered(username, userMessage),
+        });
     }
     catch (error) {
-        // Manejar errores internos del servidor
+        // Manejar errores generales del servidor
         (0, handleServerError_1.handleServerError)(error, res);
     }
 });

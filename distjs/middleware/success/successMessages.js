@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.successMessages = void 0;
+exports.successMessages = {
+    // Éxitos de registro
+    userRegistered: (username, rol) => `Usuario ${rol} ${username} se registró exitosamente!`,
+    // Éxitos de inicio de sesión
+    userLoggedIn: 'Inicio de sesión exitoso',
+    // Éxitos de verificación de usuario
+    userVerified: 'Correo verificado exitosamente, ahora verifica tu número celular',
+    // Éxitos de envío de código de verificación por SMS
+    verificationCodeSent: 'El código de verificación ha sido enviado por SMS',
+    // Éxitos de reenvío de código de verificación por correo electrónico
+    verificationCodeResent: 'El código de verificación ha sido reenviado exitosamente por correo electrónico',
+    // Éxitos de verificación de número de teléfono
+    phoneVerified: 'Número de teléfono verificado exitosamente, ahora ya puedes iniciar sesión',
+    // Éxitos de recuperación y cambio de contraseña
+    passwordResetEmailSent: 'Se ha enviado un correo electrónico con las instrucciones para restablecer la contraseña.',
+    passwordUpdated: 'Contraseña actualizada con éxito.',
+    profilePictureUploaded: 'la imagen fue actualizada',
+};
