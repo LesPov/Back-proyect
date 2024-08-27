@@ -1,50 +1,59 @@
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
+
 /**
  * Envía un correo de verificación con un código personalizado.
+ * 
+ * Esta función lee una plantilla de correo electrónico desde un archivo HTML, 
+ * personaliza el contenido con el nombre de usuario y el código de verificación, 
+ * y envía el correo electrónico utilizando Nodemailer. Si el envío es exitoso, 
+ * la función devuelve true; de lo contrario, devuelve false.
+ * 
  * @param {string} email - Dirección de correo electrónico del destinatario.
  * @param {string} username - Nombre de usuario asociado al correo.
  * @param {string} verificationCode - Código de verificación generado.
- * @returns {boolean} - True si el correo se envía con éxito, False si hay un error.
+ * @returns {Promise<boolean>} - Devuelve una promesa que resuelve en true si el correo se envía con éxito, o false en caso de error.
  */
-export const sendVerificationEmail = async (email: string, username: string, verificationCode: string) => {
+export const sendVerificationEmail = async (email: string, username: string, verificationCode: string): Promise<boolean> => {
     try {
-        // Obtiene la ruta absoluta del archivo de plantilla de correo electrónico
+        // Construye la ruta absoluta del archivo de plantilla de correo electrónico
         const templatePath = path.join(__dirname, '..', '..', '..', '..', '..', 'apiServices', 'Auth', 'register', 'templates', 'verificationEmail.html');
-        console.log(__dirname);
+
         // Lee la plantilla de correo electrónico desde el archivo
         const emailTemplate = fs.readFileSync(templatePath, 'utf-8');
 
-        // Reemplaza los marcadores {{ username }} y {{ verificationCode }} con los valores reales
-        const personalizedEmail = emailTemplate.replace('{{ username }}', username).replace('{{ verificationCode }}', verificationCode);
+        // Personaliza la plantilla reemplazando los marcadores {{ username }} y {{ verificationCode }} con los valores reales
+        const personalizedEmail = emailTemplate
+            .replace('{{ username }}', username)
+            .replace('{{ verificationCode }}', verificationCode);
 
-        // Crea un transporte de nodemailer para reutilizarlo
+        // Configura el transporte de Nodemailer para enviar el correo electrónico
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            service: 'gmail', // Utiliza el servicio de Gmail para enviar el correo
             auth: {
-                user: process.env.MAIL_USER,
-                pass: process.env.MAIL_PASS,
+                user: process.env.MAIL_USER, // Usuario de Gmail para autenticación
+                pass: process.env.MAIL_PASS, // Contraseña de Gmail para autenticación
             },
-            secure: true,
+            secure: true, // Usa TLS para la seguridad de la conexión
         });
 
-        // Registra en la consola el código de verificación enviado
-        console.log('Código de verificación enviado:', verificationCode);
-
+        // Define las opciones del correo electrónico
         const mailOptions = {
-            from: process.env.MAIL_USER,
-            to: email,
-            subject: 'Verificación de correo electrónico',
-            html: personalizedEmail, // Utiliza el contenido personalizado en el cuerpo del correo
+            from: process.env.MAIL_USER, // Dirección de correo electrónico del remitente
+            to: email, // Dirección de correo electrónico del destinatario
+            subject: 'Verificación de correo electrónico', // Asunto del correo electrónico
+            html: personalizedEmail, // Contenido del correo electrónico en formato HTML
         };
 
-        // Envía el correo de verificación
+        // Envía el correo electrónico
         await transporter.sendMail(mailOptions);
+
+        console.log('Correo de verificación enviado a:', email); // Registra el éxito del envío en la consola
 
         return true; // Indica que el correo de verificación se envió con éxito
     } catch (error) {
-        console.error('Error al enviar el correo de verificación:', error);
+        console.error('Error al enviar el correo de verificación:', error); // Registra el error en la consola
         return false; // Indica que hubo un error al enviar el correo de verificación
     }
 };

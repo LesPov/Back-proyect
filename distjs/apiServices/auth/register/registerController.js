@@ -22,15 +22,22 @@ const handlePasswordValidationErrors_1 = require("./utils/errors/handlePasswordV
 const handleServerError_1 = require("./utils/errors/handleServerError");
 const registerValidations_1 = require("./utils/validations/registerValidations");
 const createNewUser_1 = require("./utils/userCreation/createNewUser");
-const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile ");
-const createVerificationEntry_1 = require("./utils/verificationCode/createVerificationEntry ");
 const sendEmailVerificationCode_1 = require("./utils/email/sendEmailVerificationCode");
 const getRoleMessage_1 = require("./utils/rols/getRoleMessage");
 const successMessages_1 = require("../../../middleware/success/successMessages");
+const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile ");
+const createVerificationEntry_1 = require("./utils/verificationCode/createVerificationEntry ");
 /**
- * Controlador para registrar un nuevo usuario.
- * @param req La solicitud HTTP entrante.
- * @param res La respuesta HTTP saliente.
+ * Controlador para registrar un nuevo usuario en el sistema.
+ *
+ * Esta función maneja la creación de un nuevo usuario, incluyendo validaciones
+ * de los datos de entrada, verificación de existencia previa de usuario/correo,
+ * encriptación de la contraseña, creación de perfil de usuario, y envío de correo
+ * electrónico de verificación. En caso de éxito, se responde con un mensaje de éxito
+ * adecuado según el rol del usuario.
+ *
+ * @param req - La solicitud HTTP entrante que contiene los datos del usuario a registrar.
+ * @param res - La respuesta HTTP que se envía de vuelta al cliente.
  */
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -48,28 +55,28 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const emailErrors = (0, registerValidations_1.validateEmail)(email);
         // Manejar cualquier error de validación del correo electrónico
         (0, handleEmailValidationErrors_1.handleEmailValidationErrors)(emailErrors, res);
-        // Verificar si el usuario o el correo electrónico ya existen
+        // Verificar si el usuario o el correo electrónico ya existen en la base de datos
         const existingUserError = yield (0, checkExistingUserOrEmail_1.checkExistingUserOrEmail)(username, email);
         (0, handleExistingUserError_1.handleExistingUserError)(existingUserError, res);
-        // Hash de la contraseña antes de guardarla en la base de datos 
+        // Si todo es válido, proceder a encriptar la contraseña antes de guardarla
         const hashedPassword = yield bcryptjs_1.default.hash(contrasena, 10);
-        // Crear un nuevo usuario en la base de datos
+        // Crear un nuevo usuario en la base de datos con la información proporcionada
         const newUser = yield (0, createNewUser_1.createNewUser)(username, hashedPassword, email, rol);
-        // Inicializar el perfil de usuario
+        // Inicializar el perfil de usuario en la base de datos, asignando un ID único
         yield (0, initializeUserProfile_1.initializeUserProfile)(newUser.id);
-        // Generar y guardar el código de verificación
+        // Generar y guardar un código de verificación para el correo electrónico del usuario
         const verificationCode = yield (0, createVerificationEntry_1.createVerificationEntry)(newUser.id, email);
-        // Enviar correo electrónico de verificación
+        // Enviar un correo electrónico de verificación al nuevo usuario con el código generado
         yield (0, sendEmailVerificationCode_1.sendVerificationEmail)(email, username, verificationCode);
-        // Obtener el mensaje de usuario según el rol
+        // Obtener un mensaje de bienvenida basado en el rol del usuario
         const userMessage = (0, getRoleMessage_1.getRoleMessage)(rol);
-        // Responder con un mensaje de éxito
+        // Responder al cliente con un mensaje de éxito y el mensaje específico del rol
         res.json({
             msg: successMessages_1.successMessages.userRegistered(username, userMessage),
         });
     }
     catch (error) {
-        // Manejar errores generales del servidor
+        // Manejar errores generales del servidor y responder con un mensaje de error
         (0, handleServerError_1.handleServerError)(error, res);
     }
 });
