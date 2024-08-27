@@ -15,6 +15,7 @@ import { getRoleMessage } from './utils/rols/getRoleMessage';
 import { successMessages } from '../../../middleware/success/successMessages';
 import { initializeUserProfile } from './utils/userCreation/initializeUserProfile ';
 import { createVerificationEntry } from './utils/verificationCode/createVerificationEntry ';
+import { handleSuccessMessage } from './utils/success/handleSuccessMessage';
 
 /**
  * Controlador para registrar un nuevo usuario en el sistema.
@@ -70,10 +71,8 @@ export const newUser = async (req: Request, res: Response) => {
         // Obtener un mensaje de bienvenida basado en el rol del usuario
         const userMessage = getRoleMessage(rol);
 
-        // Responder al cliente con un mensaje de éxito y el mensaje específico del rol
-        res.json({
-            msg: successMessages.userRegistered(username, userMessage),
-        });
+       // Manejar y enviar el mensaje de éxito al cliente
+       handleSuccessMessage(res, username, userMessage);
     } catch (error) {
         // Manejar errores generales del servidor y responder con un mensaje de error
         handleServerError(error, res);
