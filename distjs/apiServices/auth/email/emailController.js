@@ -12,7 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyUser = void 0;
 const findUserByUsername_1 = require("./utils/findUser/findUserByUsername");
 const handleUserNotFoundError_1 = require("./utils/errors/handleUserNotFoundError");
-const checkVerificationCodeExpiration_1 = require("./utils/check/checkVerificationCodeExpiration ");
+const handleServerError_1 = require("./utils/errors/handleServerError");
+const checkUserVerificationStatus_1 = require("./utils/check/checkUserVerificationStatus");
 const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, verificationCode } = req.body;
@@ -20,10 +21,14 @@ const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const user = yield (0, findUserByUsername_1.findUserByUsername)(username);
         // Maneja el error si el usuario no existe
         (0, handleUserNotFoundError_1.handleUserNotFoundError)(username, user, res);
-        const currentDate = new Date();
-        yield (0, checkVerificationCodeExpiration_1.checkVerificationCodeExpiration)(user, currentDate);
+        // Verificar si el correo electrónico ya está verificado
+        const isEmailVerified = (0, checkUserVerificationStatus_1.checkUserVerificationStatus)(user);
+        // Maneja el error si el correo ya está verificado
+        (0, checkUserVerificationStatus_1.handleEmailNotVerificationErroruser)(isEmailVerified, res);
     }
     catch (error) {
+        // Manejar errores generales del servidor y responder con un mensaje de error
+        (0, handleServerError_1.handleServerError)(error, res);
     }
 });
 exports.verifyUser = verifyUser;

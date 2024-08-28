@@ -19,6 +19,9 @@ const VerificationModel_1 = require("../../../register/models/VerificationModel"
  * @returns El usuario encontrado o `null` si no existe.
  */
 const findUserByUsername = (username) => __awaiter(void 0, void 0, void 0, function* () {
-    return authModel_1.AuthModel.findOne({ where: { username: username }, include: [VerificationModel_1.VerificationModel] });
+    return yield authModel_1.AuthModel.findOne({
+        where: { username: username },
+        include: [VerificationModel_1.VerificationModel]
+    });
 });
 exports.findUserByUsername = findUserByUsername;

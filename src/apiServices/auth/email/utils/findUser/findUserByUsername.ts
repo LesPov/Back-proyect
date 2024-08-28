@@ -8,5 +8,8 @@ import { VerificationModel } from "../../../register/models/VerificationModel";
  * @returns El usuario encontrado o `null` si no existe.
  */
 export const findUserByUsername = async (username: string) => {
-  return AuthModel.findOne({ where: { username: username }, include: [VerificationModel] });
+    return await AuthModel.findOne({
+        where: { username: username },
+        include: [VerificationModel]
+    });
 };
