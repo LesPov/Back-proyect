@@ -14,6 +14,8 @@ const findUserByUsername_1 = require("./utils/findUser/findUserByUsername");
 const handleUserNotFoundError_1 = require("./utils/errors/handleUserNotFoundError");
 const handleServerError_1 = require("./utils/errors/handleServerError");
 const checkUserVerificationStatus_1 = require("./utils/check/checkUserVerificationStatus");
+const checkVerificationCodeIsvValid_1 = require("./utils/check/checkVerificationCodeIsvValid");
+const checkVerificationCodeExpiration_1 = require("./utils/check/checkVerificationCodeExpiration ");
 const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, verificationCode } = req.body;
@@ -25,6 +27,16 @@ const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const isEmailVerified = (0, checkUserVerificationStatus_1.checkUserVerificationStatus)(user);
         // Maneja el error si el correo ya está verificado
         (0, checkUserVerificationStatus_1.handleEmailNotVerificationErroruser)(isEmailVerified, res);
+        // Verifica si el código de verificación proporcionado es inválido.
+        const isCodeValid = (0, checkVerificationCodeIsvValid_1.checkVerificationCodeIsValid)(user, verificationCode);
+        // Maneja el error si el código de verificación proporcionado es inválido
+        (0, checkVerificationCodeIsvValid_1.handleVerificationCodeIsValidError)(isCodeValid, res);
+        const currentDate = new Date();
+        // Verifica si el código de verificación ha expirado.
+        const isCodeExpire = (0, checkVerificationCodeExpiration_1.checkVerificationCodeExpiration)(user, currentDate);
+        console.log(`Código expirado: ${isCodeExpire}`);
+        // Maneja el error si el código de verificación ha expirado.
+        (0, checkVerificationCodeExpiration_1.handleEmailVerificationCodeExpirationError)(isCodeExpire, res);
     }
     catch (error) {
         // Manejar errores generales del servidor y responder con un mensaje de error

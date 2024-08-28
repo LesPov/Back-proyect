@@ -14,13 +14,15 @@ const VERIFICATION_CODE_EXPIRATION_HOURS = 3;
  *        para el contexto del usuario, aunque en esta función no se utiliza directamente. 
  * @returns {string} - El código de verificación generado que se ha almacenado en la base de datos.
  */
+const VERIFICATION_CODE_EXPIRATION_MINUTES = 3; // Cambio a minutos para la validación correcta
+
 export const createVerificationEntry = async (userId: number, email: string): Promise<string> => {
     // Genera un código de verificación aleatorio
     const verificationCode = generateRandomVerificationCode();
 
     // Establece la fecha de expiración del código de verificación
     const expirationDate = new Date();
-    expirationDate.setMinutes(expirationDate.getMinutes() + VERIFICATION_CODE_EXPIRATION_HOURS);
+    expirationDate.setMinutes(expirationDate.getMinutes() + VERIFICATION_CODE_EXPIRATION_MINUTES);
   
     // Crea una entrada en la base de datos para el código de verificación
     await VerificationModel.create({
@@ -33,3 +35,4 @@ export const createVerificationEntry = async (userId: number, email: string): Pr
     // Devuelve el código de verificación generado
     return verificationCode;
 };
+ 

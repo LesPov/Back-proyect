@@ -3,6 +3,8 @@ import { findUserByUsername } from './utils/findUser/findUserByUsername';
 import { handleUserNotFoundError } from './utils/errors/handleUserNotFoundError';
 import { handleServerError } from './utils/errors/handleServerError';
 import { checkUserVerificationStatus, handleEmailNotVerificationErroruser } from './utils/check/checkUserVerificationStatus';
+import { checkVerificationCodeIsValid, handleVerificationCodeIsValidError } from './utils/check/checkVerificationCodeIsvValid';
+import { checkVerificationCodeExpiration, handleEmailVerificationCodeExpirationError } from './utils/check/checkVerificationCodeExpiration ';
 
 
 
@@ -16,14 +18,25 @@ export const verifyUser = async (req: Request, res: Response) => {
         // Maneja el error si el usuario no existe
         handleUserNotFoundError(username, user, res);
 
-  
+
         // Verificar si el correo electrónico ya está verificado
         const isEmailVerified = checkUserVerificationStatus(user);
 
         // Maneja el error si el correo ya está verificado
         handleEmailNotVerificationErroruser(isEmailVerified, res);
 
-    
+        // Verifica si el código de verificación proporcionado es inválido.
+        const isCodeValid = checkVerificationCodeIsValid(user, verificationCode);
+        // Maneja el error si el código de verificación proporcionado es inválido
+        handleVerificationCodeIsValidError(isCodeValid, res);
+
+        const currentDate = new Date();
+        // Verifica si el código de verificación ha expirado.
+        const isCodeExpire = checkVerificationCodeExpiration(user, currentDate);
+        console.log(`Código expirado: ${isCodeExpire}`);
+
+        // Maneja el error si el código de verificación ha expirado.
+        handleEmailVerificationCodeExpirationError(isCodeExpire, res);
 
     } catch (error: any) {
         // Manejar errores generales del servidor y responder con un mensaje de error

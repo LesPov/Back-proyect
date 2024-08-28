@@ -28,7 +28,7 @@ export const errorMessages = {
     serverError: 'servidor error',
     userAlreadyVerified: 'El usuario ya ha sido verificado previamente',
     verificationCodeExpired: 'El código de verificación ha expirado. Registra una nueva cuenta para obtener un nuevo código.',
-    invalidVerificationCode: 'El usuario aún no ha sido verificado. Codigo invalido.',
+    invalidVerificationCode: () => 'El usuario aún no ha sido verificado. Codigo invalido.',
     verificationRecordNotFound: 'eregistro de verificación correspondiente al usuario no encontrada ',
     noVerificationRecord: 'lapapa',
     phoneNumberNotProvided: 'El número de teléfono es obligatorio para enviar el código de verificación por SMS',
