@@ -1,7 +1,7 @@
 import { VerificationModel } from "../../models/VerificationModel";
 import { generateRandomVerificationCode } from "./generateRandomVerificationCode ";
 
-const VERIFICATION_CODE_EXPIRATION_HOURS = 24;
+const VERIFICATION_CODE_EXPIRATION_HOURS = 3;
 
 /**
  * Genera y guarda un código de verificación para un usuario específico.
@@ -20,7 +20,7 @@ export const createVerificationEntry = async (userId: number, email: string): Pr
 
     // Establece la fecha de expiración del código de verificación
     const expirationDate = new Date();
-    expirationDate.setHours(expirationDate.getHours() + VERIFICATION_CODE_EXPIRATION_HOURS);
+    expirationDate.setMinutes(expirationDate.getMinutes() + VERIFICATION_CODE_EXPIRATION_HOURS);
   
     // Crea una entrada en la base de datos para el código de verificación
     await VerificationModel.create({

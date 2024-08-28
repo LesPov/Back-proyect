@@ -2,12 +2,13 @@
 import { Router } from "express";
 import { newUser } from "./registerController";
 
-const router = Router();
+const registerRouter = Router();
 // Rutas existentes para registro 
 /**
  * POST /api/user/register
  *  Ruta para registrar un nuevo usuario.
  *  Público
  */
-router.post('/register', newUser);
-export default router;
+registerRouter.post('/signup', newUser);
+export default registerRouter;
+ 

@@ -10,6 +10,8 @@ import { newUser } from '../apiServices/Auth/register/registerController';
 import { AuthModel } from '../apiServices/Auth/register/models/authModel';
 import { UserProfileModel } from '../apiServices/Auth/profile/models/userProfileModel';
 import { VerificationModel } from '../apiServices/Auth/register/models/VerificationModel';
+import registerRouter from '../apiServices/Auth/register/registerRouter';
+import emailVerificationRoutes from '../apiServices/Auth/email/emailRoutes';
 
 
 class Server {
@@ -17,6 +19,7 @@ class Server {
     private app: Application;
     private port: string;
 
+    
     /**
      * Constructor de la clase Server.
      */
@@ -29,6 +32,7 @@ class Server {
         this.dbConnect();
     }
 
+
     /** 
      * Inicia el servidor y escucha en el puerto especificado.
      */
@@ -38,24 +42,29 @@ class Server {
         })
     }
 
+
     /**
      * Configura las rutas de la aplicación.
      */
     routes() {
-        this.app.use('/api/auth', newUser);
+
+        // Ruta para registrar nuevos usuarios
+        this.app.use('/api/users', registerRouter, emailVerificationRoutes); 
 
     }
-
+ 
+ 
     /**
      * Configura los middlewares de la aplicación.
      */
     middlewares() {
-        // Parseo body  
+        // Parseo body   
         this.app.use(express.json());
 
         // Cors
         this.app.use(cors());
     }
+
 
     /**
      * Conecta a la base de datos y sincroniza los modelos de Product y User.
@@ -70,7 +79,7 @@ class Server {
         } catch (error) {
             console.error('Unable to connect to the database:', error);
         }
-    } 
+    }
 }
 
 export default Server;

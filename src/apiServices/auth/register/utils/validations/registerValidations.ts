@@ -14,12 +14,12 @@ const SPECIAL_CHARACTERS_REGEX = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
  * Si alguno de estos campos está vacío, se agrega un mensaje de error a la lista de errores.
  * 
  * @param {string} username - Nombre de usuario. Debe estar presente.
- * @param {string} contrasena - Contraseña. Debe estar presente.
+ * @param {string} password - Contraseña. Debe estar presente.
  * @param {string} email - Dirección de correo electrónico. Debe estar presente.
  * @param {string} rol - Rol del usuario. Debe estar presente.
  * @returns {string[]} - Lista de mensajes de error si alguno de los campos está vacío, de lo contrario, una lista vacía.
  */
-export const validateInput = (username: string, contrasena: string, email: string, rol: string): string[] => {
+export const validateInput = (username: string, password: string, email: string, rol: string): string[] => {
     const errors: string[] = [];
     if (!username) {
         errors.push(errorMessages.requiredFields);
@@ -59,20 +59,22 @@ const validationRules = [
  * como longitud mínima, presencia de números, mayúsculas, minúsculas y caracteres especiales. 
  * Si la contraseña no cumple con alguno de los requisitos, se agrega un mensaje de error a la lista de errores.
  * 
- * @param {string} contrasena - La contraseña a validar. Debe cumplir con los requisitos especificados.
+ * @param {string} password - La contraseña a validar. Debe cumplir con los requisitos especificados.
  * @returns {string[]} - Lista de mensajes de error si la contraseña no cumple con los requisitos, de lo contrario, una lista vacía.
  */
-export const validatePassword = (contrasena: string): string[] => {
+export const validatePassword = (password: string): string[] => {
+    console.log('Contraseña recibida:', password);  // Agrega esta línea para depuración
     const errors: string[] = [];
 
     validationRules.forEach(rule => {
-        if (!rule.test(contrasena)) {
+        if (!rule.test(password)) {
             errors.push(rule.errorMessage);
         }
     });
 
     return errors;
 };
+
 
 
 /**
@@ -87,7 +89,7 @@ export const validatePassword = (contrasena: string): string[] => {
 export const validateEmail = (email: string): string[] => {
     const errors: string[] = [];
 
-    if (!EMAIL_REGEX.test(email)) {
+    if (!EMAIL_REGEX.test(email)) {   
         errors.push(errorMessages.invalidEmail);
     }
 

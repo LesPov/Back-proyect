@@ -12,7 +12,6 @@ import { createNewUser } from './utils/userCreation/createNewUser';
 
 import { sendVerificationEmail } from './utils/email/sendEmailVerificationCode';
 import { getRoleMessage } from './utils/rols/getRoleMessage';
-import { successMessages } from '../../../middleware/success/successMessages';
 import { initializeUserProfile } from './utils/userCreation/initializeUserProfile ';
 import { createVerificationEntry } from './utils/verificationCode/createVerificationEntry ';
 import { handleSuccessMessage } from './utils/success/handleSuccessMessage';
@@ -32,15 +31,15 @@ import { handleSuccessMessage } from './utils/success/handleSuccessMessage';
 export const newUser = async (req: Request, res: Response) => {
     try {
         // Extraer los datos del cuerpo de la solicitud
-        const { username, contrasena, email, rol } = req.body;
+        const { username, password, email, rol } = req.body;
 
         // Validar la entrada de datos (username, contraseña, email, rol)
-        const inputValidationErrors = validateInput(username, contrasena, email, rol);
+        const inputValidationErrors = validateInput(username, password, email, rol);
         // Manejar cualquier error de validación de la entrada de datos
         handleInputValidationErrors(inputValidationErrors, res);
 
         // Validar los requisitos de la contraseña
-        const passwordValidationErrors = validatePassword(contrasena);
+        const passwordValidationErrors = validatePassword(password);
         // Manejar cualquier error de validación de la contraseña
         handlePasswordValidationErrors(passwordValidationErrors, res);
 
@@ -54,7 +53,7 @@ export const newUser = async (req: Request, res: Response) => {
         handleExistingUserError(existingUserError, res);
 
         // Si todo es válido, proceder a encriptar la contraseña antes de guardarla
-        const hashedPassword = await bcrypt.hash(contrasena, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Crear un nuevo usuario en la base de datos con la información proporcionada
         const newUser = await createNewUser(username, hashedPassword, email, rol);

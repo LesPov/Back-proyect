@@ -18,10 +18,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const registerController_1 = require("../apiServices/Auth/register/registerController");
 const authModel_1 = require("../apiServices/Auth/register/models/authModel");
 const userProfileModel_1 = require("../apiServices/Auth/profile/models/userProfileModel");
 const VerificationModel_1 = require("../apiServices/Auth/register/models/VerificationModel");
+const registerRouter_1 = __importDefault(require("../apiServices/Auth/register/registerRouter"));
+const emailRoutes_1 = __importDefault(require("../apiServices/Auth/email/emailRoutes"));
 class Server {
     /**
      * Constructor de la clase Server.
@@ -46,13 +47,14 @@ class Server {
      * Configura las rutas de la aplicación.
      */
     routes() {
-        this.app.use('/api/auth', registerController_1.newUser);
+        // Ruta para registrar nuevos usuarios
+        this.app.use('/api/users', registerRouter_1.default, emailRoutes_1.default);
     }
     /**
      * Configura los middlewares de la aplicación.
      */
     middlewares() {
-        // Parseo body  
+        // Parseo body   
         this.app.use(express_1.default.json());
         // Cors
         this.app.use((0, cors_1.default)());

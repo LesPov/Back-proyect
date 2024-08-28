@@ -42,13 +42,13 @@ const handleSuccessMessage_1 = require("./utils/success/handleSuccessMessage");
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Extraer los datos del cuerpo de la solicitud
-        const { username, contrasena, email, rol } = req.body;
+        const { username, password, email, rol } = req.body;
         // Validar la entrada de datos (username, contraseña, email, rol)
-        const inputValidationErrors = (0, registerValidations_1.validateInput)(username, contrasena, email, rol);
+        const inputValidationErrors = (0, registerValidations_1.validateInput)(username, password, email, rol);
         // Manejar cualquier error de validación de la entrada de datos
         (0, handleInputValidationErrors_1.handleInputValidationErrors)(inputValidationErrors, res);
         // Validar los requisitos de la contraseña
-        const passwordValidationErrors = (0, registerValidations_1.validatePassword)(contrasena);
+        const passwordValidationErrors = (0, registerValidations_1.validatePassword)(password);
         // Manejar cualquier error de validación de la contraseña
         (0, handlePasswordValidationErrors_1.handlePasswordValidationErrors)(passwordValidationErrors, res);
         // Validar el formato del correo electrónico
@@ -59,7 +59,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const existingUserError = yield (0, checkExistingUserOrEmail_1.checkExistingUserOrEmail)(username, email);
         (0, handleExistingUserError_1.handleExistingUserError)(existingUserError, res);
         // Si todo es válido, proceder a encriptar la contraseña antes de guardarla
-        const hashedPassword = yield bcryptjs_1.default.hash(contrasena, 10);
+        const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
         // Crear un nuevo usuario en la base de datos con la información proporcionada
         const newUser = yield (0, createNewUser_1.createNewUser)(username, hashedPassword, email, rol);
         // Inicializar el perfil de usuario en la base de datos, asignando un ID único

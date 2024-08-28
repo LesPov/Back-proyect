@@ -1,21 +1,4 @@
 export const errorMessages = {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
     // Errores de registro
     requiredFields: 'Todos los campos son obligatorios',

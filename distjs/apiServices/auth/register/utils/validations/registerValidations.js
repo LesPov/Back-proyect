@@ -15,12 +15,12 @@ const SPECIAL_CHARACTERS_REGEX = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
  * Si alguno de estos campos está vacío, se agrega un mensaje de error a la lista de errores.
  *
  * @param {string} username - Nombre de usuario. Debe estar presente.
- * @param {string} contrasena - Contraseña. Debe estar presente.
+ * @param {string} password - Contraseña. Debe estar presente.
  * @param {string} email - Dirección de correo electrónico. Debe estar presente.
  * @param {string} rol - Rol del usuario. Debe estar presente.
  * @returns {string[]} - Lista de mensajes de error si alguno de los campos está vacío, de lo contrario, una lista vacía.
  */
-const validateInput = (username, contrasena, email, rol) => {
+const validateInput = (username, password, email, rol) => {
     const errors = [];
     if (!username) {
         errors.push(errorMessages_1.errorMessages.requiredFields);
@@ -58,13 +58,14 @@ const validationRules = [
  * como longitud mínima, presencia de números, mayúsculas, minúsculas y caracteres especiales.
  * Si la contraseña no cumple con alguno de los requisitos, se agrega un mensaje de error a la lista de errores.
  *
- * @param {string} contrasena - La contraseña a validar. Debe cumplir con los requisitos especificados.
+ * @param {string} password - La contraseña a validar. Debe cumplir con los requisitos especificados.
  * @returns {string[]} - Lista de mensajes de error si la contraseña no cumple con los requisitos, de lo contrario, una lista vacía.
  */
-const validatePassword = (contrasena) => {
+const validatePassword = (password) => {
+    console.log('Contraseña recibida:', password); // Agrega esta línea para depuración
     const errors = [];
     validationRules.forEach(rule => {
-        if (!rule.test(contrasena)) {
+        if (!rule.test(password)) {
             errors.push(rule.errorMessage);
         }
     });

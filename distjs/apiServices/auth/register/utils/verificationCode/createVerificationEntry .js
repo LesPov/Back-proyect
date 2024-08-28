@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createVerificationEntry = void 0;
 const VerificationModel_1 = require("../../models/VerificationModel");
 const generateRandomVerificationCode_1 = require("./generateRandomVerificationCode ");
-const VERIFICATION_CODE_EXPIRATION_HOURS = 24;
+const VERIFICATION_CODE_EXPIRATION_HOURS = 3;
 /**
  * Genera y guarda un código de verificación para un usuario específico.
  *
@@ -29,7 +29,7 @@ const createVerificationEntry = (userId, email) => __awaiter(void 0, void 0, voi
     const verificationCode = (0, generateRandomVerificationCode_1.generateRandomVerificationCode)();
     // Establece la fecha de expiración del código de verificación
     const expirationDate = new Date();
-    expirationDate.setHours(expirationDate.getHours() + VERIFICATION_CODE_EXPIRATION_HOURS);
+    expirationDate.setMinutes(expirationDate.getMinutes() + VERIFICATION_CODE_EXPIRATION_HOURS);
     // Crea una entrada en la base de datos para el código de verificación
     yield VerificationModel_1.VerificationModel.create({
         isVerified: false, // Inicialmente, el código no está verificado
