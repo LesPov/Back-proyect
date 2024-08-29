@@ -23,6 +23,7 @@ export const createVerificationEntry = async (userId: number, email: string): Pr
     // Establece la fecha de expiración del código de verificación
     const expirationDate = new Date();
     expirationDate.setMinutes(expirationDate.getMinutes() + VERIFICATION_CODE_EXPIRATION_MINUTES);
+    
   
     // Crea una entrada en la base de datos para el código de verificación
     await VerificationModel.create({

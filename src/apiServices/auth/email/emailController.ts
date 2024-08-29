@@ -24,7 +24,6 @@ export const verifyUser = async (req: Request, res: Response) => {
 
         // Verificar si el correo electrónico ya está verificado
         const isEmailVerified = checkUserVerificationStatus(user);
-
         // Maneja el error si el correo ya está verificado
         handleEmailNotVerificationErroruser(isEmailVerified, res);
 
