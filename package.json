@@ -4,7 +4,7 @@
   "description": "The best package you will ever find.",
   "main": "index.js",
   "scripts": {
-    "test": "",
+    "test": "jest",
     "dev": "nodemon distjs/index.js",
     "typescript": "tsc --watch",
     "copy-templates": "copyfiles -u 1 src/apiServices/Auth/register/templates/** distjs"
@@ -26,9 +26,13 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "@types/nodemailer": "^6.4.15",
     "copyfiles": "^2.4.1",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.4",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.5.4"
   }
 }

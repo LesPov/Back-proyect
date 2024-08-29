@@ -22,7 +22,7 @@ const SPECIAL_CHARACTERS_REGEX = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
  */
 const validateInput = (username, password, email, rol) => {
     const errors = [];
-    if (!username) {
+    if (!username || !password || !email || !rol) {
         errors.push(errorMessages_1.errorMessages.requiredFields);
     }
     return errors;
