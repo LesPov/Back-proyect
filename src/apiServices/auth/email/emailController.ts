@@ -4,7 +4,7 @@ import { handleUserNotFoundError } from './utils/errors/handleUserNotFoundError'
 import { handleServerError } from './utils/errors/handleServerError';
 import { checkUserVerificationStatus, handleEmailNotVerificationErroruser } from './utils/check/checkUserVerificationStatus';
 import { checkVerificationCodeIsValid, handleVerificationCodeIsValidError } from './utils/check/checkVerificationCodeIsvValid';
-import { checkVerificationCodeExpiration, handleEmailVerificationCodeExpirationError } from './utils/check/checkVerificationCodeExpiration ';
+import { checkVerificationCodeExpiration, handleEmailVerificationCodeExpirationError } from './utils/check/checkVerificationCodeExpiration';
 import { markEmailAsVerified, removeVerificationCode } from './utils/markItInDatabase/markItInDatabase';
 import { successMessages } from '../../../middleware/success/successMessages';
 

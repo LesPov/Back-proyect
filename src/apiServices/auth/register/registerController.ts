@@ -12,8 +12,8 @@ import { createNewUser } from './utils/userCreation/createNewUser';
 
 import { sendVerificationEmail } from './utils/email/sendEmailVerificationCode';
 import { getRoleMessage } from './utils/rols/getRoleMessage';
-import { initializeUserProfile } from './utils/userCreation/initializeUserProfile ';
-import { createVerificationEntry } from './utils/verificationCode/createVerificationEntry ';
+import { initializeUserProfile } from './utils/userCreation/initializeUserProfile';
+import { createVerificationEntry } from './utils/verificationCode/createVerificationEntry';
 import { handleSuccessMessage } from './utils/success/handleSuccessMessage';
 
 /**

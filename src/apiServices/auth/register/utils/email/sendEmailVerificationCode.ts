@@ -37,9 +37,9 @@ export const sendVerificationEmail = async (email: string, username: string, ver
             },
             secure: true, // Usa TLS para la seguridad de la conexión
         });
- // Registra en la consola el código de verificación enviado
- console.log('Código de verificación enviado:', verificationCode);
-  
+        // Registra en la consola el código de verificación enviado
+        console.log('Código de verificación enviado:', verificationCode);
+
         // Define las opciones del correo electrónico
         const mailOptions = {
             from: process.env.MAIL_USER, // Dirección de correo electrónico del remitente

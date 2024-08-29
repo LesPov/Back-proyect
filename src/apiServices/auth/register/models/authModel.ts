@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../../../database/connnection';
-import { AuthInterface } from '../Interfaces/authInterface';
+import { AuthInterface } from '../interfaces/authInterface';
 
 /**
  * Definición del modelo de autenticación (`AuthModel`) utilizando Sequelize.
@@ -12,7 +12,7 @@ import { AuthInterface } from '../Interfaces/authInterface';
  * @interface AuthInterface
  */
 export const AuthModel = sequelize.define<AuthInterface>('auth', {
-  
+
   /**
    * Identificador único del usuario (clave primaria).
    * Se genera automáticamente de manera incremental.
@@ -22,7 +22,7 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     primaryKey: true,
     autoIncrement: true,
   },
-  
+
   /**
    * Nombre de usuario único.
    * Este campo es obligatorio y no puede ser nulo.
@@ -32,7 +32,7 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     allowNull: false,
     unique: true,
   },
-  
+
   /**
    * Contraseña del usuario.
    * Este campo es obligatorio y no puede ser nulo.
@@ -41,7 +41,7 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  
+
   /**
    * Dirección de correo electrónico única del usuario.
    * Este campo es obligatorio y no puede ser nulo.
@@ -51,7 +51,7 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     allowNull: false,
     unique: true,
   },
-  
+
   /**
    * Número de teléfono del usuario.
    * Este campo es opcional y puede ser nulo.
@@ -61,14 +61,14 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     type: DataTypes.STRING,
     allowNull: true, // El campo puede ser nulo
     unique: true,
-  }, 
-  
+  },
+
   /**
    * Rol del usuario en la aplicación (ej. 'admin', 'user', etc.).
    * Este campo es obligatorio y no puede ser nulo.
    */
   rol: {
     type: DataTypes.STRING,
-    allowNull: false, 
+    allowNull: false,
   },
 });

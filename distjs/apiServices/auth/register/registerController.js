@@ -24,8 +24,8 @@ const registerValidations_1 = require("./utils/validations/registerValidations")
 const createNewUser_1 = require("./utils/userCreation/createNewUser");
 const sendEmailVerificationCode_1 = require("./utils/email/sendEmailVerificationCode");
 const getRoleMessage_1 = require("./utils/rols/getRoleMessage");
-const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile ");
-const createVerificationEntry_1 = require("./utils/verificationCode/createVerificationEntry ");
+const initializeUserProfile_1 = require("./utils/userCreation/initializeUserProfile");
+const createVerificationEntry_1 = require("./utils/verificationCode/createVerificationEntry");
 const handleSuccessMessage_1 = require("./utils/success/handleSuccessMessage");
 /**
  * Controlador para registrar un nuevo usuario en el sistema.

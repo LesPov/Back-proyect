@@ -15,7 +15,7 @@ const handleUserNotFoundError_1 = require("./utils/errors/handleUserNotFoundErro
 const handleServerError_1 = require("./utils/errors/handleServerError");
 const checkUserVerificationStatus_1 = require("./utils/check/checkUserVerificationStatus");
 const checkVerificationCodeIsvValid_1 = require("./utils/check/checkVerificationCodeIsvValid");
-const checkVerificationCodeExpiration_1 = require("./utils/check/checkVerificationCodeExpiration ");
+const checkVerificationCodeExpiration_1 = require("./utils/check/checkVerificationCodeExpiration");
 const markItInDatabase_1 = require("./utils/markItInDatabase/markItInDatabase");
 const successMessages_1 = require("../../../middleware/success/successMessages");
 const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
