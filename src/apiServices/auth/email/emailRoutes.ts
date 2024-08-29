@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { verifyUser } from "./emailController";
+import verifyUserRateLimit from "./middleware/verifyUserRateLimit";
 
 const emailVerificationRoutes = Router();
 
@@ -8,5 +9,5 @@ const emailVerificationRoutes = Router();
  * Ruta para verificar el correo electrónico.
  * Público
  */
-emailVerificationRoutes.put('/verify/email', verifyUser);
+emailVerificationRoutes.put('/verify/email', verifyUserRateLimit, verifyUser);
 export default emailVerificationRoutes;

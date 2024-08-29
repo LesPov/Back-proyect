@@ -17,6 +17,7 @@ const checkUserVerificationStatus_1 = require("./utils/check/checkUserVerificati
 const checkVerificationCodeIsvValid_1 = require("./utils/check/checkVerificationCodeIsvValid");
 const checkVerificationCodeExpiration_1 = require("./utils/check/checkVerificationCodeExpiration ");
 const markItInDatabase_1 = require("./utils/markItInDatabase/markItInDatabase");
+const successMessages_1 = require("../../../middleware/success/successMessages");
 const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, verificationCode } = req.body;
@@ -42,6 +43,12 @@ const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         (0, checkVerificationCodeExpiration_1.handleEmailVerificationCodeExpirationError)(isCodeExpire, res);
         //Marca el email del usuario como verificado en la base de datos.
         yield (0, markItInDatabase_1.markEmailAsVerified)(user.id);
+        // Elimina el código de verificación de la base de datos
+        yield (0, markItInDatabase_1.removeVerificationCode)(user.id);
+        //Mensege de exito 
+        res.json({
+            msg: successMessages_1.successMessages.userVerified,
+        });
     }
     catch (error) {
         // Manejar errores generales del servidor y responder con un mensaje de error

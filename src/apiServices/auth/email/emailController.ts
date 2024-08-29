@@ -5,7 +5,8 @@ import { handleServerError } from './utils/errors/handleServerError';
 import { checkUserVerificationStatus, handleEmailNotVerificationErroruser } from './utils/check/checkUserVerificationStatus';
 import { checkVerificationCodeIsValid, handleVerificationCodeIsValidError } from './utils/check/checkVerificationCodeIsvValid';
 import { checkVerificationCodeExpiration, handleEmailVerificationCodeExpirationError } from './utils/check/checkVerificationCodeExpiration ';
-import { markEmailAsVerified } from './utils/markItInDatabase/markItInDatabase';
+import { markEmailAsVerified, removeVerificationCode } from './utils/markItInDatabase/markItInDatabase';
+import { successMessages } from '../../../middleware/success/successMessages';
 
 
 
@@ -42,6 +43,13 @@ export const verifyUser = async (req: Request, res: Response) => {
         //Marca el email del usuario como verificado en la base de datos.
         await markEmailAsVerified(user.id);
 
+        // Elimina el código de verificación de la base de datos
+        await removeVerificationCode(user.id);
+
+        //Mensege de exito 
+        res.json({
+            msg: successMessages.userVerified,
+        });
     } catch (error: any) {
         // Manejar errores generales del servidor y responder con un mensaje de error
         handleServerError(error, res);
