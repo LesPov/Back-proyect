@@ -19,6 +19,8 @@ exports.errorMessages = {
     userAlreadyVerifiedemail: () => 'El correo electrónico ya ha sido verificado previamente.',
     invalidVerificationCode: () => 'El código de verificación es inválido.',
     verificationCodeExpired: 'El código de verificación ha expirado. Solicita un nuevo código para continuar..',
+    // Errores de verificación de usuario   
+    emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica tu correo para continuar.',
     userNotExists: (username) => `No existe un usuario con el nombre ${username} en la base de datos`,
     invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',
     invalidPasswordDB: 'La contraseña aleatoria proporcionada no coincide con la almacenada en la base de datos, o no exite',
@@ -34,7 +36,6 @@ exports.errorMessages = {
     invalidToken: 'Token no válido',
     accessDeniedNoToken: 'Acceso denegado',
     serverError: 'servidor error',
-    userAlreadyVerified: 'El usuario ya ha sido verificado previamente',
     verificationRecordNotFound: 'eregistro de verificación correspondiente al usuario no encontrada ',
     noVerificationRecord: 'lapapa',
     phoneNumberNotProvided: 'El número de teléfono es obligatorio para enviar el código de verificación por SMS',

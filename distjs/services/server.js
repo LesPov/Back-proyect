@@ -23,6 +23,7 @@ const userProfileModel_1 = require("../apiServices/Auth/profile/models/userProfi
 const VerificationModel_1 = require("../apiServices/Auth/register/models/VerificationModel");
 const registerRouter_1 = __importDefault(require("../apiServices/Auth/register/registerRouter"));
 const emailRoutes_1 = __importDefault(require("../apiServices/Auth/email/emailRoutes"));
+const phoneRoutes_1 = __importDefault(require("../apiServices/Auth/phone/phoneRoutes"));
 class Server {
     /**
      * Constructor de la clase Server.
@@ -48,7 +49,7 @@ class Server {
      */
     routes() {
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter_1.default, emailRoutes_1.default);
+        this.app.use('/api/users', registerRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default);
     }
     /**
      * Configura los middlewares de la aplicación.

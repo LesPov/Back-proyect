@@ -12,6 +12,7 @@ import { UserProfileModel } from '../apiServices/Auth/profile/models/userProfile
 import { VerificationModel } from '../apiServices/Auth/register/models/VerificationModel';
 import registerRouter from '../apiServices/Auth/register/registerRouter';
 import emailVerificationRoutes from '../apiServices/Auth/email/emailRoutes';
+import phoneVerificationRouter from '../apiServices/Auth/phone/phoneRoutes';
 
 
 class Server {
@@ -49,7 +50,7 @@ class Server {
     routes() {
 
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter, emailVerificationRoutes); 
+        this.app.use('/api/users', registerRouter, emailVerificationRoutes,phoneVerificationRouter); 
 
     }
  
