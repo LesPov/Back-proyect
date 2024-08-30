@@ -8,7 +8,7 @@ import { createOrUpdateVerificationEntry } from './utils/errors/createOrUpdateVe
 
 export const resendVerificationCode = async (req: Request, res: Response) => {
     try {
-        const { username, email } = req.body;
+        const { username } = req.body;
 
         //Busca un usuario en la base de datos basado en su nombre de usuario.
         const user = await findUserByUsername(username);

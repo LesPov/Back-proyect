@@ -17,7 +17,7 @@ const handleServerError_1 = require("../utils/errors/handleServerError");
 const createOrUpdateVerificationEntry_1 = require("./utils/errors/createOrUpdateVerificationEntry");
 const resendVerificationCode = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, email } = req.body;
+        const { username } = req.body;
         //Busca un usuario en la base de datos basado en su nombre de usuario.
         const user = yield (0, findUserByUsername_1.findUserByUsername)(username);
         // Maneja el error si el usuario no existe
