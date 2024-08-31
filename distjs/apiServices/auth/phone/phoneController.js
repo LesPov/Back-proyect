@@ -45,7 +45,7 @@ const sendVerificationCodePhone = async (req, res) => {
         // 8. Enviar mensaje por WhatsApp con el código de verificación
         const message = `Tu código de verificación es: ${sendcodesms}`;
         await (0, sendWhatsAppMessage_1.sendWhatsAppMessage)(phoneNumber, message);
-        // Responder con un mensaje de éxito
+        // 9. Responder con un mensaje de éxito
         res.status(200).json({ message: 'Código de verificación enviado exitosamente por WhatsApp.' });
     }
     catch (error) {
