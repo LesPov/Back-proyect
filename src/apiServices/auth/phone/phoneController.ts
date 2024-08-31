@@ -9,6 +9,8 @@ import { checkUserVerificationStatus, handleEmailNotVerificationErroruser } from
 import { checkUserPhoneSendCode, handlePhoneVerificationError } from './utils/check/checkUserPhoneSendCode';
 import { checkUserPhoneNumberAssociation, handlePhoneNumberAssociationError } from './utils/check/checkUserPhoneNumberAssociation';
 import { createVerificationEntryPhone } from './utils/check/createVerificationEntryPhone';
+import { updatePhoneNumber } from './utils/updatePhone/updatePhoneNumber';
+import { sendWhatsAppMessage } from './utils/send/sendWhatsAppMessage';
 
 
 /**
@@ -20,7 +22,7 @@ import { createVerificationEntryPhone } from './utils/check/createVerificationEn
 export const sendVerificationCodePhone = async (req: Request, res: Response) => {
     try {
         // 1. Validación de entrada
-        const { username, phoneNumber } = req.body;
+        const { username, phoneNumber, verificationCode } = req.body;
         const inputValidationErrors = validateInput(username, phoneNumber);
         handleInputValidationErrors(inputValidationErrors, res);
 
@@ -39,17 +41,25 @@ export const sendVerificationCodePhone = async (req: Request, res: Response) => 
         // 5. Verificación de asociación de número de teléfono
         const isPhoneNumberAssociated = checkUserPhoneNumberAssociation(user);
         handlePhoneNumberAssociationError(isPhoneNumberAssociated, res);
+
         if (!user) return; // Si user es null, sale de la función
 
-        // 6. generar nuevo codigo de verificacion
+        // 6. Guardar en la base de datos el número de teléfono
+        await updatePhoneNumber(user.id, phoneNumber);
+
+        // 7. Generar nuevo código de verificación
         const sendcodesms = await createVerificationEntryPhone(user.id, phoneNumber);
 
-        // Antes de la actualización de Auth
-        console.log('Antes de la actualización de Auth:', { phoneNumber, username });
+        // 8. Enviar mensaje por WhatsApp con el código de verificación
+        const message = `Tu código de verificación es: ${sendcodesms}`;
+        await sendWhatsAppMessage(phoneNumber, message);
+
+        // Responder con un mensaje de éxito
+        res.status(200).json({ message: 'Código de verificación enviado exitosamente por WhatsApp.' });
 
     } catch (error) {
         // Manejar errores generales del servidor y responder con un mensaje de error
-        handleServerError(error, res);
+        handleServerError(error, res); 
     }
 };
 

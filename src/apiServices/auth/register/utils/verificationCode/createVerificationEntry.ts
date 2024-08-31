@@ -16,7 +16,7 @@ const VERIFICATION_CODE_EXPIRATION_HOURS = 3;
  */
 const VERIFICATION_CODE_EXPIRATION_MINUTES = 3; // Cambio a minutos para la validación correcta
 
-export const createVerificationEntry = async (userId: number, email: string): Promise<string> => {
+export const  createVerificationEntry = async (userId: number, email: string): Promise<string> => {
     // Genera un código de verificación aleatorio
     const verificationCode = generateRandomVerificationCode();
 

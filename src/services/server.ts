@@ -15,6 +15,7 @@ import emailVerificationRoutes from '../apiServices/Auth/email/emailRoutes';
 import phoneVerificationRouter from '../apiServices/Auth/phone/phoneRoutes';
 
 
+
 class Server {
 
     private app: Application;

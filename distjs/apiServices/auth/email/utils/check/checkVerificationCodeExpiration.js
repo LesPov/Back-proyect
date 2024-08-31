@@ -10,9 +10,8 @@ const errorMessages_1 = require("../../../../../middleware/erros/errorMessages")
  * @returns Booleano que indica si el código ha expirado.
  */
 const checkVerificationCodeExpiration = (user, currentDate) => {
-    var _a;
     // Verifica si la fecha de expiración del código es válida y ha expirado
-    const expirationDate = (_a = user === null || user === void 0 ? void 0 : user.verification) === null || _a === void 0 ? void 0 : _a.verificationCodeExpiration;
+    const expirationDate = user?.verification?.verificationCodeExpiration;
     return expirationDate ? new Date(expirationDate) < currentDate : false;
 };
 exports.checkVerificationCodeExpiration = checkVerificationCodeExpiration;

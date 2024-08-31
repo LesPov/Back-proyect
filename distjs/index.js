@@ -9,7 +9,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const dotenv_1 = __importDefault(require("dotenv"));
 const server_1 = __importDefault(require("./services/server"));
+const whatsappClient_1 = require("./apiServices/Auth/phone/utils/send/whatsappClient");
 // Configurar las variables de entorno del archivo .env
 dotenv_1.default.config();
-// Crear una instancia del servidor
-const server = new server_1.default();
+const startServer = async () => {
+    try {
+        // Inicializar el cliente de WhatsApp
+        await (0, whatsappClient_1.initializeWhatsAppClient)();
+        console.log('WhatsApp Client initialized successfully.');
+        // Crear una instancia del servidor y arrancarlo
+        const server = new server_1.default();
+    }
+    catch (error) {
+        console.error('Error initializing WhatsApp client:', error);
+        process.exit(1); // Salir del proceso si hay un error crítico
+    }
+};
+// Iniciar el servidor junto con el cliente de WhatsApp
+startServer();

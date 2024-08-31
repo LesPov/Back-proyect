@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -29,7 +20,7 @@ const path_1 = __importDefault(require("path"));
  * @param {string} verificationCode - Código de verificación generado.
  * @returns {Promise<boolean>} - Devuelve una promesa que resuelve en true si el correo se envía con éxito, o false en caso de error.
  */
-const sendVerificationEmail = (email, username, verificationCode) => __awaiter(void 0, void 0, void 0, function* () {
+const sendVerificationEmail = async (email, username, verificationCode) => {
     try {
         // Construye la ruta absoluta del archivo de plantilla de correo electrónico
         const templatePath = path_1.default.join(__dirname, '..', '..', '..', '..', '..', 'apiServices', 'Auth', 'register', 'templates', 'verificationEmail.html');
@@ -58,7 +49,7 @@ const sendVerificationEmail = (email, username, verificationCode) => __awaiter(v
             html: personalizedEmail, // Contenido del correo electrónico en formato HTML
         };
         // Envía el correo electrónico
-        yield transporter.sendMail(mailOptions);
+        await transporter.sendMail(mailOptions);
         console.log('Correo de verificación enviado a:', email); // Registra el éxito del envío en la consola
         return true; // Indica que el correo de verificación se envió con éxito
     }
@@ -66,5 +57,5 @@ const sendVerificationEmail = (email, username, verificationCode) => __awaiter(v
         console.error('Error al enviar el correo de verificación:', error); // Registra el error en la consola
         return false; // Indica que hubo un error al enviar el correo de verificación
     }
-});
+};
 exports.sendVerificationEmail = sendVerificationEmail;

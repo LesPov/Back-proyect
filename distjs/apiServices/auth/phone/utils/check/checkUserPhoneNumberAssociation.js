@@ -7,7 +7,7 @@ exports.handlePhoneNumberAssociationError = exports.checkUserPhoneNumberAssociat
  * @returns Verdadero si el usuario ya tiene un número de teléfono asociado, falso en caso contrario.
  */
 const checkUserPhoneNumberAssociation = (user) => {
-    return !!(user === null || user === void 0 ? void 0 : user.phoneNumber); // Retorna verdadero si el número de teléfono existe
+    return !!user?.phoneNumber; // Retorna verdadero si el número de teléfono existe
 };
 exports.checkUserPhoneNumberAssociation = checkUserPhoneNumberAssociation;
 /**
