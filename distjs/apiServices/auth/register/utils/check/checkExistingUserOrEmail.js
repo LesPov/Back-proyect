@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkExistingUserOrEmail = void 0;
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
@@ -15,10 +24,10 @@ const authModel_1 = require("../../models/authModel");
  * @returns True si el valor ya existe en la base de datos, de lo contrario, false.
  * @throws errorMessages.databaseError Si ocurre un error durante la consulta a la base de datos.
  */
-const findExistingField = async (field, value) => {
+const findExistingField = (field, value) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Buscar un registro en la base de datos con el campo especificado y el valor dado
-        const existingRecord = await authModel_1.AuthModel.findOne({ where: { [field]: value } });
+        const existingRecord = yield authModel_1.AuthModel.findOne({ where: { [field]: value } });
         // Retornar true si se encuentra un registro, de lo contrario, false
         return Boolean(existingRecord);
     }
@@ -27,7 +36,7 @@ const findExistingField = async (field, value) => {
         console.error(`Error en findExistingField con ${field}:`, error);
         throw errorMessages_1.errorMessages.databaseError;
     }
-};
+});
 /**
  * Verifica si un nombre de usuario ya existe y devuelve un mensaje de error si es así.
  *
@@ -37,12 +46,12 @@ const findExistingField = async (field, value) => {
  * @param username Nombre de usuario a verificar.
  * @returns Mensaje de error si el nombre de usuario ya existe, de lo contrario, null.
  */
-const checkExistingUsername = async (username) => {
+const checkExistingUsername = (username) => __awaiter(void 0, void 0, void 0, function* () {
     // Verificar si el nombre de usuario ya existe y devolver el mensaje de error correspondiente
-    return (await findExistingField('username', username))
+    return (yield findExistingField('username', username))
         ? errorMessages_1.errorMessages.userExists(username)
         : null;
-};
+});
 /**
  * Verifica si una dirección de correo electrónico ya existe y devuelve un mensaje de error si es así.
  *
@@ -52,12 +61,12 @@ const checkExistingUsername = async (username) => {
  * @param email Dirección de correo electrónico a verificar.
  * @returns Mensaje de error si la dirección de correo electrónico ya existe, de lo contrario, null.
  */
-const checkExistingEmail = async (email) => {
+const checkExistingEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
     // Verificar si el correo electrónico ya existe y devolver el mensaje de error correspondiente
-    return (await findExistingField('email', email))
+    return (yield findExistingField('email', email))
         ? errorMessages_1.errorMessages.userEmailExists(email)
         : null;
-};
+});
 /**
  * Verifica si un nombre de usuario o una dirección de correo electrónico ya existe.
  *
@@ -69,15 +78,15 @@ const checkExistingEmail = async (email) => {
  * @param email Dirección de correo electrónico a verificar.
  * @returns Mensaje de error si el nombre de usuario o el correo electrónico ya existe, de lo contrario, null.
  */
-const checkExistingUserOrEmail = async (username, email) => {
+const checkExistingUserOrEmail = (username, email) => __awaiter(void 0, void 0, void 0, function* () {
     // Verificar si el nombre de usuario ya existe
-    const usernameError = await checkExistingUsername(username);
+    const usernameError = yield checkExistingUsername(username);
     // Verificar si el correo electrónico ya existe
-    const emailError = await checkExistingEmail(email);
+    const emailError = yield checkExistingEmail(email);
     // Devolver un mensaje combinado si ambos existen, o el mensaje del que exista, o null si ninguno existe
     if (usernameError && emailError) {
         return `${usernameError}. ${emailError}`;
     }
     return usernameError || emailError || null;
-};
+});
 exports.checkExistingUserOrEmail = checkExistingUserOrEmail;

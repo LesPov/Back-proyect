@@ -3,21 +3,31 @@
  * @file server.ts
  * @description Clase que representa el servidor de la aplicación.
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const authModel_1 = require("../apiServices/Auth/register/models/authModel");
 const userProfileModel_1 = require("../apiServices/Auth/profile/models/userProfileModel");
 const VerificationModel_1 = require("../apiServices/Auth/register/models/VerificationModel");
 const registerRouter_1 = __importDefault(require("../apiServices/Auth/register/registerRouter"));
 const emailRoutes_1 = __importDefault(require("../apiServices/Auth/email/emailRoutes"));
 const phoneRoutes_1 = __importDefault(require("../apiServices/Auth/phone/phoneRoutes"));
+// Configurar las variables de entorno del archivo .env
+dotenv_1.default.config();
 class Server {
-    app;
-    port;
     /**
      * Constructor de la clase Server.
      */
@@ -56,15 +66,17 @@ class Server {
     /**
      * Conecta a la base de datos y sincroniza los modelos de Product y User.
      */
-    async dbConnect() {
-        try {
-            await authModel_1.AuthModel.sync();
-            await userProfileModel_1.UserProfileModel.sync();
-            await VerificationModel_1.VerificationModel.sync();
-        }
-        catch (error) {
-            console.error('Unable to connect to the database:', error);
-        }
+    dbConnect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield authModel_1.AuthModel.sync();
+                yield userProfileModel_1.UserProfileModel.sync();
+                yield VerificationModel_1.VerificationModel.sync();
+            }
+            catch (error) {
+                console.error('Unable to connect to the database:', error);
+            }
+        });
     }
 }
 exports.default = Server;

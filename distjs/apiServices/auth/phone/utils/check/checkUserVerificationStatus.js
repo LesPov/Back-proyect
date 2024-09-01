@@ -8,8 +8,9 @@ const errorMessages_1 = require("../../../../../middleware/erros/errorMessages")
  * @returns Verdadero si el email ya está verificado, falso en caso contrario.
  */
 const checkUserVerificationStatus = (user) => {
+    var _a;
     // Verificar el estado de la verificación del correo electrónico si no esta 
-    return user?.verification?.isEmailVerified || false;
+    return ((_a = user === null || user === void 0 ? void 0 : user.verification) === null || _a === void 0 ? void 0 : _a.isEmailVerified) || false;
 };
 exports.checkUserVerificationStatus = checkUserVerificationStatus;
 /**

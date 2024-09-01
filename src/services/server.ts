@@ -2,9 +2,10 @@
  * @file server.ts
  * @description Clase que representa el servidor de la aplicación.
  */
-
-import express, { Application } from 'express';
+ 
+import express, { Application } from 'express'; 
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 import { newUser } from '../apiServices/Auth/register/registerController';
 import { AuthModel } from '../apiServices/Auth/register/models/authModel';
@@ -15,11 +16,15 @@ import emailVerificationRoutes from '../apiServices/Auth/email/emailRoutes';
 import phoneVerificationRouter from '../apiServices/Auth/phone/phoneRoutes';
 
 
+// Configurar las variables de entorno del archivo .env
+dotenv.config();
+
 
 class Server {
 
     private app: Application;
     private port: string;
+    
 
     
     /**

@@ -1,4 +1,3 @@
-import twilio from 'twilio';
 import { Request, Response } from 'express';
 import { validateInput } from './utils/validations/validateInput';
 import { handleInputValidationErrors } from '../register/utils/errors/handleInputValidationErrors';
@@ -10,7 +9,7 @@ import { checkUserPhoneSendCode, handlePhoneVerificationError } from './utils/ch
 import { checkUserPhoneNumberAssociation, handlePhoneNumberAssociationError } from './utils/check/checkUserPhoneNumberAssociation';
 import { createVerificationEntryPhone } from './utils/check/createVerificationEntryPhone';
 import { updatePhoneNumber } from './utils/updatePhone/updatePhoneNumber';
-import { sendWhatsAppMessage } from './utils/send/sendWhatsAppMessage';
+// import { sendWhatsAppMessage } from './utils/send/sendWhatsAppMessage';
 
 
 /**
@@ -50,16 +49,16 @@ export const sendVerificationCodePhone = async (req: Request, res: Response) => 
         // 7. Generar nuevo código de verificación
         const sendcodesms = await createVerificationEntryPhone(user.id, phoneNumber);
 
-        // 8. Enviar mensaje por WhatsApp con el código de verificación
-        const message = `Tu código de verificación es: ${sendcodesms}`;
-        await sendWhatsAppMessage(phoneNumber, message);
+        // 8. Enviar mensaje por WhatsApp con el código de verificación   
+        // const message = `Tu código de verificación es: ${sendcodesms}`;
+        // await sendWhatsAppMessage(phoneNumber, message);
 
         // 9. Responder con un mensaje de éxito
         res.status(200).json({ message: 'Código de verificación enviado exitosamente por WhatsApp.' });
 
     } catch (error) {
         // Manejar errores generales del servidor y responder con un mensaje de error
-        handleServerError(error, res); 
+        handleServerError(error, res);
     }
 };
 

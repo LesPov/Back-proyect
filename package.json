@@ -7,13 +7,13 @@
     "test": "jest",
     "dev": "nodemon distjs/index.js",
     "typescript": "tsc --watch",
-    "copy-templates": "copyfiles -u 1 src/apiServices/Auth/register/templates/** distjs"
+    "copy-templates": "copyfiles -u 1 src/apiServices/Auth/register/templates/** distjs",
+    "start-bot": "ts-node src/apiServices/chatbot/chatbot.ts"
+
   },
   "author": "Leo",
   "license": "ISC",
   "dependencies": {
-    "@types/qr-image": "^3.2.9",
-    "@types/qrcode-terminal": "^0.12.2",
     "@types/uuid": "^10.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -24,9 +24,11 @@
     "mysql2": "^3.11.0",
     "node-dependency-injection": "^3.1.2",
     "nodemailer": "^6.9.14",
-    "puppeteer": "^23.2.1",
-    "qr-image": "^3.2.0",
-    "qrcode-terminal": "^0.12.0",
+    "@bot-whatsapp/bot": "latest",
+    "@bot-whatsapp/cli": "latest",
+    "@bot-whatsapp/database": "latest",
+    "@bot-whatsapp/provider": "latest",
+    "@whiskeysockets/baileys": "^6.4.0",
     "sequelize": "^6.37.3",
     "uuid": "^10.0.0",
     "whatsapp-web.js": "^1.25.0"
