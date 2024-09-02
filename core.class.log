@@ -1,0 +1,136 @@
+[handleMsg]:  {
+  key: {
+    remoteJid: '573134002789@s.whatsapp.net',
+    fromMe: false,
+    id: 'B14C489B523C37188C8C0CE5E4883679',
+    participant: undefined
+  },
+  messageTimestamp: 1725316875,
+  pushName: 'mariac19martinezp68',
+  broadcast: false,
+  message: Message {
+    conversation: 'Hola',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Hola',
+  from: '573134002789'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_71780fd5-4bde-4792-a7fe-05d6cdb07ff8',
+  keyword: 'key_1dda7a93-a3ab-4321-8391-da227444809b',
+  answer: 'Bienbenido a Ciudad Segura estas en bogota?',
+  options: {
+    media: null,
+    buttons: [],
+    capture: false,
+    child: null,
+    delay: 0,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: false
+  },
+  refSerialize: 'bd8423e00e9b75379b461e487b14a44b'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '573134002789@s.whatsapp.net',
+    fromMe: false,
+    id: '93CF03738736FEDE5B5EC93BF66CA189',
+    participant: undefined
+  },
+  messageTimestamp: 1725316931,
+  pushName: 'mariac19martinezp68',
+  broadcast: false,
+  message: Message {
+    conversation: 'Hola',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Hola',
+  from: '573134002789'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_71780fd5-4bde-4792-a7fe-05d6cdb07ff8',
+  keyword: 'key_1dda7a93-a3ab-4321-8391-da227444809b',
+  answer: 'Bienbenido a Ciudad Segura estas en bogota?',
+  options: {
+    media: null,
+    buttons: [],
+    capture: false,
+    child: null,
+    delay: 0,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: false
+  },
+  refSerialize: 'bd8423e00e9b75379b461e487b14a44b'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '573107531294@s.whatsapp.net',
+    fromMe: false,
+    id: '0BF8E94289F915BB7DE2FB4B62081BB4',
+    participant: undefined
+  },
+  messageTimestamp: 1725316958,
+  pushName: 'Juan B.',
+  broadcast: false,
+  message: Message {
+    conversation: 'Ñorrr',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Ñorrr',
+  from: '573107531294'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '573058259965@s.whatsapp.net',
+    fromMe: false,
+    id: '131E77C4E6436035754D69149CC1568A',
+    participant: undefined
+  },
+  messageTimestamp: 1725316988,
+  pushName: 'Camilo martinez Tec🏍️',
+  broadcast: false,
+  message: Message {
+    conversation: 'Weed',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Weed',
+  from: '573058259965'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '573058259965@s.whatsapp.net',
+    fromMe: false,
+    id: '568E5EC66CB08C83054E1C1B0F34CB51',
+    participant: undefined
+  },
+  messageTimestamp: 1725316989,
+  pushName: 'Camilo martinez Tec🏍️',
+  broadcast: false,
+  message: Message {
+    conversation: 'No dice nada su inteligencia',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'No dice nada su inteligencia',
+  from: '573058259965'
+}
