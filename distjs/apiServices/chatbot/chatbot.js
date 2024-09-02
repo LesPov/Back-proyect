@@ -8,23 +8,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const dotenv = require('dotenv');
-const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot');
-const WebWhatsappProvider = require('@bot-whatsapp/provider/web-whatsapp');
-const MockAdapter = require('@bot-whatsapp/database/mock');
-// Configurar las variables de entorno del archivo .env
-dotenv.config();
-const flowPrincipal = addKeyword(['hola', 'alo'])
-    .addAnswer(['Hola, bienvenido a mi tienda', '¿Cómo puedo ayudarte?'])
-    .addAnswer(['Tengo:', 'Zapatos', 'Bolsos', 'etc...']);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+// Importaciones necesarias
+const connnection_1 = __importDefault(require("../../database/connnection"));
+const databaseindex_1 = __importDefault(require("./database/databaseindex"));
+const flowindex_1 = __importDefault(require("./flow/flowindex"));
+const providersindex_1 = __importDefault(require("./providers/providersindex"));
+const dotenv_1 = __importDefault(require("dotenv"));
+// Cargar las variables de entorno
+dotenv_1.default.config();
+// Importar el bot de WhatsApp
+const BotWhatsapp = require('@bot-whatsapp/bot');
+// Función principal para crear el bot
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    const adapterDB = new MockAdapter();
-    const adapterFlow = createFlow([flowPrincipal]);
-    const adapterProvider = createProvider(WebWhatsappProvider);
-    createBot({
-        flow: adapterFlow,
-        provider: adapterProvider,
-        database: adapterDB,
-    });
+    try {
+        // Verificar la conexión a la base de datos
+        yield connnection_1.default.authenticate();
+        console.log('Conexión a la base de datos establecida correctamente.');
+        yield BotWhatsapp.createBot({
+            flow: flowindex_1.default,
+            provider: providersindex_1.default,
+            database: databaseindex_1.default,
+        });
+        console.log("Bot de WhatsApp iniciado correctamente");
+    }
+    catch (error) {
+        console.error("Error iniciando el bot de WhatsApp:", error);
+    }
 });
 main();

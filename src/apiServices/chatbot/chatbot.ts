@@ -1,25 +1,34 @@
-const dotenv = require('dotenv');
-const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot');
-const WebWhatsappProvider = require('@bot-whatsapp/provider/web-whatsapp');
-const MockAdapter = require('@bot-whatsapp/database/mock');
+// Importaciones necesarias
+import sequelize from "../../database/connnection";
+import databaseindex from "./database/databaseindex";
+import flowindex from "./flow/flowindex";
+import providersindex from "./providers/providersindex";
+import dotenv from 'dotenv';
 
-// Configurar las variables de entorno del archivo .env
+// Cargar las variables de entorno
 dotenv.config();
 
-const flowPrincipal = addKeyword(['hola', 'alo'])
-    .addAnswer(['Hola, bienvenido a mi tienda', '¿Cómo puedo ayudarte?'])
-    .addAnswer(['Tengo:', 'Zapatos', 'Bolsos', 'etc...']);
+// Importar el bot de WhatsApp
+const BotWhatsapp = require('@bot-whatsapp/bot');
 
+// Función principal para crear el bot
 const main = async () => {
-    const adapterDB = new MockAdapter();
-    const adapterFlow = createFlow([flowPrincipal]);
-    const adapterProvider = createProvider(WebWhatsappProvider);
+    try {
+         // Verificar la conexión a la base de datos
+         await sequelize.authenticate();
+         console.log('Conexión a la base de datos establecida correctamente.');
+ 
+    
+        await BotWhatsapp.createBot({
+            flow: flowindex,
+            provider: providersindex,
+            database: databaseindex,
+        });
 
-    createBot({
-        flow: adapterFlow,
-        provider: adapterProvider,
-        database: adapterDB,
-    });
+        console.log("Bot de WhatsApp iniciado correctamente");
+    } catch (error) {
+        console.error("Error iniciando el bot de WhatsApp:", error);
+    }
 };
 
 main();

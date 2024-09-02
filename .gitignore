@@ -3,7 +3,7 @@ node_modules
 .wwebjs_auth
 .wwebjs_cache
 base-wweb-mysql
-
+base-baileys-memory
 
 
 

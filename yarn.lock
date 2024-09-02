@@ -1149,9 +1149,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
 "@mongodb-js/saslprep@^1.1.0":
-  version "1.1.8"
-  resolved "https://registry.npmjs.org/@mongodb-js/saslprep/-/saslprep-1.1.8.tgz#d39744540be8800d17749990b0da95b4271840d1"
-  integrity sha512-qKwC/M/nNNaKUBMQ0nuzm47b7ZYWQHN3pcXq4IIcoSBc2hOIrflAxJduIvvqmhoz3gR2TacTAs8vlsCVPkiEdQ==
+  version "1.1.9"
+  resolved "https://registry.npmjs.org/@mongodb-js/saslprep/-/saslprep-1.1.9.tgz#e974bab8eca9faa88677d4ea4da8d09a52069004"
+  integrity sha512-tVkljjeEaAhCqTzajSdgbQ6gE6f3oneVwa3iXR6csiEwXXOFsiC6Uh9iAjAhXPtqa/XMDHWjjeNH/77m/Yq2dw==
   dependencies:
     sparse-bitfield "^3.0.3"
 
@@ -1805,9 +1805,9 @@
   integrity sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==
 
 "@types/node@*", "@types/node@>=13.7.0":
-  version "22.5.1"
-  resolved "https://registry.npmjs.org/@types/node/-/node-22.5.1.tgz#de01dce265f6b99ed32b295962045d10b5b99560"
-  integrity sha512-KkHsxej0j9IW1KKOOAA/XBA0z08UFSrRQHErzEfA3Vgq57eXIMYboIlHJuYIfd+lwCQjtKqUu3UnmKbtUc9yRw==
+  version "22.5.2"
+  resolved "https://registry.npmjs.org/@types/node/-/node-22.5.2.tgz#e42344429702e69e28c839a7e16a8262a8086793"
+  integrity sha512-acJsPTEqYqulZS/Yp/S3GgeE6GZ0qYODUR8aVr/DkhHQ8l9nd4j5x1/ZJy9/gHrRlFMqkO6i0I3E27Alu4jjPg==
   dependencies:
     undici-types "~6.19.2"
 
@@ -2185,6 +2185,13 @@ aws4@^1.8.0:
   version "1.13.2"
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.13.2.tgz#0aa167216965ac9474ccfa83892cfb6b3e1e52ef"
   integrity sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==
+
+axios@^0.21.1:
+  version "0.21.4"
+  resolved "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+  dependencies:
+    follow-redirects "^1.14.0"
 
 axios@^1.4.0, axios@^1.6.0:
   version "1.7.7"
@@ -3269,7 +3276,7 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-file-type@^16.5.4:
+file-type@^16.5.3, file-type@^16.5.4:
   version "16.5.4"
   resolved "https://registry.npmjs.org/file-type/-/file-type-16.5.4.tgz#474fb4f704bee427681f98dd390058a172a6c2fd"
   integrity sha512-/yFHK0aGjFEgDJjEKP0pWCplsPFPhwyfwevf/pVxiN0tmE4L9LmwWxWukdJSHdoCli4VgQLehjJtwQBnqmsKcw==
@@ -3334,7 +3341,7 @@ fluent-ffmpeg@^2.1.2:
     async "^0.2.9"
     which "^1.1.1"
 
-follow-redirects@^1.15.2, follow-redirects@^1.15.6:
+follow-redirects@^1.14.0, follow-redirects@^1.15.2, follow-redirects@^1.15.6:
   version "1.15.6"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
   integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
@@ -3386,7 +3393,7 @@ fs-constants@^1.0.0:
   resolved "https://registry.npmjs.org/fs-constants/-/fs-constants-1.0.0.tgz#6be0de9be998ce16af8afc24497b9ee9b7ccd9ad"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
 
-fs-extra@^10.1.0:
+fs-extra@^10.0.0, fs-extra@^10.1.0:
   version "10.1.0"
   resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
   integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
@@ -3656,6 +3663,13 @@ ignore@^5.2.0:
   version "5.3.2"
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
   integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
+
+image-size@^1.0.0:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/image-size/-/image-size-1.1.1.tgz#ddd67d4dc340e52ac29ce5f546a09f4e29e840ac"
+  integrity sha512-541xKlUw6jr/6gGuk92F+mYM5zaFAc5ahphvkqvNe2bQ6gVBkd6bfrmVJ2t4KDAfikAYZyIqTnktX3i6/aQDrQ==
+  dependencies:
+    queue "6.0.2"
 
 import-local@^3.0.2:
   version "3.2.0"
@@ -4863,6 +4877,11 @@ node-webpmux@3.1.7:
   resolved "https://registry.npmjs.org/node-webpmux/-/node-webpmux-3.1.7.tgz#7dc96bdf7daed96311f0f5a4dba2664633002593"
   integrity sha512-ySkL4lBCto86OyQ0blAGzylWSECcn5I0lM3bYEhe75T8Zxt/BFUMHa8ktUguR7zwXNdS/Hms31VfSsYKN1383g==
 
+node-webpmux@^3.1.0:
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/node-webpmux/-/node-webpmux-3.2.0.tgz#a11dcb5a1dfbb626d6bee3a7c191fa22931ad913"
+  integrity sha512-Rmc7MIS7zxDRPkfC9B15malsd1uStX2N6mYqHZNZeCJAVRDjmnxxTsyDh6POvWdNC7nmAYBW6CcHVY62DlnzRg==
+
 nodemailer@^6.9.14:
   version "6.9.14"
   resolved "https://registry.npmjs.org/nodemailer/-/nodemailer-6.9.14.tgz#845fda981f9fd5ac264f4446af908a7c78027f75"
@@ -5419,6 +5438,13 @@ queue-promise@^2.2.1:
   resolved "https://registry.npmjs.org/queue-promise/-/queue-promise-2.2.1.tgz#8de03fb79ba458efcb5ebf76368ab029d2669752"
   integrity sha512-C3eyRwLF9m6dPV4MtqMVFX+Xmc7keZ9Ievm3jJ/wWM5t3uVbFnGsJXwpYzZ4LaIEcX9bss/mdaKzyrO6xheRuA==
 
+queue@6.0.2:
+  version "6.0.2"
+  resolved "https://registry.npmjs.org/queue/-/queue-6.0.2.tgz#b91525283e2315c7553d2efa18d83e76432fed65"
+  integrity sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==
+  dependencies:
+    inherits "~2.0.3"
+
 quick-format-unescaped@^4.0.3:
   version "4.0.4"
   resolved "https://registry.npmjs.org/quick-format-unescaped/-/quick-format-unescaped-4.0.4.tgz#93ef6dd8d3453cbc7970dd614fad4c5954d6b5a7"
@@ -5728,7 +5754,7 @@ setprototypeof@1.2.0:
   resolved "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz#66c9a24a73f9fc28cbe66b09fed3d33dcaf1b424"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
-sharp@^0.30.5:
+sharp@^0.30.0, sharp@^0.30.5:
   version "0.30.7"
   resolved "https://registry.npmjs.org/sharp/-/sharp-0.30.7.tgz#7862bda98804fdd1f0d5659c85e3324b90d94c7c"
   integrity sha512-G+MY2YW33jgflKPTXXptVO28HvNOo9G3j0MybYAHeEmby+QuD2U98dT6ueht9cv/XDqZspSpIhoSW+BAKJ7Hig==
@@ -6363,6 +6389,19 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+wa-sticker-formatter@^4.4.4:
+  version "4.4.4"
+  resolved "https://registry.npmjs.org/wa-sticker-formatter/-/wa-sticker-formatter-4.4.4.tgz#d3ad9cf81b2c00f853a3e75b6fb01664139881c1"
+  integrity sha512-tl2tXlu7HEs630+1LcJsdavNGEysyQV7EIe/tFsPJCEd2jteG0nGouWNUglUEjW+bDCZGXw9VpJgUtwVGIKr8w==
+  dependencies:
+    axios "^0.21.1"
+    file-type "^16.5.3"
+    fluent-ffmpeg "^2.1.2"
+    fs-extra "^10.0.0"
+    image-size "^1.0.0"
+    node-webpmux "^3.1.0"
+    sharp "^0.30.0"
 
 walker@^1.0.8:
   version "1.0.8"
