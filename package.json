@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon distjs/index.js --watch src --ignore distjs",
+    "dev": "nodemon distjs/index.js",
     "typescript": "tsc --watch",
     "copy-templates": "copyfiles -u 1 src/apiServices/Auth/register/templates/** distjs",
     "start-bot": "ts-node src/apiServices/chatbot/chatbot.ts"
@@ -13,12 +13,7 @@
   "author": "Leo",
   "license": "ISC",
   "dependencies": {
-    "@bot-whatsapp/bot": "latest",
-    "@bot-whatsapp/cli": "latest",
-    "@bot-whatsapp/database": "latest",
-    "@bot-whatsapp/provider": "latest",
     "@types/uuid": "^10.0.0",
-    "@whiskeysockets/baileys": "^6.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

@@ -1,10 +1,6 @@
 node_modules
 .env
-.wwebjs_auth
-.wwebjs_cache
-base-wweb-mysql
-base-baileys-memory
-
+bot_sessions
 
 
 
