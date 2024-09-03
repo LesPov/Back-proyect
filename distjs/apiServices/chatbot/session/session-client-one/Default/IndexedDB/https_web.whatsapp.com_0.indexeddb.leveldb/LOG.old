@@ -1,41 +1,4 @@
-2024/09/03-15:19:27.748 1730 Reusing MANIFEST C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/09/03-15:19:27.751 1730 Recovering log #332
-2024/09/03-15:19:28.786 1730 Reusing old log C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000332.log 
-2024/09/03-15:19:28.787 1730 Delete type=2 #322
-2024/09/03-15:19:28.788 1730 Delete type=2 #323
-2024/09/03-15:19:28.788 1730 Delete type=2 #324
-2024/09/03-15:19:28.788 1730 Delete type=2 #325
-2024/09/03-15:19:28.788 1730 Delete type=2 #326
-2024/09/03-15:19:28.788 1730 Delete type=2 #327
-2024/09/03-15:19:28.788 1730 Delete type=2 #328
-2024/09/03-15:19:28.788 1730 Delete type=2 #329
-2024/09/03-15:19:28.788 1730 Delete type=2 #330
-2024/09/03-15:19:28.788 1730 Delete type=2 #333
-2024/09/03-15:19:50.328 1730 Level-0 table #346: started
-2024/09/03-15:19:50.478 1730 Level-0 table #346: 856217 bytes OK
-2024/09/03-15:19:50.667 1730 Delete type=0 #332
-2024/09/03-15:19:50.669 1730 Manual compaction at level-0 from '\x00\x1b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at (end)
-2024/09/03-15:20:05.097 287c Compacting 1@1 + 10@2 files
-2024/09/03-15:20:05.613 287c Generated table #347@1: 37903 keys, 2199857 bytes
-2024/09/03-15:20:06.284 287c Generated table #348@1: 3400 keys, 2161019 bytes
-2024/09/03-15:20:06.567 287c Generated table #349@1: 3582 keys, 2158874 bytes
-2024/09/03-15:20:07.269 287c Generated table #350@1: 4593 keys, 2166837 bytes
-2024/09/03-15:20:08.412 287c Generated table #351@1: 26654 keys, 2220788 bytes
-2024/09/03-15:20:09.360 287c Generated table #352@1: 29363 keys, 2255215 bytes
-2024/09/03-15:20:09.948 287c Generated table #353@1: 22431 keys, 2176710 bytes
-2024/09/03-15:20:11.676 287c Generated table #354@1: 91876 keys, 2239209 bytes
-2024/09/03-15:20:14.236 287c Generated table #355@1: 100565 keys, 2249246 bytes
-2024/09/03-15:20:14.590 287c Generated table #356@1: 16816 keys, 382589 bytes
-2024/09/03-15:20:14.590 287c Compacted 1@1 + 10@2 files => 20210344 bytes
-2024/09/03-15:20:14.597 287c compacted to: files[ 0 0 10 0 0 0 0 ]
-2024/09/03-15:20:14.599 287c Delete type=2 #334
-2024/09/03-15:20:14.599 287c Delete type=2 #335
-2024/09/03-15:20:14.599 287c Delete type=2 #336
-2024/09/03-15:20:14.599 287c Delete type=2 #337
-2024/09/03-15:20:14.599 287c Delete type=2 #338
-2024/09/03-15:20:14.599 287c Delete type=2 #339
-2024/09/03-15:20:14.599 287c Delete type=2 #340
-2024/09/03-15:20:14.599 287c Delete type=2 #341
-2024/09/03-15:20:14.599 287c Delete type=2 #342
-2024/09/03-15:20:14.599 287c Delete type=2 #343
-2024/09/03-15:20:14.599 287c Delete type=2 #346
+2024/09/03-17:08:19.408 2d48 Reusing MANIFEST C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/09/03-17:08:19.410 2d48 Recovering log #645
+2024/09/03-17:08:19.522 2d48 Reusing old log C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000645.log 
+2024/09/03-17:08:25.537 7e4 Manual compaction at level-0 from '\x00:\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00;\x00\x00\x00' @ 0 : 0; will stop at (end)

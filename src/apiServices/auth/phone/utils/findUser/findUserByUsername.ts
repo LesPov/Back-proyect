@@ -1,4 +1,5 @@
 import { AuthModel } from "../../../register/models/authModel";
+import { VerificationModel } from "../../../register/models/VerificationModel";
 
 /**
  * Busca un usuario en la base de datos basado en su nombre de usuario.
@@ -9,5 +10,6 @@ import { AuthModel } from "../../../register/models/authModel";
 export const findUserByUsername = async (username: string) => {
     return await AuthModel.findOne({
         where: { username: username },
+        include: [VerificationModel]
     });
 };

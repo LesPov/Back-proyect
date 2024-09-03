@@ -36,10 +36,10 @@ const sendVerificationCodePhone = (req, res) => __awaiter(void 0, void 0, void 0
         // 2. Búsqueda del usuario
         const user = yield (0, findUserByUsername_1.findUserByUsername)(username);
         (0, handleUserNotFoundError_1.handleUserNotFoundError)(username, user, res);
-        // 3. Verificación del estado del usuario
-        const isEmailVerified = (0, checkUserVerificationStatus_1.checkUserVerificationStatus)(user);
+        // 3. Verificación del estado del usuario Email
+        const isEmailVerified = (0, checkUserVerificationStatus_1.checkUserVerificationStatusEmail)(user);
         (0, checkUserVerificationStatus_1.handleEmailNotVerificationErroruser)(isEmailVerified, res);
-        // 4. Verificación del número de teléfono
+        // 4. Verificación del número de teléfono si ya esta registrado
         const isPhoneNumberVerified = yield (0, checkUserPhoneSendCode_1.checkUserPhoneSendCode)(phoneNumber);
         (0, checkUserPhoneSendCode_1.handlePhoneVerificationError)(isPhoneNumberVerified, res);
         // 5. Verificación de asociación de número de teléfono

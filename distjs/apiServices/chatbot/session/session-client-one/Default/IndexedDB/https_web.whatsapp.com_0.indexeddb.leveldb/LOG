@@ -1,31 +1,31 @@
-2024/09/03-16:06:42.298 1474 Reusing MANIFEST C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/09/03-16:06:42.300 1474 Recovering log #345
-2024/09/03-16:06:42.596 1474 Reusing old log C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000345.log 
-2024/09/03-16:06:56.342 131c Level-0 table #359: started
-2024/09/03-16:06:56.627 131c Level-0 table #359: 651877 bytes OK
-2024/09/03-16:06:56.635 131c Delete type=0 #345
-2024/09/03-16:06:56.666 131c Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)
-2024/09/03-16:07:11.104 2bbc Compacting 1@1 + 10@2 files
-2024/09/03-16:07:12.006 2bbc Generated table #360@1: 39804 keys, 2202118 bytes
-2024/09/03-16:07:12.430 2bbc Generated table #361@1: 3437 keys, 2162130 bytes
-2024/09/03-16:07:12.748 2bbc Generated table #362@1: 3560 keys, 2158971 bytes
-2024/09/03-16:07:13.087 2bbc Generated table #363@1: 4531 keys, 2166343 bytes
-2024/09/03-16:07:13.617 2bbc Generated table #364@1: 26107 keys, 2218373 bytes
-2024/09/03-16:07:14.556 2bbc Generated table #365@1: 29319 keys, 2255943 bytes
-2024/09/03-16:07:15.052 2bbc Generated table #366@1: 22683 keys, 2180173 bytes
-2024/09/03-16:07:15.731 2bbc Generated table #367@1: 89611 keys, 2236170 bytes
-2024/09/03-16:07:16.313 2bbc Generated table #368@1: 100746 keys, 2252228 bytes
-2024/09/03-16:07:16.517 2bbc Generated table #369@1: 19562 keys, 442712 bytes
-2024/09/03-16:07:16.517 2bbc Compacted 1@1 + 10@2 files => 20275161 bytes
-2024/09/03-16:07:16.520 2bbc compacted to: files[ 0 0 10 0 0 0 0 ]
-2024/09/03-16:07:16.521 2bbc Delete type=2 #347
-2024/09/03-16:07:16.521 2bbc Delete type=2 #348
-2024/09/03-16:07:16.521 2bbc Delete type=2 #349
-2024/09/03-16:07:16.521 2bbc Delete type=2 #350
-2024/09/03-16:07:16.521 2bbc Delete type=2 #351
-2024/09/03-16:07:16.522 2bbc Delete type=2 #352
-2024/09/03-16:07:16.522 2bbc Delete type=2 #353
-2024/09/03-16:07:16.522 2bbc Delete type=2 #354
-2024/09/03-16:07:16.522 2bbc Delete type=2 #355
-2024/09/03-16:07:16.522 2bbc Delete type=2 #356
-2024/09/03-16:07:16.522 2bbc Delete type=2 #359
+2024/09/03-17:18:21.073 1308 Reusing MANIFEST C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/09/03-17:18:21.075 1308 Recovering log #645
+2024/09/03-17:18:21.304 1308 Reusing old log C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000645.log 
+2024/09/03-17:18:33.713 d5c Level-0 table #659: started
+2024/09/03-17:18:33.757 d5c Level-0 table #659: 339895 bytes OK
+2024/09/03-17:18:33.762 d5c Delete type=0 #645
+2024/09/03-17:18:33.822 2adc Manual compaction at level-0 from '\x00;\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00<\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/03-17:18:45.154 2adc Compacting 1@1 + 10@2 files
+2024/09/03-17:18:45.909 2adc Generated table #660@1: 56138 keys, 2218512 bytes
+2024/09/03-17:18:46.177 2adc Generated table #661@1: 3796 keys, 2162141 bytes
+2024/09/03-17:18:46.509 2adc Generated table #662@1: 3204 keys, 2155818 bytes
+2024/09/03-17:18:46.806 2adc Generated table #663@1: 4426 keys, 2165209 bytes
+2024/09/03-17:18:47.274 2adc Generated table #664@1: 21273 keys, 2199655 bytes
+2024/09/03-17:18:47.854 2adc Generated table #665@1: 29006 keys, 2258589 bytes
+2024/09/03-17:18:48.281 2adc Generated table #666@1: 25665 keys, 2202121 bytes
+2024/09/03-17:18:48.901 2adc Generated table #667@1: 71026 keys, 2212284 bytes
+2024/09/03-17:18:49.576 2adc Generated table #668@1: 100246 keys, 2250851 bytes
+2024/09/03-17:18:49.843 2adc Generated table #669@1: 42412 keys, 957018 bytes
+2024/09/03-17:18:49.843 2adc Compacted 1@1 + 10@2 files => 20782198 bytes
+2024/09/03-17:18:49.845 2adc compacted to: files[ 0 0 10 0 0 0 0 ]
+2024/09/03-17:18:49.846 2adc Delete type=2 #647
+2024/09/03-17:18:49.846 2adc Delete type=2 #648
+2024/09/03-17:18:49.846 2adc Delete type=2 #649
+2024/09/03-17:18:49.846 2adc Delete type=2 #650
+2024/09/03-17:18:49.847 2adc Delete type=2 #651
+2024/09/03-17:18:49.847 2adc Delete type=2 #652
+2024/09/03-17:18:49.847 2adc Delete type=2 #653
+2024/09/03-17:18:49.847 2adc Delete type=2 #654
+2024/09/03-17:18:49.847 2adc Delete type=2 #655
+2024/09/03-17:18:49.847 2adc Delete type=2 #656
+2024/09/03-17:18:49.847 2adc Delete type=2 #659

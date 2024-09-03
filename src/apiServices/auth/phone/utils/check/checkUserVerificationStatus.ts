@@ -6,7 +6,7 @@ import { errorMessages } from '../../../../../middleware/erros/errorMessages';
  * @param user - El objeto usuario.
  * @returns Verdadero si el email ya está verificado, falso en caso contrario.
  */
-export const checkUserVerificationStatus = (user: any) => {
+export const checkUserVerificationStatusEmail = (user: any) => {
     // Verificar el estado de la verificación del correo electrónico si no esta 
     return user?.verification?.isEmailVerified || false;
 };

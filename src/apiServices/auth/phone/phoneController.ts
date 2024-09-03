@@ -4,7 +4,7 @@ import { handleInputValidationErrors } from '../register/utils/errors/handleInpu
 import { handleServerError } from './utils/errors/handleServerError';
 import { findUserByUsername } from '../email/utils/findUser/findUserByUsername';
 import { handleUserNotFoundError } from './utils/errors/handleUserNotFoundError';
-import { checkUserVerificationStatus, handleEmailNotVerificationErroruser } from './utils/check/checkUserVerificationStatus';
+import { checkUserVerificationStatusEmail, handleEmailNotVerificationErroruser } from './utils/check/checkUserVerificationStatus';
 import { checkUserPhoneSendCode, handlePhoneVerificationError } from './utils/check/checkUserPhoneSendCode';
 import { checkUserPhoneNumberAssociation, handlePhoneNumberAssociationError } from './utils/check/checkUserPhoneNumberAssociation';
 import { createVerificationEntryPhone } from './utils/check/createVerificationEntryPhone';
@@ -31,11 +31,11 @@ export const sendVerificationCodePhone = async (req: Request, res: Response) => 
         const user = await findUserByUsername(username);
         handleUserNotFoundError(username, user, res);
 
-        // 3. Verificación del estado del usuario
-        const isEmailVerified = checkUserVerificationStatus(user);
+        // 3. Verificación del estado del usuario Email
+        const isEmailVerified = checkUserVerificationStatusEmail(user);
         handleEmailNotVerificationErroruser(isEmailVerified, res);
 
-        // 4. Verificación del número de teléfono
+        // 4. Verificación del número de teléfono si ya esta registrado
         const isPhoneNumberVerified = await checkUserPhoneSendCode(phoneNumber);
         handlePhoneVerificationError(isPhoneNumberVerified, res);
 

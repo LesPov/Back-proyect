@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const phoneController_1 = require("./phoneController");
+const phoneValidateCodeController_1 = require("./validateCode/phoneValidateCodeController");
 const phoneVerificationRouter = (0, express_1.Router)();
 /**
  * POST /api/user/verify/send
@@ -9,4 +10,10 @@ const phoneVerificationRouter = (0, express_1.Router)();
  * Público
  */
 phoneVerificationRouter.post("/phone/send", phoneController_1.sendVerificationCodePhone);
+/**
+ * PUT /api/user/verify/phone
+ * Ruta para verificar el número de teléfono.
+ * Público
+ */
+phoneVerificationRouter.put('/verify/phone', phoneValidateCodeController_1.verifyPhoneNumber);
 exports.default = phoneVerificationRouter;

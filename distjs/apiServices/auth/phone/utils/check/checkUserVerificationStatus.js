@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleEmailNotVerificationErroruser = exports.checkUserVerificationStatus = void 0;
+exports.handleEmailNotVerificationErroruser = exports.checkUserVerificationStatusEmail = void 0;
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
 /**
  * Verifica si el usuario ya ha sido verificado por email.
  * @param user - El objeto usuario.
  * @returns Verdadero si el email ya está verificado, falso en caso contrario.
  */
-const checkUserVerificationStatus = (user) => {
+const checkUserVerificationStatusEmail = (user) => {
     var _a;
     // Verificar el estado de la verificación del correo electrónico si no esta 
     return ((_a = user === null || user === void 0 ? void 0 : user.verification) === null || _a === void 0 ? void 0 : _a.isEmailVerified) || false;
 };
-exports.checkUserVerificationStatus = checkUserVerificationStatus;
+exports.checkUserVerificationStatusEmail = checkUserVerificationStatusEmail;
 /**
  * Maneja el error cuando el correo electrónico ya está verificado.
  *
