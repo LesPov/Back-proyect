@@ -13,6 +13,7 @@
   "author": "Leo",
   "license": "ISC",
   "dependencies": {
+    "@adiwajshing/baileys": "^5.0.0",
     "@types/uuid": "^10.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -23,7 +24,6 @@
     "mysql2": "^3.11.0",
     "node-dependency-injection": "^3.1.2",
     "nodemailer": "^6.9.14",
-    "puppeteer": "^23.2.1",
     "qrcode-terminal": "^0.12.0",
     "sequelize": "^6.37.3",
     "uuid": "^10.0.0",

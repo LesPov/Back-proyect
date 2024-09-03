@@ -1,10 +1,7 @@
 node_modules
 .env
-bot_sessions
-.wwebjs_auth
+
+
+
+
 .wwebjs_cache
-
-
-
-
-

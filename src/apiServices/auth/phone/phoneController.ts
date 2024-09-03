@@ -11,6 +11,8 @@ import { createVerificationEntryPhone } from './utils/check/createVerificationEn
 import { updatePhoneNumber } from './utils/updatePhone/updatePhoneNumber';
 import whatsappClient from '../../chatbot/client';
 import { sendWhatsAppMessage } from './utils/send/sendWhatsAppMessage';
+ 
+
 
 /**
  * Controlador para enviar un código de verificación por mensaje de texto (SMS).
@@ -21,7 +23,7 @@ import { sendWhatsAppMessage } from './utils/send/sendWhatsAppMessage';
 export const sendVerificationCodePhone = async (req: Request, res: Response) => {
     try {
         // 1. Validación de entrada
-        const { username, phoneNumber, verificationCode } = req.body;
+        const { username, phoneNumber } = req.body;
         const inputValidationErrors = validateInput(username, phoneNumber);
         handleInputValidationErrors(inputValidationErrors, res);
 

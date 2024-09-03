@@ -30,7 +30,7 @@ const sendWhatsAppMessage_1 = require("./utils/send/sendWhatsAppMessage");
 const sendVerificationCodePhone = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // 1. Validación de entrada
-        const { username, phoneNumber, verificationCode } = req.body;
+        const { username, phoneNumber } = req.body;
         const inputValidationErrors = (0, validateInput_1.validateInput)(username, phoneNumber);
         (0, handleInputValidationErrors_1.handleInputValidationErrors)(inputValidationErrors, res);
         // 2. Búsqueda del usuario
