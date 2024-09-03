@@ -1,29 +1,31 @@
-2024/09/03-13:51:58.664 ba8 Reusing MANIFEST C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/09/03-13:51:58.665 ba8 Recovering log #308
-2024/09/03-13:52:00.962 ba8 Reusing old log C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000308.log 
-2024/09/03-13:52:21.009 1574 Level-0 table #321: started
-2024/09/03-13:52:21.289 1574 Level-0 table #321: 885301 bytes OK
-2024/09/03-13:52:21.611 1574 Delete type=0 #308
-2024/09/03-13:52:21.695 1de8 Manual compaction at level-0 from '\x00\x19\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1a\x00\x00\x00' @ 0 : 0; will stop at (end)
-2024/09/03-13:52:34.699 32ec Compacting 1@1 + 9@2 files
-2024/09/03-13:52:35.584 32ec Generated table #322@1: 28837 keys, 2190255 bytes
-2024/09/03-13:52:36.184 32ec Generated table #323@1: 3514 keys, 2159438 bytes
-2024/09/03-13:52:36.593 32ec Generated table #324@1: 3686 keys, 2160490 bytes
-2024/09/03-13:52:37.579 32ec Generated table #325@1: 4680 keys, 2173796 bytes
-2024/09/03-13:52:38.261 32ec Generated table #326@1: 30693 keys, 2237942 bytes
-2024/09/03-13:52:39.337 32ec Generated table #327@1: 29652 keys, 2252035 bytes
-2024/09/03-13:52:39.814 32ec Generated table #328@1: 20414 keys, 2158735 bytes
-2024/09/03-13:52:40.894 32ec Generated table #329@1: 107954 keys, 2260264 bytes
-2024/09/03-13:52:42.240 32ec Generated table #330@1: 96914 keys, 2168446 bytes
-2024/09/03-13:52:42.240 32ec Compacted 1@1 + 9@2 files => 19761401 bytes
-2024/09/03-13:52:42.290 32ec compacted to: files[ 0 0 9 0 0 0 0 ]
-2024/09/03-13:52:42.291 32ec Delete type=2 #310
-2024/09/03-13:52:42.291 32ec Delete type=2 #311
-2024/09/03-13:52:42.291 32ec Delete type=2 #312
-2024/09/03-13:52:42.291 32ec Delete type=2 #313
-2024/09/03-13:52:42.291 32ec Delete type=2 #314
-2024/09/03-13:52:42.292 32ec Delete type=2 #315
-2024/09/03-13:52:42.292 32ec Delete type=2 #316
-2024/09/03-13:52:42.292 32ec Delete type=2 #317
-2024/09/03-13:52:42.292 32ec Delete type=2 #318
-2024/09/03-13:52:42.292 32ec Delete type=2 #321
+2024/09/03-16:06:42.298 1474 Reusing MANIFEST C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/09/03-16:06:42.300 1474 Recovering log #345
+2024/09/03-16:06:42.596 1474 Reusing old log C:\Users\pc\Desktop\2024 segundo perido\Proyectos Fullstak\Back\distjs\apiServices\chatbot\session\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000345.log 
+2024/09/03-16:06:56.342 131c Level-0 table #359: started
+2024/09/03-16:06:56.627 131c Level-0 table #359: 651877 bytes OK
+2024/09/03-16:06:56.635 131c Delete type=0 #345
+2024/09/03-16:06:56.666 131c Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/03-16:07:11.104 2bbc Compacting 1@1 + 10@2 files
+2024/09/03-16:07:12.006 2bbc Generated table #360@1: 39804 keys, 2202118 bytes
+2024/09/03-16:07:12.430 2bbc Generated table #361@1: 3437 keys, 2162130 bytes
+2024/09/03-16:07:12.748 2bbc Generated table #362@1: 3560 keys, 2158971 bytes
+2024/09/03-16:07:13.087 2bbc Generated table #363@1: 4531 keys, 2166343 bytes
+2024/09/03-16:07:13.617 2bbc Generated table #364@1: 26107 keys, 2218373 bytes
+2024/09/03-16:07:14.556 2bbc Generated table #365@1: 29319 keys, 2255943 bytes
+2024/09/03-16:07:15.052 2bbc Generated table #366@1: 22683 keys, 2180173 bytes
+2024/09/03-16:07:15.731 2bbc Generated table #367@1: 89611 keys, 2236170 bytes
+2024/09/03-16:07:16.313 2bbc Generated table #368@1: 100746 keys, 2252228 bytes
+2024/09/03-16:07:16.517 2bbc Generated table #369@1: 19562 keys, 442712 bytes
+2024/09/03-16:07:16.517 2bbc Compacted 1@1 + 10@2 files => 20275161 bytes
+2024/09/03-16:07:16.520 2bbc compacted to: files[ 0 0 10 0 0 0 0 ]
+2024/09/03-16:07:16.521 2bbc Delete type=2 #347
+2024/09/03-16:07:16.521 2bbc Delete type=2 #348
+2024/09/03-16:07:16.521 2bbc Delete type=2 #349
+2024/09/03-16:07:16.521 2bbc Delete type=2 #350
+2024/09/03-16:07:16.521 2bbc Delete type=2 #351
+2024/09/03-16:07:16.522 2bbc Delete type=2 #352
+2024/09/03-16:07:16.522 2bbc Delete type=2 #353
+2024/09/03-16:07:16.522 2bbc Delete type=2 #354
+2024/09/03-16:07:16.522 2bbc Delete type=2 #355
+2024/09/03-16:07:16.522 2bbc Delete type=2 #356
+2024/09/03-16:07:16.522 2bbc Delete type=2 #359
