@@ -9,6 +9,8 @@ import { checkUserPhoneSendCode, handlePhoneVerificationError } from './utils/ch
 import { checkUserPhoneNumberAssociation, handlePhoneNumberAssociationError } from './utils/check/checkUserPhoneNumberAssociation';
 import { createVerificationEntryPhone } from './utils/check/createVerificationEntryPhone';
 import { updatePhoneNumber } from './utils/updatePhone/updatePhoneNumber';
+import whatsappClient from '../../chatbot/client';
+import { sendWhatsAppMessage } from './utils/send/sendWhatsAppMessage';
 
 /**
  * Controlador para enviar un código de verificación por mensaje de texto (SMS).
@@ -47,8 +49,13 @@ export const sendVerificationCodePhone = async (req: Request, res: Response) => 
         // 7. Generar nuevo código de verificación
         const sendcodesms = await createVerificationEntryPhone(user.id, phoneNumber);
 
-        // 8. Enviar  con codigo por WhatsApp con el código de verificación   
 
+        // Mensaje de verificación para enviar
+        const message = `Tu código de verificación es: ${sendcodesms}`;
+        console.log('El mensage enviado fue:', message);
+
+        // 8. Enviar el código de verificación por WhatsApp
+        await sendWhatsAppMessage(phoneNumber, message);
 
         // 9. Responder con un mensaje de éxito
         res.status(200).json({ message: 'Código de verificación enviado exitosamente por WhatsApp.' });

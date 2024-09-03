@@ -8,15 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendVerificationCodePhone = void 0;
-const BotWhatsapp = require('@bot-whatsapp/bot');
-/**
- * Controlador para enviar un código de verificación por WhatsApp.
- * @param {Request} req - Objeto de solicitud de Express.
- * @param {Response} res - Objeto de respuesta de Express.
- * @returns {Response} - Respuesta JSON con un mensaje indicando el estado de la operación.
- */
-const sendVerificationCodePhone = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.sendWhatsAppMessage = void 0;
+const client_1 = __importDefault(require("../../../../chatbot/client"));
+// Función para enviar mensaje de WhatsApp
+const sendWhatsAppMessage = (phoneNumber, message) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Asegúrate de que el número de teléfono esté en el formato correcto
+        const formattedNumber = `${phoneNumber.replace(/[-+()\s]/g, '')}@c.us`; // Formato internacional de WhatsApp ID
+        // Enviar el mensaje
+        yield client_1.default.sendMessage(formattedNumber, message);
+        console.log('Mensaje enviado con éxito a:', phoneNumber);
+    }
+    catch (error) {
+        console.error('Error al enviar mensaje por WhatsApp:', error);
+        throw new Error('Failed to send WhatsApp message');
+    }
 });
-exports.sendVerificationCodePhone = sendVerificationCodePhone;
+exports.sendWhatsAppMessage = sendWhatsAppMessage;

@@ -20,6 +20,7 @@ const checkUserPhoneSendCode_1 = require("./utils/check/checkUserPhoneSendCode")
 const checkUserPhoneNumberAssociation_1 = require("./utils/check/checkUserPhoneNumberAssociation");
 const createVerificationEntryPhone_1 = require("./utils/check/createVerificationEntryPhone");
 const updatePhoneNumber_1 = require("./utils/updatePhone/updatePhoneNumber");
+const sendWhatsAppMessage_1 = require("./utils/send/sendWhatsAppMessage");
 /**
  * Controlador para enviar un código de verificación por mensaje de texto (SMS).
  * @param {Request} req - Objeto de solicitud de Express.
@@ -50,7 +51,11 @@ const sendVerificationCodePhone = (req, res) => __awaiter(void 0, void 0, void 0
         yield (0, updatePhoneNumber_1.updatePhoneNumber)(user.id, phoneNumber);
         // 7. Generar nuevo código de verificación
         const sendcodesms = yield (0, createVerificationEntryPhone_1.createVerificationEntryPhone)(user.id, phoneNumber);
-        // 8. Enviar  con codigo por WhatsApp con el código de verificación   
+        // Mensaje de verificación para enviar
+        const message = `Tu código de verificación es: ${sendcodesms}`;
+        console.log('El mensage enviado fue:', message);
+        // 8. Enviar el código de verificación por WhatsApp
+        yield (0, sendWhatsAppMessage_1.sendWhatsAppMessage)(phoneNumber, message);
         // 9. Responder con un mensaje de éxito
         res.status(200).json({ message: 'Código de verificación enviado exitosamente por WhatsApp.' });
     }

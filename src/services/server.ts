@@ -22,7 +22,7 @@ dotenv.config();
 
 class Server {
 
-    private app: Application;
+    private app: Application; 
     private port: string;
     
 
