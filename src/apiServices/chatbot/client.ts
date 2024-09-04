@@ -4,7 +4,9 @@ import fs from 'fs';
 import path from 'path';
 
 // Ruta donde se guardará la sesión
-const sessionPath = path.resolve(__dirname, 'session');
+
+// Ruta donde se guardará la sesión
+const sessionPath = path.resolve(__dirname, '../../../.wwebjs_sessions');
 
 const client = new Client({
     authStrategy: new LocalAuth({

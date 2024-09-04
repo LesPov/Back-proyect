@@ -7,23 +7,23 @@ import { errorMessages } from '../../../../../../middleware/erros/errorMessages'
  * @returns Verdadero si el email ya está verificado, falso en caso contrario.
  */
 export const checkUserVerificationStatusPhone = (user: any) => {
-    // Verificar el estado de la verificación del correo electrónico si no esta 
-    return user?.verification?.isEmailVerified || false;
+    // Verificar el estado de la verificación del numero celular si no esta 
+    return user?.verification?.isPhoneVerified || false;
 };
 /**
- * Maneja el error cuando el correo electrónico ya está verificado.
+ * Maneja el error cuando el numero celular ya está verificado.
  * 
- * @param isEmailVerified - Indicador de si el correo electrónico está verificado.
+ * @param isPhoneVerified - Indicador de si el numero celular está verificado.
  * @param res - El objeto de respuesta HTTP proporcionado por Express.
  * 
- * @throws Lanza una excepción si el correo electrónico ya está verificado.
+ * @throws Lanza una excepción si el numero celular ya está verificado.
  */
-export const handlePhoneNotVerificationErroruser = (isEmailVerified: boolean, res: Response) => {
-    if (!isEmailVerified) {
-        const errorMsg = errorMessages.emailNotVerified();
+export const handlePhoneNotVerificationErroruser = (isPhoneVerified: boolean, res: Response) => {
+    if (!isPhoneVerified) {
+        const errorMsg = errorMessages.phoneAlreadyVerified();
         res.status(400).json({
             msg: errorMsg,
-            errors: 'Error: El correo electrónico no ha sido verificado. Por favor, verifica tu correo antes de continuar.',
+            errors: 'Error: El numero celular no ha sido verificado. Por favor, verifica tu correo antes de continuar.',
         });
         throw new Error("User email not verified.");
     }

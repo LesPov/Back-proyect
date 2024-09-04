@@ -25,6 +25,9 @@ export const errorMessages = {
 emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica tu correo para continuar.',
 
 
+//Errores de phone 
+phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previamente',
+
   userNotExists: (username: string) => `No existe un usuario con el nombre ${username} en la base de datos`,
   invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',
   invalidPasswordDB: 'La contraseña aleatoria proporcionada no coincide con la almacenada en la base de datos, o no exite',
@@ -47,7 +50,6 @@ emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica 
   phoneNumberVerificationError: 'Error al enviar el código de verificación por SMS',
   emailVerificationError: 'Ocurrió un error al reenviar el código de verificación por correo electrónico',
   incorrectPhoneNumber: 'El número de teléfono no coincide con el registrado para este usuario',
-  phoneAlreadyVerified: 'El número de teléfono ya ha sido verificado previamente',
   phoneNumberInUse: 'El número de teléfono ya ha sido registrado para este usuario',
   phoneVerificationRequired: 'El usuario aún no ha sido verificado. Verifica tu numero celular para activar tu cuenta.',
   verificadoVericationRequired: 'El usuario aún no ha sido verificado. Verifica tu numero celular y correo para activar tu cuenta.',

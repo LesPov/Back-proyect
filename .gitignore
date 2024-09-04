@@ -1,7 +1,5 @@
-node_modules
+node_modules/
 .env
-
-
-
-
+distjs/apiServices/chatbot/session/
 .wwebjs_cache
+.wwebjs_sessions
