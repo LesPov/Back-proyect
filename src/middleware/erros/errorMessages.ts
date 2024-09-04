@@ -27,6 +27,7 @@ emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica 
 
 //Errores de phone 
 phoneCodeVerify:() => 'El numero de telefono no ha sido verificado',
+incorrectPhoneNumber: () =>'El número de teléfono no coincide con el registrado para este usuario',
 
 phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previamente',
 
@@ -52,7 +53,6 @@ phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previa
   phoneNumberExists: 'El número de teléfono ya ha sido registrado en la base de datos. ingresa otro',
   phoneNumberVerificationError: 'Error al enviar el código de verificación por SMS',
   emailVerificationError: 'Ocurrió un error al reenviar el código de verificación por correo electrónico',
-  incorrectPhoneNumber: 'El número de teléfono no coincide con el registrado para este usuario',
   phoneNumberInUse: 'El número de teléfono ya ha sido registrado para este usuario',
   phoneVerificationRequired: 'El usuario aún no ha sido verificado. Verifica tu numero celular para activar tu cuenta.',
   verificadoVericationRequired: 'El usuario aún no ha sido verificado. Verifica tu numero celular y correo para activar tu cuenta.',

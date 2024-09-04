@@ -4,7 +4,7 @@ import { handleUserNotFoundError } from './utils/errors/handleUserNotFoundError'
 import { handleServerError } from './utils/errors/handleServerError';
 import { checkUserVerificationStatus, handleEmailNotVerificationErroruser } from './utils/check/checkUserVerificationStatus';
 import { checkVerificationCodeIsValid, handleVerificationCodeIsValidError } from './utils/check/checkVerificationCodeIsvValid';
-import { checkVerificationCodeExpiration, handleEmailVerificationCodeExpirationError } from './utils/check/checkVerificationCodeExpiration';
+import { checkVerificationCodeExpiration, handleVerificationCodeExpirationError } from './utils/check/checkVerificationCodeExpiration';
 import { markEmailAsVerified, removeVerificationCode } from './utils/markItInDatabase/markItInDatabase';
 import { successMessages } from '../../../middleware/success/successMessages';
 
@@ -17,10 +17,10 @@ export const verifyUser = async (req: Request, res: Response) => {
 
         //Busca un usuario en la base de datos basado en su nombre de usuario.
         const user = await findUserByUsername(username);
-        // Maneja el error si el usuario no existe
-        handleUserNotFoundError(username, user, res);
-        if (!user) return; // Si user es null, sale de la función
-
+        if (!user) {
+            // Si el usuario no existe, maneja el error y termina el flujo.
+            return handleUserNotFoundError(username, user, res);
+        }
 
         // Verificar si el correo electrónico ya está verificado
         const isEmailVerified = checkUserVerificationStatus(user);
@@ -37,7 +37,7 @@ export const verifyUser = async (req: Request, res: Response) => {
         const isCodeExpire = checkVerificationCodeExpiration(user, currentDate);
         console.log(`Código expirado: ${isCodeExpire}`);
         // Maneja el error si el código de verificación ha expirado.
-        handleEmailVerificationCodeExpirationError(isCodeExpire, res);
+        handleVerificationCodeExpirationError(isCodeExpire, res);
 
         //Marca el email del usuario como verificado en la base de datos.
         await markEmailAsVerified(user.id);

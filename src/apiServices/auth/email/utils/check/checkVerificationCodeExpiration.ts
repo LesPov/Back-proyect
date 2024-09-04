@@ -20,7 +20,7 @@ export const checkVerificationCodeExpiration = (user: any, currentDate: Date): b
  * @param isCodeExpire - Booleano que indica si el código ha expirado.
  * @param res - El objeto de respuesta HTTP proporcionado por Express.
  */
-export const handleEmailVerificationCodeExpirationError = (isCodeExpire: boolean, res: Response) => {
+export const handleVerificationCodeExpirationError = (isCodeExpire: boolean, res: Response) => {
     if (isCodeExpire) {
         const errorMsg = errorMessages.verificationCodeExpired;
         res.status(400).json({

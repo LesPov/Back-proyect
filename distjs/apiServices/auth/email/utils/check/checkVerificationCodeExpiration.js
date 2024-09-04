@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleEmailVerificationCodeExpirationError = exports.checkVerificationCodeExpiration = void 0;
+exports.handleVerificationCodeExpirationError = exports.checkVerificationCodeExpiration = void 0;
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
 /**
  * Verifica si el código de verificación ha expirado.
@@ -22,7 +22,7 @@ exports.checkVerificationCodeExpiration = checkVerificationCodeExpiration;
  * @param isCodeExpire - Booleano que indica si el código ha expirado.
  * @param res - El objeto de respuesta HTTP proporcionado por Express.
  */
-const handleEmailVerificationCodeExpirationError = (isCodeExpire, res) => {
+const handleVerificationCodeExpirationError = (isCodeExpire, res) => {
     if (isCodeExpire) {
         const errorMsg = errorMessages_1.errorMessages.verificationCodeExpired;
         res.status(400).json({
@@ -32,4 +32,4 @@ const handleEmailVerificationCodeExpirationError = (isCodeExpire, res) => {
         throw new Error("Verification code has expired");
     }
 };
-exports.handleEmailVerificationCodeExpirationError = handleEmailVerificationCodeExpirationError;
+exports.handleVerificationCodeExpirationError = handleVerificationCodeExpirationError;
