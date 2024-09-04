@@ -22,6 +22,7 @@ exports.errorMessages = {
     // Errores de verificación de usuario   
     emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica tu correo para continuar.',
     //Errores de phone 
+    phoneCodeVerify: () => 'El numero de telefono no ha sido verificado',
     phoneAlreadyVerified: () => 'El número de teléfono ya ha sido verificado previamente',
     userNotExists: (username) => `No existe un usuario con el nombre ${username} en la base de datos`,
     invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',

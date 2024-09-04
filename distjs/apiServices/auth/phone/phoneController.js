@@ -33,7 +33,7 @@ const sendVerificationCodePhone = (req, res) => __awaiter(void 0, void 0, void 0
         const { username, phoneNumber } = req.body;
         const inputValidationErrors = (0, validateInput_1.validateInput)(username, phoneNumber);
         (0, handleInputValidationErrors_1.handleInputValidationErrors)(inputValidationErrors, res);
-        // 2. Búsqueda del usuario
+        // 2. Búsqueda del usuario si existe
         const user = yield (0, findUserByUsername_1.findUserByUsername)(username);
         (0, handleUserNotFoundError_1.handleUserNotFoundError)(username, user, res);
         // 3. Verificación del estado del usuario Email

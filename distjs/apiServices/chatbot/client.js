@@ -7,7 +7,6 @@ const whatsapp_web_js_1 = require("whatsapp-web.js");
 const qrcode_terminal_1 = __importDefault(require("qrcode-terminal"));
 const path_1 = __importDefault(require("path"));
 // Ruta donde se guardará la sesión
-// Ruta donde se guardará la sesión
 const sessionPath = path_1.default.resolve(__dirname, '../../../.wwebjs_sessions');
 const client = new whatsapp_web_js_1.Client({
     authStrategy: new whatsapp_web_js_1.LocalAuth({

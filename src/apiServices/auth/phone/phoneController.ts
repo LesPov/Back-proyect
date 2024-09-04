@@ -27,7 +27,7 @@ export const sendVerificationCodePhone = async (req: Request, res: Response) => 
         const inputValidationErrors = validateInput(username, phoneNumber);
         handleInputValidationErrors(inputValidationErrors, res);
 
-        // 2. Búsqueda del usuario
+        // 2. Búsqueda del usuario si existe
         const user = await findUserByUsername(username);
         handleUserNotFoundError(username, user, res);
 

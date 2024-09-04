@@ -1,9 +1,6 @@
 import { Client, LocalAuth } from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
-import fs from 'fs';
 import path from 'path';
-
-// Ruta donde se guardará la sesión
 
 // Ruta donde se guardará la sesión
 const sessionPath = path.resolve(__dirname, '../../../.wwebjs_sessions');

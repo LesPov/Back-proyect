@@ -27,4 +27,4 @@ export const handleEmailNotVerificationErroruser = (isEmailVerified: boolean, re
         });
         throw new Error("User email not verified.");
     }
-};
+}; 
