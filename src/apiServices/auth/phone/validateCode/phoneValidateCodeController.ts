@@ -9,10 +9,11 @@ import { checkUserVerificationStatusPhone, handlePhoneNotVerificationErroruser }
 import { checkUserPhoneNumberAssociationCode, handlePhoneNumberAssociationCodeError } from './utils/check/checkUserPhoneNumberAssociation';
 import { checkVerificationCodeIsValid, handleVerificationCodeIsValidError } from '../../email/utils/check/checkVerificationCodeIsvValid';
 import { checkVerificationCodeExpiration, handleVerificationCodeExpirationError } from '../../email/utils/check/checkVerificationCodeExpiration';
-import { markisPhoneVerified, markisVerified } from './markItInDatabase/marckisPhoneVerified';
+import { markisPhoneVerified, markisVerified } from './utils/markItInDatabase/marckisPhoneVerified';
 import whatsappClient from '../../../chatbot/client';
 import { sendWhatsAppMessage } from '../utils/send/sendWhatsAppMessage';
 import { removeVerificationCode } from '../../email/utils/markItInDatabase/markItInDatabase';
+import { successMessages } from '../../../../middleware/success/successMessages';
 
 /**
  * Verifica el número de teléfono del usuario en función del código de verificación.
@@ -68,7 +69,7 @@ export const verifyPhoneNumber = async (req: Request, res: Response) => {
         // Maneja el error si el código de verificación ha expirado.
         handleVerificationCodeExpirationError(isCodeExpire, res);
 
-     
+
 
         // 8. Marca el número de teléfono como verificado en la base de datos.
         // Actualiza el estado del número de teléfono del usuario a verificado en la base de datos.
@@ -87,7 +88,7 @@ export const verifyPhoneNumber = async (req: Request, res: Response) => {
         // 11. Responde con éxito si todas las validaciones y actualizaciones se completan correctamente
         // Envía una respuesta exitosa al cliente indicando que el número de teléfono ha sido verificado.
         res.status(200).json({
-            msg: 'Número de teléfono verificado con éxito',
+            msg: successMessages.phoneVerified,
         });
 
 

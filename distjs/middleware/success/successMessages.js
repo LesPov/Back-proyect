@@ -9,7 +9,7 @@ exports.successMessages = {
     // Éxitos de verificación de usuario
     userVerified: 'Correo verificado exitosamente, ahora verifica tu número celular',
     // Éxitos de envío de código de verificación por SMS
-    verificationCodeSent: 'El código de verificación ha sido enviado por SMS',
+    verificationCodeSent: 'El código de verificación ha sido enviado por whatsaap',
     // Éxitos de reenvío de código de verificación por correo electrónico
     verificationCodeResent: 'El código de verificación ha sido reenviado exitosamente por correo electrónico',
     // Éxitos de verificación de número de teléfono

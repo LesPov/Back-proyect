@@ -20,9 +20,10 @@ const checkUserVerificationStatusPhone_1 = require("./utils/check/checkUserVerif
 const checkUserPhoneNumberAssociation_1 = require("./utils/check/checkUserPhoneNumberAssociation");
 const checkVerificationCodeIsvValid_1 = require("../../email/utils/check/checkVerificationCodeIsvValid");
 const checkVerificationCodeExpiration_1 = require("../../email/utils/check/checkVerificationCodeExpiration");
-const marckisPhoneVerified_1 = require("./markItInDatabase/marckisPhoneVerified");
+const marckisPhoneVerified_1 = require("./utils/markItInDatabase/marckisPhoneVerified");
 const sendWhatsAppMessage_1 = require("../utils/send/sendWhatsAppMessage");
 const markItInDatabase_1 = require("../../email/utils/markItInDatabase/markItInDatabase");
+const successMessages_1 = require("../../../../middleware/success/successMessages");
 /**
  * Verifica el número de teléfono del usuario en función del código de verificación.
  * @param req - Objeto de solicitud HTTP proporcionado por Express.
@@ -79,7 +80,7 @@ const verifyPhoneNumber = (req, res) => __awaiter(void 0, void 0, void 0, functi
         // 11. Responde con éxito si todas las validaciones y actualizaciones se completan correctamente
         // Envía una respuesta exitosa al cliente indicando que el número de teléfono ha sido verificado.
         res.status(200).json({
-            msg: 'Número de teléfono verificado con éxito',
+            msg: successMessages_1.successMessages.phoneVerified,
         });
         // 12. Mensaje de verificación para enviar
         // Prepara y envía un mensaje por WhatsApp confirmando la verificación del número de teléfono.

@@ -18,7 +18,7 @@ export const resendVerificationCode = async (req: Request, res: Response) => {
         if (!user) return; // Si user es null, sale de la función
 
         // Generar y guardar un código de verificación para el correo electrónico del usuario
-        const newVerificationCode = await createOrUpdateVerificationEntry(user.id, user.email);
+        const newVerificationCode = await createOrUpdateVerificationEntry(user.id);
 
         // Enviar el correo electrónico de verificación al usuario con el nuevo código
         await sendVerificationEmail(user.email, username, newVerificationCode);

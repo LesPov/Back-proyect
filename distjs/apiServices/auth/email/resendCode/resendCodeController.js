@@ -25,7 +25,7 @@ const resendVerificationCode = (req, res) => __awaiter(void 0, void 0, void 0, f
         if (!user)
             return; // Si user es null, sale de la función
         // Generar y guardar un código de verificación para el correo electrónico del usuario
-        const newVerificationCode = yield (0, createOrUpdateVerificationEntry_1.createOrUpdateVerificationEntry)(user.id, user.email);
+        const newVerificationCode = yield (0, createOrUpdateVerificationEntry_1.createOrUpdateVerificationEntry)(user.id);
         // Enviar el correo electrónico de verificación al usuario con el nuevo código
         yield (0, sendEmailVerificationCode_1.sendVerificationEmail)(user.email, username, newVerificationCode);
         // Mensaje de éxito

@@ -10,11 +10,10 @@ const VERIFICATION_CODE_EXPIRATION_MINUTES = 3;
  * y guarda o actualiza esta información en el modelo de verificación para el usuario proporcionado.
  * 
  * @param {number} userId - El ID del usuario para el cual se generará el código de verificación.
- * @param {string} email - La dirección de correo electrónico del usuario. Este parámetro se proporciona 
- *        para el contexto del usuario, aunque en esta función no se utiliza directamente. 
+
  * @returns {string} - El código de verificación generado que se ha almacenado en la base de datos.
  */
-export const createOrUpdateVerificationEntry = async (userId: number, email: string): Promise<string> => {
+export const createOrUpdateVerificationEntry = async (userId: number): Promise<string> => {
     // Genera un código de verificación aleatorio
     const verificationCode = generateRandomVerificationCode();
 

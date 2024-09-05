@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { sendVerificationCodePhone } from "./phoneController";
 import { verifyPhoneNumber } from "./validateCode/phoneValidateCodeController";
+import { resendVerificationCodePhone } from "./resendCodeController/phoneresendCodeController";
 
 const phoneVerificationRouter  = Router();
 
@@ -19,5 +20,14 @@ phoneVerificationRouter.post("/phone/send", sendVerificationCodePhone);
  * Público
  */
 phoneVerificationRouter .put('/verify/phone', verifyPhoneNumber);
+
+
+
+/**
+ * POST /api/user/verify/resend
+ * Ruta para reenviar el código de verificación por SMS.
+ * Público
+ */
+phoneVerificationRouter.post("/verify/resend", resendVerificationCodePhone);
 
 export default phoneVerificationRouter ;
