@@ -28,6 +28,6 @@ phoneVerificationRouter .put('/verify/phone', verifyPhoneNumber);
  * Ruta para reenviar el código de verificación por SMS.
  * Público
  */
-phoneVerificationRouter.post("/verify/resend", resendVerificationCodePhone);
+phoneVerificationRouter.post("/verify/phone/resend", resendVerificationCodePhone);
 
 export default phoneVerificationRouter ;

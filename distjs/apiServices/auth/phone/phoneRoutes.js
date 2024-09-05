@@ -22,5 +22,5 @@ phoneVerificationRouter.put('/verify/phone', phoneValidateCodeController_1.verif
  * Ruta para reenviar el código de verificación por SMS.
  * Público
  */
-phoneVerificationRouter.post("/verify/resend", phoneresendCodeController_1.resendVerificationCodePhone);
+phoneVerificationRouter.post("/verify/phone/resend", phoneresendCodeController_1.resendVerificationCodePhone);
 exports.default = phoneVerificationRouter;

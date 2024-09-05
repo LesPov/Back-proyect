@@ -45,7 +45,7 @@ const resendVerificationCodePhone = (req, res) => __awaiter(void 0, void 0, void
         const newVerificationCode = yield (0, createOrUpdateVerificationEntry_1.createOrUpdateVerificationEntry)(user.id);
         // 4. Envío del mensaje por WhatsApp
         // Crea un mensaje de verificación que será enviado al usuario por WhatsApp.
-        const message = `Hola ${username}, tu nuevo código de verificación es ${newVerificationCode}. Por favor, úsalo para verificar tu número de teléfono.`;
+        const message = `Hola ${username}, tu nuevo código de verificación es ${newVerificationCode}. Por favor, úsalo para verificar tu número de teléfono antes de que se expire.`;
         console.log('El mensaje enviado fue:', message);
         // Envía el mensaje de verificación a través de WhatsApp utilizando el número de teléfono proporcionado.
         yield (0, sendWhatsAppMessage_1.sendWhatsAppMessage)(phoneNumber, message);
