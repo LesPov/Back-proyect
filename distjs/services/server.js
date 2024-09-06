@@ -25,6 +25,7 @@ const VerificationModel_1 = require("../apiServices/Auth/register/models/Verific
 const registerRouter_1 = __importDefault(require("../apiServices/Auth/register/registerRouter"));
 const emailRoutes_1 = __importDefault(require("../apiServices/Auth/email/emailRoutes"));
 const phoneRoutes_1 = __importDefault(require("../apiServices/Auth/phone/phoneRoutes"));
+const loginRouter_1 = __importDefault(require("../apiServices/Auth/login/loginRouter"));
 // Configurar las variables de entorno del archivo .env
 dotenv_1.default.config();
 class Server {
@@ -52,7 +53,7 @@ class Server {
      */
     routes() {
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default);
+        this.app.use('/api/users', registerRouter_1.default, loginRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default);
     }
     /**
      * Configura los middlewares de la aplicación.

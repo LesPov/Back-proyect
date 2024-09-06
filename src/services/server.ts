@@ -14,6 +14,7 @@ import { VerificationModel } from '../apiServices/Auth/register/models/Verificat
 import registerRouter from '../apiServices/Auth/register/registerRouter';
 import emailVerificationRoutes from '../apiServices/Auth/email/emailRoutes';
 import phoneVerificationRouter from '../apiServices/Auth/phone/phoneRoutes';
+import loginUserRouter from '../apiServices/Auth/login/loginRouter';
 
 
 // Configurar las variables de entorno del archivo .env
@@ -25,7 +26,6 @@ class Server {
     private app: Application; 
     private port: string;
     
-
     
     /**
      * Constructor de la clase Server.
@@ -56,7 +56,7 @@ class Server {
     routes() {
 
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter, emailVerificationRoutes,phoneVerificationRouter); 
+        this.app.use('/api/users', registerRouter,loginUserRouter, emailVerificationRoutes,phoneVerificationRouter); 
 
     }
  
