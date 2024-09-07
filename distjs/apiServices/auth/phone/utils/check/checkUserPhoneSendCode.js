@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handlePhoneVerificationError = exports.checkUserPhoneSendCode = void 0;
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
-const authModel_1 = require("../../../register/models/authModel");
+const authModel_1 = require("../../../../../middleware/models/authModel");
 /**
  * Verifica si el número de teléfono ya está registrado en la base de datos.
  * @param phoneNumber - El número de teléfono a verificar.

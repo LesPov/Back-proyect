@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createVerificationEntryPhone = void 0;
-const VerificationModel_1 = require("../../../register/models/VerificationModel");
+const VerificationModel_1 = require("../../../../../middleware/models/VerificationModel");
 const generateRandomVerificationCode_1 = require("../../../register/utils/verificationCode/generateRandomVerificationCode ");
 const VERIFICATION_CODE_EXPIRATION_MINUTES = 10; // Tiempo de expiración en minutos
 /**

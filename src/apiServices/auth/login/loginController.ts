@@ -2,6 +2,10 @@ import { Request, Response } from 'express';
 import { handleServerErrorLogin } from "./utils/errors/handleServerError";
 import { validateInputLogin } from './utils/validations/loginvalidateInput';
 import { handleInputValidationErrors } from '../register/utils/errors/handleInputValidationErrors';
+import { findUserByUsernameLogin, handleUserNotFoundErrorLogin } from './utils/findUser/findUserByUsernameLogin';
+import { checkUserVerificationStatusEmail, handleEmailNotVerificationErroruser } from '../phone/utils/check/checkUserVerificationStatus';
+import { checkUserVerificationStatusPhoneLogin, handlePhoneLoginNotVerificationErroruser } from './utils/check/checkUserVerificationStatusPhone';
+import { validatePassword } from './utils/validations/validatePasswordLogin';
 
 
 
@@ -18,22 +22,38 @@ export const loginUser = async (req: Request, res: Response) => {
     try {
 
         // 1. Extraer los datos del cuerpo de la solicitud
-        // Extraemos el nombre de usuario y la contraseña del cuerpo de la solicitud
+        //  Validar la entrada de datos (username, passwordorrandomPassword)
         const { username, passwordorrandomPassword } = req.body;
-
-
-        // 2. Validar la entrada de datos (username, passwordorrandomPassword)
         const inputValidationErrors = validateInputLogin(username, passwordorrandomPassword);
         // Manejar cualquier error de validación de la entrada de datos
         handleInputValidationErrors(inputValidationErrors, res);
 
 
-        //3.
+        // 2. Búsqueda del usuario si existe
+        const user = await findUserByUsernameLogin(username);
+        handleUserNotFoundErrorLogin(username, user, res);
+
+
+        // 3. Verificación del estado del usuario Email
+        const isEmailVerified = checkUserVerificationStatusEmail(user);
+        handleEmailNotVerificationErroruser(isEmailVerified, res);
+
+
+        // 4. Verificación del estado del usuario Phone
+        // Verifica si el número de teléfono del usuario ya está verificado.
+        const isPhoneNumberVerified = checkUserVerificationStatusPhoneLogin(user);
+        handlePhoneLoginNotVerificationErroruser(isPhoneNumberVerified, res);
+
+
+        // 5. Validar la contraseña ingresada
+        // Si la contraseña es incorrecta, incrementar los intentos de login
+        await validatePassword(user, passwordorrandomPassword, res); // Solo se llama a esta función para ambas validaciones
+
 
 
     } catch (error) {
 
-        // 5. Manejo de errores de servidor
+        // 6. Manejo de errores de servidor
         // Manejar errores generales del servidor y responder con un mensaje de error
         handleServerErrorLogin(error, res);
     }

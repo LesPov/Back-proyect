@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../../../../database/connnection';
+import sequelize from '../../database/connnection';
 import { AuthInterface } from '../interfaces/authInterface';
 
 /**
@@ -39,8 +39,8 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
    */
   password: {
     type: DataTypes.STRING,
-    allowNull: false, 
-    
+    allowNull: false,
+
   },
 
   /**

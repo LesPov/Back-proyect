@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeVerificationCode = exports.markEmailAsVerified = void 0;
-const VerificationModel_1 = require("../../../register/models/VerificationModel");
+const VerificationModel_1 = require("../../../../../middleware/models/VerificationModel");
 /**
  * Marca el correo electrónico del usuario como verificado en la base de datos.
  *

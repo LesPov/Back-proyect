@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../../../../database/connnection";
+import sequelize from "../../database/connnection";
 import { VerificationInterface } from "../interfaces/VerificationInterface";
 import { AuthModel } from "./authModel";
 
@@ -52,7 +52,7 @@ export const VerificationModel = sequelize.define<VerificationInterface>('verifi
    * Código de verificación generado para el usuario.
    * Valor por defecto: UUID versión 4.
    */
-  verificationCode: { 
+  verificationCode: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },

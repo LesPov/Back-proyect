@@ -1,4 +1,4 @@
-import { AuthModel } from "../../../register/models/authModel";
+import { AuthModel } from "../../../../../middleware/models/authModel";
 
 /**
  * Actualiza el número de teléfono del usuario en la base de datos.

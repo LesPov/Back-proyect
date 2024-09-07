@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserProfileModel = void 0;
 const sequelize_1 = require("sequelize");
 const connnection_1 = __importDefault(require("../../../../database/connnection"));
-const authModel_1 = require("../../register/models/authModel");
+const authModel_1 = require("../../../../middleware/models/authModel");
 exports.UserProfileModel = connnection_1.default.define('userProfile', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,

@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findUserByUsername = void 0;
+exports.handleUserNotFoundErrorLogin = exports.findUserByUsernameLogin = void 0;
+const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
 const authModel_1 = require("../../../../../middleware/models/authModel");
 const VerificationModel_1 = require("../../../../../middleware/models/VerificationModel");
 /**
@@ -18,10 +19,29 @@ const VerificationModel_1 = require("../../../../../middleware/models/Verificati
  * @param username - El nombre de usuario del usuario a buscar.
  * @returns El usuario encontrado o `null` si no existe.
  */
-const findUserByUsername = (username) => __awaiter(void 0, void 0, void 0, function* () {
+const findUserByUsernameLogin = (username) => __awaiter(void 0, void 0, void 0, function* () {
     return yield authModel_1.AuthModel.findOne({
         where: { username: username },
         include: [VerificationModel_1.VerificationModel]
     });
 });
-exports.findUserByUsername = findUserByUsername;
+exports.findUserByUsernameLogin = findUserByUsernameLogin;
+/**
+ * Maneja el error cuando un usuario no es encontrado en la base de datos.
+ *
+ * @param user - El objeto de usuario retornado por la consulta a la base de datos.
+ * @param res - El objeto de respuesta HTTP proporcionado por Express.
+ *
+ * @throws Lanza una excepción si el usuario no fue encontrado.
+ */
+const handleUserNotFoundErrorLogin = (username, user, res) => {
+    if (!user) {
+        const errorMsg = errorMessages_1.errorMessages.userNotFound(username);
+        res.status(404).json({
+            msg: errorMsg,
+            errors: 'Error: El usuario no fue encontrado en la base de datos.',
+        });
+        throw new Error("User not found validation failed");
+    }
+};
+exports.handleUserNotFoundErrorLogin = handleUserNotFoundErrorLogin;

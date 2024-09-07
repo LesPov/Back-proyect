@@ -1,5 +1,5 @@
 import { errorMessages } from "../../../../../middleware/erros/errorMessages";
-import { AuthModel } from "../../models/authModel";
+import { AuthModel } from "../../../../../middleware/models/authModel";
 
 /**
  * Crea un nuevo usuario en la base de datos.

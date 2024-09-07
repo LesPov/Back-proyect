@@ -1,5 +1,5 @@
 import { Model } from 'sequelize';
-import { AuthInterface } from '../../register/interfaces/authInterface';
+import { AuthInterface } from '../../../../middleware/interfaces/authInterface';
 
 // Modelo para el perfil de usuario
 export interface UserProfileinterface extends Model {

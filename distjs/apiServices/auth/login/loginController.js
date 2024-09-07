@@ -13,6 +13,10 @@ exports.loginUser = void 0;
 const handleServerError_1 = require("./utils/errors/handleServerError");
 const loginvalidateInput_1 = require("./utils/validations/loginvalidateInput");
 const handleInputValidationErrors_1 = require("../register/utils/errors/handleInputValidationErrors");
+const findUserByUsernameLogin_1 = require("./utils/findUser/findUserByUsernameLogin");
+const checkUserVerificationStatus_1 = require("../phone/utils/check/checkUserVerificationStatus");
+const checkUserVerificationStatusPhone_1 = require("./utils/check/checkUserVerificationStatusPhone");
+const validatePasswordLogin_1 = require("./utils/validations/validatePasswordLogin");
 /**
  * Controlador para manejar la solicitud de inicio de sesión de un usuario.
  *
@@ -25,16 +29,27 @@ const handleInputValidationErrors_1 = require("../register/utils/errors/handleIn
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // 1. Extraer los datos del cuerpo de la solicitud
-        // Extraemos el nombre de usuario y la contraseña del cuerpo de la solicitud
+        //  Validar la entrada de datos (username, passwordorrandomPassword)
         const { username, passwordorrandomPassword } = req.body;
-        // 2. Validar la entrada de datos (username, passwordorrandomPassword)
         const inputValidationErrors = (0, loginvalidateInput_1.validateInputLogin)(username, passwordorrandomPassword);
         // Manejar cualquier error de validación de la entrada de datos
         (0, handleInputValidationErrors_1.handleInputValidationErrors)(inputValidationErrors, res);
-        //3.
+        // 2. Búsqueda del usuario si existe
+        const user = yield (0, findUserByUsernameLogin_1.findUserByUsernameLogin)(username);
+        (0, findUserByUsernameLogin_1.handleUserNotFoundErrorLogin)(username, user, res);
+        // 3. Verificación del estado del usuario Email
+        const isEmailVerified = (0, checkUserVerificationStatus_1.checkUserVerificationStatusEmail)(user);
+        (0, checkUserVerificationStatus_1.handleEmailNotVerificationErroruser)(isEmailVerified, res);
+        // 4. Verificación del estado del usuario Phone
+        // Verifica si el número de teléfono del usuario ya está verificado.
+        const isPhoneNumberVerified = (0, checkUserVerificationStatusPhone_1.checkUserVerificationStatusPhoneLogin)(user);
+        (0, checkUserVerificationStatusPhone_1.handlePhoneLoginNotVerificationErroruser)(isPhoneNumberVerified, res);
+        // 5. Validar la contraseña ingresada
+        // Si la contraseña es incorrecta, incrementar los intentos de login
+        yield (0, validatePasswordLogin_1.validatePassword)(user, passwordorrandomPassword, res); // Solo se llama a esta función para ambas validaciones
     }
     catch (error) {
-        // 5. Manejo de errores de servidor
+        // 6. Manejo de errores de servidor
         // Manejar errores generales del servidor y responder con un mensaje de error
         (0, handleServerError_1.handleServerErrorLogin)(error, res);
     }

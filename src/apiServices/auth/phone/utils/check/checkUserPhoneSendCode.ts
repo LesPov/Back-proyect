@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { errorMessages } from '../../../../../middleware/erros/errorMessages';
-import { AuthModel } from '../../../register/models/authModel';
+import { AuthModel } from '../../../../../middleware/models/authModel';
 
 /**
  * Verifica si el número de teléfono ya está registrado en la base de datos.

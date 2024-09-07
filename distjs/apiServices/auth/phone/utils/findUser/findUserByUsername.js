@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findUserByUsername = void 0;
-const authModel_1 = require("../../../register/models/authModel");
-const VerificationModel_1 = require("../../../register/models/VerificationModel");
+const authModel_1 = require("../../../../../middleware/models/authModel");
+const VerificationModel_1 = require("../../../../../middleware/models/VerificationModel");
 /**
  * Busca un usuario en la base de datos basado en su nombre de usuario.
  *

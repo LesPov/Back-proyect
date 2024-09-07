@@ -1,4 +1,4 @@
-import { VerificationModel } from "../../../register/models/VerificationModel";
+import { VerificationModel } from "../../../../../middleware/models/VerificationModel";
 import { generateRandomVerificationCode } from "../../../register/utils/verificationCode/generateRandomVerificationCode ";
 
 
@@ -23,7 +23,7 @@ export const createVerificationEntryPhone = async (userId: number, phoneNumber: 
     // Establece la fecha de expiración del código de verificación
     const expirationDate = new Date();
     expirationDate.setMinutes(expirationDate.getMinutes() + VERIFICATION_CODE_EXPIRATION_MINUTES);
-    
+
     // Crea o actualiza una entrada en la base de datos para el código de verificación
     await VerificationModel.upsert({
         userId: userId, // ID del usuario al que pertenece el código

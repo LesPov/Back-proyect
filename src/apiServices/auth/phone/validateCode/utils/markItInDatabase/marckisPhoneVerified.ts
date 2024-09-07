@@ -1,4 +1,4 @@
-import { VerificationModel } from "../../../../register/models/VerificationModel";
+import { VerificationModel } from "../../../../../../middleware/models/VerificationModel";
 
 /**
  * Marca el isPhoneVerified del usuario como verificado en la base de datos.

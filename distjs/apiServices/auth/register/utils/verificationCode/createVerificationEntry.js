@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createVerificationEntry = void 0;
-const VerificationModel_1 = require("../../models/VerificationModel");
+const VerificationModel_1 = require("../../../../../middleware/models/VerificationModel");
 const generateRandomVerificationCode_1 = require("./generateRandomVerificationCode ");
 const VERIFICATION_CODE_EXPIRATION_HOURS = 3;
 /**

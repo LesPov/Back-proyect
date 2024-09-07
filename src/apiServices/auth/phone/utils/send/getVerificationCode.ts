@@ -1,4 +1,4 @@
-import { VerificationModel } from "../../../register/models/VerificationModel";
+import { VerificationModel } from "../../../../../middleware/models/VerificationModel";
 
 /**
  * Recupera el código de verificación para un usuario específico.

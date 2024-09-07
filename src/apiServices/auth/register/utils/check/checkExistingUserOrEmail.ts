@@ -1,5 +1,5 @@
 import { errorMessages } from "../../../../../middleware/erros/errorMessages";
-import { AuthModel } from "../../models/authModel";
+import { AuthModel } from "../../../../../middleware/models/authModel";
 
 /**
  * Verifica si un valor dado (username o email) ya existe en la base de datos.

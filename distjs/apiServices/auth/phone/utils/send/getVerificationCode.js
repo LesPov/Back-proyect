@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getVerificationCode = void 0;
-const VerificationModel_1 = require("../../../register/models/VerificationModel");
+const VerificationModel_1 = require("../../../../../middleware/models/VerificationModel");
 /**
  * Recupera el código de verificación para un usuario específico.
  *

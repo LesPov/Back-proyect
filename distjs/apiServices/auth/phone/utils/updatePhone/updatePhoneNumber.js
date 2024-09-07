@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updatePhoneNumber = void 0;
-const authModel_1 = require("../../../register/models/authModel");
+const authModel_1 = require("../../../../../middleware/models/authModel");
 /**
  * Actualiza el número de teléfono del usuario en la base de datos.
  * @param {number} userId - ID del usuario.

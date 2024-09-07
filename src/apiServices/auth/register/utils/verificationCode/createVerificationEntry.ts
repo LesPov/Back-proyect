@@ -1,4 +1,4 @@
-import { VerificationModel } from "../../models/VerificationModel";
+import { VerificationModel } from "../../../../../middleware/models/VerificationModel";
 import { generateRandomVerificationCode } from "./generateRandomVerificationCode ";
 
 const VERIFICATION_CODE_EXPIRATION_HOURS = 3;
@@ -16,15 +16,15 @@ const VERIFICATION_CODE_EXPIRATION_HOURS = 3;
  */
 const VERIFICATION_CODE_EXPIRATION_MINUTES = 3; // Cambio a minutos para la validación correcta
 
-export const  createVerificationEntry = async (userId: number, email: string): Promise<string> => {
+export const createVerificationEntry = async (userId: number, email: string): Promise<string> => {
     // Genera un código de verificación aleatorio
     const verificationCode = generateRandomVerificationCode();
 
     // Establece la fecha de expiración del código de verificación
     const expirationDate = new Date();
     expirationDate.setMinutes(expirationDate.getMinutes() + VERIFICATION_CODE_EXPIRATION_MINUTES);
-    
-  
+
+
     // Crea una entrada en la base de datos para el código de verificación
     await VerificationModel.create({
         isVerified: false, // Inicialmente, el código no está verificado
@@ -32,8 +32,7 @@ export const  createVerificationEntry = async (userId: number, email: string): P
         verificationCodeExpiration: expirationDate, // Fecha y hora en que expira el código
         userId: userId, // ID del usuario al que pertenece el código
     });
-  
+
     // Devuelve el código de verificación generado
     return verificationCode;
 };
- 

@@ -15,7 +15,7 @@ export const errorMessages = {
 
 
   //Errores en la verificaciondeemail:
-  userNotFound: (username: string) => `Usuario con nombre de usuario ${username} no encontrado.`,
+  userNotFound: (username: string) => `Usuario con nombre ${username} no encontrado en la base de datos.`,
   userAlreadyVerifiedemail: () => 'El correo electrónico ya ha sido verificado previamente.',
   invalidVerificationCode: () => 'El código de verificación es inválido.',
   verificationCodeExpired: 'El código de verificación ha expirado. Solicita un nuevo código para continuar..',
@@ -28,6 +28,9 @@ emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica 
 //Errores de phone 
 phoneCodeVerify:() => 'El numero de telefono no ha sido verificado',
 incorrectPhoneNumber: () =>'El número de teléfono no coincide con el registrado para este usuario',
+numberNotVerified: () => 'El usuario aún no ha sido verificado. Verifica tu numero celular para activar tu cuenta.',
+invalidRandomPassword:() => 'Contraseña aleatoria incorrecta',
+incorrectPasswor1d: () =>'Contraseña incorrecta',
 
 phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previamente',
 
@@ -36,7 +39,6 @@ phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previa
   invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',
   invalidPasswordDB: 'La contraseña aleatoria proporcionada no coincide con la almacenada en la base de datos, o no exite',
   userNotVerified: 'El usuario aún no ha sido verificado. Verifica tu correo electrónico para activar tu cuenta.',
-  numberNotVerified: 'El usuario aún no ha sido verificado. Verifica tu numero celular para activar tu cuenta.',
   accountLocked: 'La cuenta está bloqueada temporalmente debido a múltiples intentos fallidos. Inténtalo de nuevo más tarde.',
   failedPasswordReset: 'loll',
   accountLockedv1: (timeLeft: string) => `La cuenta está bloqueada temporalmente debido a múltiples intentos fallidos. Inténtalo de nuevo más tarde. Tiempo restante: ${timeLeft} minutos.`,
@@ -62,7 +64,6 @@ phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previa
   passwordValidationFailed: 'La contraseña no cumple con los requisitos de validación',
 
   unverifiedAccount: 'Tu correo electrónico o número teléfono no han sido verificados.',
-  invalidRandomPassword: 'Contraseña aleatoria incorrecta',
   invalidNewPassword: 'contraseña lol',
   invalidRandomPassworde: 'ya expiro la contraseña',
   incorrectPasswordWithAttempts: 'se requiere la contraseña normal',
@@ -75,6 +76,5 @@ phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previa
   expiredVerificationCode: 'La contraseña aleatoria ha expirado. Por favor, solicite una nueva.',
   accountBlocked: 'cuenata vloqueada',
   invalidRandomPasswordLength: 'la contraseña aleatorea debe ser de 8 digitos',
-  incorrectPasswor1d: 'Contraseña incorrecta',
   expiredRandomPassword: 'La contraseña aleatoria ha expirado',
 };

@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkExistingUserOrEmail = void 0;
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
-const authModel_1 = require("../../models/authModel");
+const authModel_1 = require("../../../../../middleware/models/authModel");
 /**
  * Verifica si un valor dado (username o email) ya existe en la base de datos.
  *

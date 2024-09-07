@@ -1,5 +1,5 @@
-import { AuthModel } from "../../../register/models/authModel";
-import { VerificationModel } from "../../../register/models/VerificationModel";
+import { AuthModel } from "../../../../../middleware/models/authModel";
+import { VerificationModel } from "../../../../../middleware/models/VerificationModel";
 
 /**
  * Busca un usuario en la base de datos basado en su nombre de usuario.
