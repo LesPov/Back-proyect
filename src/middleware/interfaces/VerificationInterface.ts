@@ -21,6 +21,7 @@ export interface VerificationInterface extends Model {
   /** Contador de intentos fallidos de inicio de sesión. */
   loginAttempts: number;
   
+  blockExpiration:Date;
   /** Fecha y hora de expiración del código de verificación. */
   verificationCodeExpiration: Date;
   

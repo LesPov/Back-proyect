@@ -47,9 +47,9 @@ export const loginUser = async (req: Request, res: Response) => {
 
         // 5. Validar la contraseña ingresada
         // Si la contraseña es incorrecta, incrementar los intentos de login
-        await validatePassword(user, passwordorrandomPassword, res); // Solo se llama a esta función para ambas validaciones
+        const validatePaswordLogin = await validatePassword(user, passwordorrandomPassword, res); // Solo se llama a esta función para ambas validaciones
 
-
+     
 
     } catch (error) {
 

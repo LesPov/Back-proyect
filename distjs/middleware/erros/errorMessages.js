@@ -27,7 +27,9 @@ exports.errorMessages = {
     numberNotVerified: () => 'El usuario aún no ha sido verificado. Verifica tu numero celular para activar tu cuenta.',
     invalidRandomPassword: () => 'Contraseña aleatoria incorrecta',
     incorrectPasswor1d: () => 'Contraseña incorrecta',
-    phoneAlreadyVerified: () => 'El número de teléfono ya ha sido verificado previamente',
+    phoneAlreadyVerified: () => 'El número de teléfono ya ha sido verificado previamente', //Login
+    //login
+    maxLoginAttemptsExceeded: 'Has alcanzado el máximo número de intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.',
     userNotExists: (username) => `No existe un usuario con el nombre ${username} en la base de datos`,
     invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',
     invalidPasswordDB: 'La contraseña aleatoria proporcionada no coincide con la almacenada en la base de datos, o no exite',

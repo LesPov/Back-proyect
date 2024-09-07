@@ -46,7 +46,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         (0, checkUserVerificationStatusPhone_1.handlePhoneLoginNotVerificationErroruser)(isPhoneNumberVerified, res);
         // 5. Validar la contraseña ingresada
         // Si la contraseña es incorrecta, incrementar los intentos de login
-        yield (0, validatePasswordLogin_1.validatePassword)(user, passwordorrandomPassword, res); // Solo se llama a esta función para ambas validaciones
+        const validatePaswordLogin = yield (0, validatePasswordLogin_1.validatePassword)(user, passwordorrandomPassword, res); // Solo se llama a esta función para ambas validaciones
     }
     catch (error) {
         // 6. Manejo de errores de servidor

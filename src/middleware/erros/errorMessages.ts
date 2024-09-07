@@ -21,18 +21,26 @@ export const errorMessages = {
   verificationCodeExpired: 'El código de verificación ha expirado. Solicita un nuevo código para continuar..',
 
 
-// Errores de verificación de usuario   
-emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica tu correo para continuar.',
+  // Errores de verificación de usuario   
+  emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica tu correo para continuar.',
 
 
-//Errores de phone 
-phoneCodeVerify:() => 'El numero de telefono no ha sido verificado',
-incorrectPhoneNumber: () =>'El número de teléfono no coincide con el registrado para este usuario',
-numberNotVerified: () => 'El usuario aún no ha sido verificado. Verifica tu numero celular para activar tu cuenta.',
-invalidRandomPassword:() => 'Contraseña aleatoria incorrecta',
-incorrectPasswor1d: () =>'Contraseña incorrecta',
+  //Errores de phone 
+  phoneCodeVerify: () => 'El numero de telefono no ha sido verificado',
+  incorrectPhoneNumber: () => 'El número de teléfono no coincide con el registrado para este usuario',
+  numberNotVerified: () => 'El usuario aún no ha sido verificado. Verifica tu numero celular para activar tu cuenta.',
+  invalidRandomPassword: () => 'Contraseña aleatoria incorrecta',
+  incorrectPasswor1d: () => 'Contraseña incorrecta',
 
-phoneAlreadyVerified:() => 'El número de teléfono ya ha sido verificado previamente',
+  phoneAlreadyVerified: () => 'El número de teléfono ya ha sido verificado previamente',//Login
+
+
+
+  //login
+  maxLoginAttemptsExceeded: 'Has alcanzado el máximo número de intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.',
+
+
+
 
 
   userNotExists: (username: string) => `No existe un usuario con el nombre ${username} en la base de datos`,
