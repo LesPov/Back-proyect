@@ -23,7 +23,7 @@ export const loginUser = async (req: Request, res: Response) => {
         handleInputValidationErrors(inputValidationErrors, res);
 
         // 2. Búsqueda del usuario
-        const user = await findUserByUsernameLogin(username);
+        const user = await findUserByUsernameLogin(username); 
         if (!user) {
             handleUserNotFoundErrorLogin(username, user, res);
             return;
