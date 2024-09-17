@@ -11,13 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requestPasswordReset = void 0;
 const handleServerError_1 = require("./utils/errors/handleServerError");
-const findUserPasswordReset_1 = require("./utils/findUser/findUserPasswordReset");
 const handleInputValidationErrors_1 = require("../../register/utils/errors/handleInputValidationErrors");
+const resentValidation_1 = require("./utils/validations/resentValidation");
 const requestPasswordReset = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // 1. Extraer y validar los datos de entrada
         const { usernameOrEmail } = req.body;
-        const inputValidationErrors = (0, findUserPasswordReset_1.validateInputPasswordReset)(usernameOrEmail);
+        const inputValidationErrors = (0, resentValidation_1.validateInputPasswordReset)(usernameOrEmail);
         (0, handleInputValidationErrors_1.handleInputValidationErrors)(inputValidationErrors, res);
         // 2.Busca al usuario en la base de datos según el nombre de usuario o correo electrónico.
     }
