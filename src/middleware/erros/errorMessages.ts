@@ -37,8 +37,12 @@ export const errorMessages = {
 
 
   //login
-  maxLoginAttemptsExceeded: 'Has alcanzado el máximo número de intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.',
+  maxAttemptsReached: 'Has alcanzado el máximo número de intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.',
+ // Mensaje cuando la cuenta está bloqueada
+ accountBlocked: (remainingTime: number) => `La cuenta está bloqueada temporalmente. Intente nuevamente en ${remainingTime} minutos.`,
 
+ // Mensaje cuando se alcanza el máximo de intentos de inicio de sesión
+ 
 
 
 
@@ -50,7 +54,7 @@ export const errorMessages = {
   accountLocked: 'La cuenta está bloqueada temporalmente debido a múltiples intentos fallidos. Inténtalo de nuevo más tarde.',
   failedPasswordReset: 'loll',
   accountLockedv1: (timeLeft: string) => `La cuenta está bloqueada temporalmente debido a múltiples intentos fallidos. Inténtalo de nuevo más tarde. Tiempo restante: ${timeLeft} minutos.`,
-  incorrectPassword: (attempts: number) => ` Contraseña incorrecta. Intentos fallidos: ${attempts}`,
+  incorrectPassword: (attempts: number) => ` Contraseña incorrecta. te quedan: ${attempts} intentos`,
   verificationCodeNotFound: `Codigo a expirado registrate de nuevo `,
   tokenNotProvided: 'Acceso denegado, token no proporcionado',
   accessDenied: 'Acceso denegado, no tienes permisos para acceder a esta ruta',
@@ -82,7 +86,6 @@ export const errorMessages = {
   passwordNoSpecialChar1: 'La contraseña debe contener al menos uno de los siguientes signos: & $ @ _ - /',
   errorMessages: 'Error al subir img',
   expiredVerificationCode: 'La contraseña aleatoria ha expirado. Por favor, solicite una nueva.',
-  accountBlocked: 'cuenata vloqueada',
   invalidRandomPasswordLength: 'la contraseña aleatorea debe ser de 8 digitos',
   expiredRandomPassword: 'La contraseña aleatoria ha expirado',
 };

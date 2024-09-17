@@ -72,4 +72,14 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
+  /**
+   * Indicador de si el usuario está verificado en general.
+   * Valor por defecto: `false`.
+   */
+  status: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
 });

@@ -29,7 +29,10 @@ exports.errorMessages = {
     incorrectPasswor1d: () => 'Contraseña incorrecta',
     phoneAlreadyVerified: () => 'El número de teléfono ya ha sido verificado previamente', //Login
     //login
-    maxLoginAttemptsExceeded: 'Has alcanzado el máximo número de intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.',
+    maxAttemptsReached: 'Has alcanzado el máximo número de intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.',
+    // Mensaje cuando la cuenta está bloqueada
+    accountBlocked: (remainingTime) => `La cuenta está bloqueada temporalmente. Intente nuevamente en ${remainingTime} minutos.`,
+    // Mensaje cuando se alcanza el máximo de intentos de inicio de sesión
     userNotExists: (username) => `No existe un usuario con el nombre ${username} en la base de datos`,
     invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',
     invalidPasswordDB: 'La contraseña aleatoria proporcionada no coincide con la almacenada en la base de datos, o no exite',
@@ -37,7 +40,7 @@ exports.errorMessages = {
     accountLocked: 'La cuenta está bloqueada temporalmente debido a múltiples intentos fallidos. Inténtalo de nuevo más tarde.',
     failedPasswordReset: 'loll',
     accountLockedv1: (timeLeft) => `La cuenta está bloqueada temporalmente debido a múltiples intentos fallidos. Inténtalo de nuevo más tarde. Tiempo restante: ${timeLeft} minutos.`,
-    incorrectPassword: (attempts) => ` Contraseña incorrecta. Intentos fallidos: ${attempts}`,
+    incorrectPassword: (attempts) => ` Contraseña incorrecta. te quedan: ${attempts} intentos`,
     verificationCodeNotFound: `Codigo a expirado registrate de nuevo `,
     tokenNotProvided: 'Acceso denegado, token no proporcionado',
     accessDenied: 'Acceso denegado, no tienes permisos para acceder a esta ruta',
@@ -65,7 +68,6 @@ exports.errorMessages = {
     passwordNoSpecialChar1: 'La contraseña debe contener al menos uno de los siguientes signos: & $ @ _ - /',
     errorMessages: 'Error al subir img',
     expiredVerificationCode: 'La contraseña aleatoria ha expirado. Por favor, solicite una nueva.',
-    accountBlocked: 'cuenata vloqueada',
     invalidRandomPasswordLength: 'la contraseña aleatorea debe ser de 8 digitos',
     expiredRandomPassword: 'La contraseña aleatoria ha expirado',
 };

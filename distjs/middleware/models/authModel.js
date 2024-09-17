@@ -69,4 +69,13 @@ exports.AuthModel = connnection_1.default.define('auth', {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
+    /**
+     * Indicador de si el usuario está verificado en general.
+     * Valor por defecto: `false`.
+     */
+    status: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
 });
