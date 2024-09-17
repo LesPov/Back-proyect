@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleUserNotFoundErrorPasswordReset = exports.findUserPasswordReset = void 0;
+const errorMessages_1 = require("../../../../../../middleware/erros/errorMessages");
 const authModel_1 = require("../../../../../../middleware/models/authModel");
 const VerificationModel_1 = require("../../../../../../middleware/models/VerificationModel");
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,7 +19,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * @param {string} usernameOrEmail - Nombre de usuario o correo electrónico.
  * @returns {Promise<AuthModel | null>} - Usuario encontrado o nulo si no se encuentra.
  */
-const findUser = (usernameOrEmail) => __awaiter(void 0, void 0, void 0, function* () {
+const findUserPasswordReset = (usernameOrEmail) => __awaiter(void 0, void 0, void 0, function* () {
     if (EMAIL_REGEX.test(usernameOrEmail)) {
         return yield authModel_1.AuthModel.findOne({ where: { email: usernameOrEmail }, include: [VerificationModel_1.VerificationModel] });
     }
@@ -25,3 +27,23 @@ const findUser = (usernameOrEmail) => __awaiter(void 0, void 0, void 0, function
         return yield authModel_1.AuthModel.findOne({ where: { username: usernameOrEmail }, include: [VerificationModel_1.VerificationModel] });
     }
 });
+exports.findUserPasswordReset = findUserPasswordReset;
+/**
+ * Maneja el error cuando un usuario no es encontrado en la base de datos.
+ *
+ * @param user - El objeto de usuario retornado por la consulta a la base de datos.
+ * @param res - El objeto de respuesta HTTP proporcionado por Express.
+ *
+ * @throws Lanza una excepción si el usuario no fue encontrado.
+ */
+const handleUserNotFoundErrorPasswordReset = (usernameOrEmail, user, res) => {
+    if (!user) {
+        const errorMsg = errorMessages_1.errorMessages.userNotFound(usernameOrEmail);
+        res.status(404).json({
+            msg: errorMsg,
+            errors: 'Error: El usuario no fue encontrado en la base de datos.',
+        });
+        throw new Error("User not found validation failed");
+    }
+};
+exports.handleUserNotFoundErrorPasswordReset = handleUserNotFoundErrorPasswordReset;
