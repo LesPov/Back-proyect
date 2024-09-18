@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateEmail = exports.validatePassword = exports.validateInput = void 0;
+exports.validateEmail = exports.validatePassword = exports.validationRules = exports.validateInput = void 0;
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
 const PASSWORD_MIN_LENGTH = 10;
 const PASSWORD_REGEX_NUMBER = /\d/;
@@ -29,7 +29,7 @@ const validateInput = (username, password, email, rol) => {
 };
 exports.validateInput = validateInput;
 // Definir la configuración para validaciones
-const validationRules = [
+exports.validationRules = [
     {
         test: (password) => password.length >= PASSWORD_MIN_LENGTH,
         errorMessage: errorMessages_1.errorMessages.passwordTooShort
@@ -64,7 +64,7 @@ const validationRules = [
 const validatePassword = (password) => {
     console.log('Contraseña recibida:', password); // Agrega esta línea para depuración
     const errors = [];
-    validationRules.forEach(rule => {
+    exports.validationRules.forEach(rule => {
         if (!rule.test(password)) {
             errors.push(rule.errorMessage);
         }

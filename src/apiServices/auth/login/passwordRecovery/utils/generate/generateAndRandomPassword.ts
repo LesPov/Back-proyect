@@ -22,14 +22,7 @@ export const generateAndSetRandomPassword = async (verificationId: number): Prom
         { where: { userId: verificationId } } // Usa 'userId' en lugar de 'id' si es la clave foránea
     );
 
-    // Borra la contraseña después de 5 minutos
-    setTimeout(async () => {
-        await VerificationModel.update(
-            { randomPassword: '' }, // Limpia la contraseña
-            { where: { userId: verificationId } } // Usa 'userId' en lugar de 'id'
-        );
-    }, 5 * 60 * 1000); // 5 minutos en milisegundos
-
+  
     // Retorna la nueva contraseña
     return randomPassword;
 };

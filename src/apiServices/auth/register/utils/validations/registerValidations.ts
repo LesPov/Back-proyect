@@ -29,7 +29,7 @@ export const validateInput = (username: string, password: string, email: string,
 
 
 // Definir la configuración para validaciones
-const validationRules = [
+export const validationRules = [
     {
         test: (password: string) => password.length >= PASSWORD_MIN_LENGTH,
         errorMessage: errorMessages.passwordTooShort

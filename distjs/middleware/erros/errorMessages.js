@@ -35,6 +35,8 @@ exports.errorMessages = {
     // Mensaje cuando se alcanza el máximo de intentos de inicio de sesión
     //resentpasswordrestLogin
     unverifiedAccount: () => 'Tu correo electrónico o número teléfono no han sido verificados.',
+    //requestPassword 
+    expiredVerificationCode: () => 'La contraseña aleatoria ha expirado. Por favor, solicite una nueva.',
     userNotExists: (username) => `No existe un usuario con el nombre ${username} en la base de datos`,
     invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',
     invalidPasswordDB: 'La contraseña aleatoria proporcionada no coincide con la almacenada en la base de datos, o no exite',
@@ -68,7 +70,6 @@ exports.errorMessages = {
     expiredPassword: 'la contraseña ya expìro manito',
     passwordNoSpecialChar1: 'La contraseña debe contener al menos uno de los siguientes signos: & $ @ _ - /',
     errorMessages: 'Error al subir img',
-    expiredVerificationCode: 'La contraseña aleatoria ha expirado. Por favor, solicite una nueva.',
     invalidRandomPasswordLength: 'la contraseña aleatorea debe ser de 8 digitos',
     expiredRandomPassword: 'La contraseña aleatoria ha expirado',
 };

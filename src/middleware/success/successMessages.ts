@@ -21,7 +21,7 @@ export const successMessages = {
     // Éxitos de recuperación y cambio de contraseña
     passwordResetEmailSent:() => 'Se ha enviado un correo electrónico con las instrucciones para restablecer la contraseña.',
   
-    passwordUpdated: 'Contraseña actualizada con éxito.',
+    passwordUpdated:() => 'Contraseña actualizada con éxito.',
   
     profilePictureUploaded: 'la imagen fue actualizada',
   };

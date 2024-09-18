@@ -28,12 +28,6 @@ const generateAndSetRandomPassword = (verificationId) => __awaiter(void 0, void 
         verificationCodeExpiration: expirationTime
     }, { where: { userId: verificationId } } // Usa 'userId' en lugar de 'id' si es la clave foránea
     );
-    // Borra la contraseña después de 5 minutos
-    setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield VerificationModel_1.VerificationModel.update({ randomPassword: '' }, // Limpia la contraseña
-        { where: { userId: verificationId } } // Usa 'userId' en lugar de 'id'
-        );
-    }), 5 * 60 * 1000); // 5 minutos en milisegundos
     // Retorna la nueva contraseña
     return randomPassword;
 });
