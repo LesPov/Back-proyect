@@ -19,4 +19,10 @@ loginUserRouter.post('/login', loginController_1.loginUser);
  * Público
  */
 loginUserRouter.post('/forgotPassword', passwordRecoveryController_1.requestPasswordReset);
+/**
+ * POST /api/user/reset-password
+ * Ruta para cambiar la contraseña después de recibir el correo de recuperación.
+ * Público
+ */
+// loginUserRouter.post('/reset-password', validateToken, resetPassword);
 exports.default = loginUserRouter;

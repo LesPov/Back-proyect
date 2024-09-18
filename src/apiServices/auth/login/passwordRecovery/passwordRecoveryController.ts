@@ -17,14 +17,12 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
         const inputValidationErrors = validateInputPasswordReset(usernameOrEmail);
         handleInputValidationErrors(inputValidationErrors, res);
 
-
         // 2. Búsqueda del usuario
         const user = await findUserPasswordReset(usernameOrEmail);
         if (!user) {
             handleUserNotFoundErrorLogin(usernameOrEmail, user, res);
             return;
         }
-
 
         // 3. Verificación del estado del usuario isverified
         const isVerified = checkisUserVerified(user);
@@ -38,7 +36,9 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
 
         // 6. Envia el mesge de exito
         handleSuccessMessagePasswordReset(res);
+
     } catch (error) {
+        
         // 7. Manejo de errores de servidor
         handleServerErrorPasswordReset(error, res);
     }
