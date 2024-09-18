@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateInputrRequestPassword = void 0;
+exports.validateInputresetPassword = void 0;
 const errorMessages_1 = require("../../../../../../middleware/erros/errorMessages");
-const validateInputrRequestPassword = (usernameOrEmail) => {
+const validateInputresetPassword = (usernameOrEmail, randomPassword, newPassword) => {
     const errors = [];
-    if (!usernameOrEmail) {
+    if (!usernameOrEmail || !randomPassword || !newPassword) {
         errors.push(errorMessages_1.errorMessages.requiredFields);
     }
     return errors;
 };
-exports.validateInputrRequestPassword = validateInputrRequestPassword;
+exports.validateInputresetPassword = validateInputresetPassword;

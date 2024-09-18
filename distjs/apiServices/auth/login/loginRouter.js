@@ -1,8 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const loginController_1 = require("./loginController");
 const passwordRecoveryController_1 = require("./passwordRecovery/passwordRecoveryController");
+const resetPasswordController_1 = require("./resetPassword/resetPasswordController");
+const validateToken_1 = __importDefault(require("../../../middleware/validateToken/validateToken"));
 const loginUserRouter = (0, express_1.Router)();
 /**
  * POST /api/user/login
@@ -24,5 +29,5 @@ loginUserRouter.post('/forgotPassword', passwordRecoveryController_1.requestPass
  * Ruta para cambiar la contraseña después de recibir el correo de recuperación.
  * Público
  */
-// loginUserRouter.post('/reset-password', validateToken, resetPassword);
+loginUserRouter.post('/resetPassword', validateToken_1.default, resetPasswordController_1.resetPassword);
 exports.default = loginUserRouter;

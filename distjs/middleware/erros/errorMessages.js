@@ -47,7 +47,7 @@ exports.errorMessages = {
     tokenNotProvided: 'Acceso denegado, token no proporcionado',
     accessDenied: 'Acceso denegado, no tienes permisos para acceder a esta ruta',
     invalidToken: 'Token no válido',
-    accessDeniedNoToken: 'Acceso denegado',
+    accessDeniedNoToken: 'Acceso denegado no tines autorizacion',
     serverError: 'servidor error',
     verificationRecordNotFound: 'eregistro de verificación correspondiente al usuario no encontrada ',
     noVerificationRecord: 'lapapa',

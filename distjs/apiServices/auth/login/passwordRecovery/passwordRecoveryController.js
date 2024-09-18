@@ -23,10 +23,10 @@ const requestPasswordReset = (req, res) => __awaiter(void 0, void 0, void 0, fun
     try {
         // 1. Extraer y validar los datos de entrada
         const { usernameOrEmail } = req.body;
-        const inputValidationErrors = (0, resentValidation_1.validateInputPasswordReset)(usernameOrEmail);
+        const inputValidationErrors = (0, resentValidation_1.validateInputrRequestPassword)(usernameOrEmail);
         (0, handleInputValidationErrors_1.handleInputValidationErrors)(inputValidationErrors, res);
         // 2. Búsqueda del usuario
-        const user = yield (0, findUserPasswordReset_1.findUserPasswordReset)(usernameOrEmail);
+        const user = yield (0, findUserPasswordReset_1.findUseRrequestPassword)(usernameOrEmail);
         if (!user) {
             (0, findUserByUsernameLogin_1.handleUserNotFoundErrorLogin)(usernameOrEmail, user, res);
             return;
@@ -43,7 +43,7 @@ const requestPasswordReset = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
     catch (error) {
         // 7. Manejo de errores de servidor
-        (0, handleServerError_1.handleServerErrorPasswordReset)(error, res);
+        (0, handleServerError_1.handleServerErrorRequestPassword)(error, res);
     }
 });
 exports.requestPasswordReset = requestPasswordReset;

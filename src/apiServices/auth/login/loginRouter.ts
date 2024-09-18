@@ -2,6 +2,7 @@ import { Router } from "express";
 import { loginUser } from "./loginController";
 import { requestPasswordReset } from "./passwordRecovery/passwordRecoveryController";
 import { resetPassword } from "./resetPassword/resetPasswordController";
+import validateToken from "../../../middleware/validateToken/validateToken";
 
 const loginUserRouter = Router();
 
@@ -29,6 +30,6 @@ loginUserRouter.post('/forgotPassword', requestPasswordReset);
  * Ruta para cambiar la contraseña después de recibir el correo de recuperación.
  * Público
  */
-// loginUserRouter.post('/reset-password', validateToken, resetPassword);
+loginUserRouter.post('/resetPassword', validateToken, resetPassword);
 
 export default loginUserRouter;

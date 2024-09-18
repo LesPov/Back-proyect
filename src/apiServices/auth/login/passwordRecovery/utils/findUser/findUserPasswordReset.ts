@@ -11,7 +11,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * @param {string} usernameOrEmail - Nombre de usuario o correo electrónico.
  * @returns {Promise<AuthModel | null>} - Usuario encontrado o nulo si no se encuentra.
  */
-export const findUserPasswordReset = async (usernameOrEmail: string): Promise<AuthInterface | null> => {
+export const findUseRrequestPassword = async (usernameOrEmail: string): Promise<AuthInterface | null> => {
     if (EMAIL_REGEX.test(usernameOrEmail)) {
         return await AuthModel.findOne({ where: { email: usernameOrEmail }, include: [VerificationModel] });
     } else {

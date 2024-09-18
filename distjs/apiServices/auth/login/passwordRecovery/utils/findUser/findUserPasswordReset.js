@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleUserNotFoundErrorPasswordReset = exports.findUserPasswordReset = void 0;
+exports.handleUserNotFoundErrorPasswordReset = exports.findUseRrequestPassword = void 0;
 const errorMessages_1 = require("../../../../../../middleware/erros/errorMessages");
 const authModel_1 = require("../../../../../../middleware/models/authModel");
 const VerificationModel_1 = require("../../../../../../middleware/models/VerificationModel");
@@ -19,7 +19,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * @param {string} usernameOrEmail - Nombre de usuario o correo electrónico.
  * @returns {Promise<AuthModel | null>} - Usuario encontrado o nulo si no se encuentra.
  */
-const findUserPasswordReset = (usernameOrEmail) => __awaiter(void 0, void 0, void 0, function* () {
+const findUseRrequestPassword = (usernameOrEmail) => __awaiter(void 0, void 0, void 0, function* () {
     if (EMAIL_REGEX.test(usernameOrEmail)) {
         return yield authModel_1.AuthModel.findOne({ where: { email: usernameOrEmail }, include: [VerificationModel_1.VerificationModel] });
     }
@@ -27,7 +27,7 @@ const findUserPasswordReset = (usernameOrEmail) => __awaiter(void 0, void 0, voi
         return yield authModel_1.AuthModel.findOne({ where: { username: usernameOrEmail }, include: [VerificationModel_1.VerificationModel] });
     }
 });
-exports.findUserPasswordReset = findUserPasswordReset;
+exports.findUseRrequestPassword = findUseRrequestPassword;
 /**
  * Maneja el error cuando un usuario no es encontrado en la base de datos.
  *

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { handleServerErrorPasswordReset } from './utils/errors/handleServerError';
+import { handleServerErrorRequestPassword } from './utils/errors/handleServerError';
 import { handleInputValidationErrors } from '../../register/utils/errors/handleInputValidationErrors';
-import { validateInputPasswordReset } from './utils/validations/resentValidation';
-import { findUserPasswordReset } from './utils/findUser/findUserPasswordReset';
+import { validateInputrRequestPassword } from './utils/validations/resentValidation';
+import { findUseRrequestPassword } from './utils/findUser/findUserPasswordReset';
 import { handleUserNotFoundErrorLogin } from '../utils/findUser/findUserByUsernameLogin';
 import { checkisUserVerified, handleUnverifiedUserError } from './utils/check/checkUserVerificationStatus';
 import { generateAndSetRandomPassword } from './utils/generate/generateAndRandomPassword';
@@ -14,11 +14,11 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
     try {
         // 1. Extraer y validar los datos de entrada
         const { usernameOrEmail } = req.body;
-        const inputValidationErrors = validateInputPasswordReset(usernameOrEmail);
+        const inputValidationErrors = validateInputrRequestPassword(usernameOrEmail);
         handleInputValidationErrors(inputValidationErrors, res);
 
         // 2. Búsqueda del usuario
-        const user = await findUserPasswordReset(usernameOrEmail);
+        const user = await findUseRrequestPassword(usernameOrEmail);
         if (!user) {
             handleUserNotFoundErrorLogin(usernameOrEmail, user, res);
             return;
@@ -29,17 +29,17 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
         handleUnverifiedUserError(isVerified, res);
 
         // 4. Genera una nueva contraseña aleatoria y actualiza el registro de verificación
-        const randomPassword = await generateAndSetRandomPassword(user.id); 
+        const randomPassword = await generateAndSetRandomPassword(user.id);
 
         // 5. Envía un correo electrónico con la nueva contraseña aleatoria
-       await sendPasswordResetEmailPasswordReset(user.email, user.username, randomPassword);
+        await sendPasswordResetEmailPasswordReset(user.email, user.username, randomPassword);
 
         // 6. Envia el mesge de exito
         handleSuccessMessagePasswordReset(res);
 
     } catch (error) {
-        
+
         // 7. Manejo de errores de servidor
-        handleServerErrorPasswordReset(error, res);
+        handleServerErrorRequestPassword(error, res);
     }
 };

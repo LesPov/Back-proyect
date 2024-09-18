@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleServerErrorRequestPassword = void 0;
+exports.handleServerErrorResetPassword = void 0;
 const errorMessages_1 = require("../../../../../../middleware/erros/errorMessages");
 /**
  * Maneja errores internos del servidor.
@@ -17,18 +17,18 @@ const errorMessages_1 = require("../../../../../../middleware/erros/errorMessage
  * @param {Response} res - Objeto de respuesta HTTP proporcionado por Express, utilizado
  *                          para enviar la respuesta de error al cliente.
  *
- * @throws {Error} Lanza una excepción con el mensaje "Controller rquestPasswordReset error" si se
+ * @throws {Error} Lanza una excepción con el mensaje "Controller resetPassword error" si se
  *                 maneja un error interno del servidor, interrumpiendo la ejecución del
  *                 código posterior.
  */
-const handleServerErrorRequestPassword = (error, res) => {
-    console.error("Error en el controlador requestPasswordReset:", error);
+const handleServerErrorResetPassword = (error, res) => {
+    console.error("Error en el controlador resetPassword:", error);
     if (!res.headersSent) {
         res.status(400).json({
             msg: error.message || errorMessages_1.errorMessages.databaseError,
             error,
         });
-        throw new Error("Controller requestPasswordReset error");
+        throw new Error("Controller resetPassword error");
     }
 };
-exports.handleServerErrorRequestPassword = handleServerErrorRequestPassword;
+exports.handleServerErrorResetPassword = handleServerErrorResetPassword;
