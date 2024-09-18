@@ -19,6 +19,8 @@ const checkUserVerificationStatusPhone_1 = require("./utils/check/checkUserVerif
 const validatePasswordLogin_1 = require("./utils/validations/validatePasswordLogin");
 const loginAttemptsService_1 = require("./utils/loginAttempts/loginAttemptsService");
 const handleSuccessfulLogin_1 = require("./utils/handleSuccessfu/handleSuccessfulLogin");
+const checkVerificationCodeExpiration_1 = require("../email/utils/check/checkVerificationCodeExpiration");
+const handleVerificationCodeExpirationError_1 = require("./resetPassword/utils/errors/handleVerificationCodeExpirationError");
 /**
  * Controlador para manejar la solicitud de inicio de sesión de un usuario.
  *
@@ -46,6 +48,10 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // 5. Validar la contraseña y manejar los intentos de inicio de sesión
         const isPasswordValid = yield (0, validatePasswordLogin_1.validatePassword)(user, passwordorrandomPassword);
         const loginSuccess = yield (0, loginAttemptsService_1.handleLoginAttempts)(user.id, isPasswordValid, res);
+        // Verifica si el randomPassword de verificación ha expirado
+        const currentDate = new Date();
+        const isCodeExpire = (0, checkVerificationCodeExpiration_1.checkVerificationCodeExpiration)(user, currentDate);
+        (0, handleVerificationCodeExpirationError_1.handleVerificationCodeExpirationErrorReset)(isCodeExpire, res);
         // 6. Si el inicio de sesión es exitoso
         if (loginSuccess) {
             yield (0, handleSuccessfulLogin_1.handleSuccessfulLogin)(user, res, passwordorrandomPassword);

@@ -14,11 +14,13 @@ exports.errorMessages = {
     invalidEmail: 'La dirección de correo electrónico no es válida',
     userEmailExists: (email) => `El correo electrónico ${email} ya está registrado.`,
     userExists: (username) => `El usuario con el nombre ${username} ya existe.`,
-    //Errores en la verificaciondeemail:
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Errores en la verificacionDelEmail:
     userNotFound: (username) => `Usuario con nombre ${username} no encontrado en la base de datos.`,
     userAlreadyVerifiedemail: () => 'El correo electrónico ya ha sido verificado previamente.',
     invalidVerificationCode: () => 'El código de verificación es inválido.',
     verificationCodeExpired: 'El código de verificación ha expirado. Solicita un nuevo código para continuar..',
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Errores de verificación de usuario   
     emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica tu correo para continuar.',
     //Errores de phone 

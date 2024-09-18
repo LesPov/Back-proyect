@@ -2,7 +2,8 @@ export const errorMessages = {
   //Erores en la base de datos:
   databaseError: 'Ocurrió un error al acceder a la base de datos. Por favor, inténtalo nuevamente más tarde.',
 
-  //Errores en la parte de registro:
+
+//Errores en la parte de registro:
   requiredFields: 'Todos los campos son obligatorios',
   passwordTooShort: 'La contraseña debe tener al menos 10 caracteres',
   passwordNoNumber: 'La contraseña debe contener al menos un dígito numérico.',
@@ -12,16 +13,20 @@ export const errorMessages = {
   invalidEmail: 'La dirección de correo electrónico no es válida',
   userEmailExists: (email: string) => `El correo electrónico ${email} ya está registrado.`,
   userExists: (username: string) => `El usuario con el nombre ${username} ya existe.`,
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-  //Errores en la verificaciondeemail:
+//Errores en la verificacionDelEmail:
   userNotFound: (username: string) => `Usuario con nombre ${username} no encontrado en la base de datos.`,
   userAlreadyVerifiedemail: () => 'El correo electrónico ya ha sido verificado previamente.',
   invalidVerificationCode: () => 'El código de verificación es inválido.',
   verificationCodeExpired: 'El código de verificación ha expirado. Solicita un nuevo código para continuar..',
 
 
-  // Errores de verificación de usuario   
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Errores de verificación de usuario   
   emailNotVerified: () => 'El correo electrónico no ha sido verificado. Verifica tu correo para continuar.',
 
 

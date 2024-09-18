@@ -8,6 +8,8 @@ import { checkUserVerificationStatusPhoneLogin, handlePhoneLoginNotVerificationE
 import { validatePassword } from './utils/validations/validatePasswordLogin';
 import { handleLoginAttempts } from './utils/loginAttempts/loginAttemptsService';
 import { handleSuccessfulLogin } from './utils/handleSuccessfu/handleSuccessfulLogin';
+import { checkVerificationCodeExpiration } from '../email/utils/check/checkVerificationCodeExpiration';
+import { handleVerificationCodeExpirationErrorReset } from './resetPassword/utils/errors/handleVerificationCodeExpirationError';
 
 /**
  * Controlador para manejar la solicitud de inicio de sesión de un usuario.
@@ -23,7 +25,7 @@ export const loginUser = async (req: Request, res: Response) => {
         handleInputValidationErrors(inputValidationErrors, res);
 
         // 2. Búsqueda del usuario
-        const user = await findUserByUsernameLogin(username); 
+        const user = await findUserByUsernameLogin(username);
         if (!user) {
             handleUserNotFoundErrorLogin(username, user, res);
             return;
@@ -40,7 +42,10 @@ export const loginUser = async (req: Request, res: Response) => {
         // 5. Validar la contraseña y manejar los intentos de inicio de sesión
         const isPasswordValid = await validatePassword(user, passwordorrandomPassword);
         const loginSuccess = await handleLoginAttempts(user.id, isPasswordValid, res);
-
+        // Verifica si el randomPassword de verificación ha expirado
+        const currentDate = new Date();
+        const isCodeExpire = checkVerificationCodeExpiration(user, currentDate);
+        handleVerificationCodeExpirationErrorReset(isCodeExpire, res);
         // 6. Si el inicio de sesión es exitoso
         if (loginSuccess) {
             await handleSuccessfulLogin(user, res, passwordorrandomPassword);
