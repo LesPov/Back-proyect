@@ -19,7 +19,7 @@ export const successMessages = {
     phoneVerified: 'Número de teléfono verificado exitosamente, ahora ya puedes iniciar sesión',
   
     // Éxitos de recuperación y cambio de contraseña
-    passwordResetEmailSent: 'Se ha enviado un correo electrónico con las instrucciones para restablecer la contraseña.',
+    passwordResetEmailSent:() => 'Se ha enviado un correo electrónico con las instrucciones para restablecer la contraseña.',
   
     passwordUpdated: 'Contraseña actualizada con éxito.',
   

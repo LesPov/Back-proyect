@@ -7,7 +7,7 @@
     "test": "jest",
     "dev": "nodemon distjs/index.js",
     "typescript": "tsc --watch",
-    "copy-templates": "copyfiles -u 1 src/apiServices/Auth/register/templates/** distjs",
+    "copy-templates": "copyfiles -u 1 src/apiServices/Auth/{register,login/passwordRecovery}/templates/** distjs",
     "start-bot": "ts-node src/apiServices/chatbot/chatbot.ts"
   },
   "author": "Leo",

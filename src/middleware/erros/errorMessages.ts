@@ -45,6 +45,8 @@ export const errorMessages = {
  
 
 
+//resentpasswordrestLogin
+unverifiedAccount:() => 'Tu correo electrónico o número teléfono no han sido verificados.',
 
 
   userNotExists: (username: string) => `No existe un usuario con el nombre ${username} en la base de datos`,
@@ -75,7 +77,6 @@ export const errorMessages = {
 
   passwordValidationFailed: 'La contraseña no cumple con los requisitos de validación',
 
-  unverifiedAccount: 'Tu correo electrónico o número teléfono no han sido verificados.',
   invalidNewPassword: 'contraseña lol',
   invalidRandomPassworde: 'ya expiro la contraseña',
   incorrectPasswordWithAttempts: 'se requiere la contraseña normal',

@@ -33,6 +33,8 @@ exports.errorMessages = {
     // Mensaje cuando la cuenta está bloqueada
     accountBlocked: (remainingTime) => `La cuenta está bloqueada temporalmente. Intente nuevamente en ${remainingTime} minutos.`,
     // Mensaje cuando se alcanza el máximo de intentos de inicio de sesión
+    //resentpasswordrestLogin
+    unverifiedAccount: () => 'Tu correo electrónico o número teléfono no han sido verificados.',
     userNotExists: (username) => `No existe un usuario con el nombre ${username} en la base de datos`,
     invalidPassword: 'Contraseña aleatorea incorrecta, la contraseña aleatoria debe tener exactamente 8 caracteres.',
     invalidPasswordDB: 'La contraseña aleatoria proporcionada no coincide con la almacenada en la base de datos, o no exite',
@@ -58,7 +60,6 @@ exports.errorMessages = {
     verificadoVericationRequired: 'El usuario aún no ha sido verificado. Verifica tu numero celular y correo para activar tu cuenta.',
     missingUsernameOrEmail: 'Todos los campos son obligatorios',
     passwordValidationFailed: 'La contraseña no cumple con los requisitos de validación',
-    unverifiedAccount: 'Tu correo electrónico o número teléfono no han sido verificados.',
     invalidNewPassword: 'contraseña lol',
     invalidRandomPassworde: 'ya expiro la contraseña',
     incorrectPasswordWithAttempts: 'se requiere la contraseña normal',
