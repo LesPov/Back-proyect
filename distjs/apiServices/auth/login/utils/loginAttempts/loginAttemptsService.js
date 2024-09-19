@@ -15,20 +15,6 @@ const errorMessages_1 = require("../../../../../middleware/erros/errorMessages")
 const MAX_LOGIN_ATTEMPTS = 5;
 const BLOCK_DURATION_MINUTES = 30;
 /**
- * Incrementa el contador de intentos de inicio de sesión fallidos.
- * @param userId - ID del usuario
- * @returns El número actualizado de intentos fallidos
- */
-const incrementLoginAttempts = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const verification = yield VerificationModel_1.VerificationModel.findOne({ where: { userId } });
-    if (!verification) {
-        throw new Error('Registro de verificación no encontrado');
-    }
-    verification.loginAttempts += 1;
-    yield verification.save();
-    return verification.loginAttempts;
-});
-/**
  * Resetea el contador de intentos de inicio de sesión y elimina el bloqueo.
  * @param userId - ID del usuario
  */

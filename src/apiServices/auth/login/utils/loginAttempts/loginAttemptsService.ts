@@ -6,20 +6,7 @@ import { errorMessages } from '../../../../../middleware/erros/errorMessages';
 const MAX_LOGIN_ATTEMPTS = 5;
 const BLOCK_DURATION_MINUTES = 30;
 
-/**
- * Incrementa el contador de intentos de inicio de sesión fallidos.
- * @param userId - ID del usuario
- * @returns El número actualizado de intentos fallidos
- */
-const incrementLoginAttempts = async (userId: number): Promise<number> => {
-    const verification = await VerificationModel.findOne({ where: { userId } });
-    if (!verification) {
-        throw new Error('Registro de verificación no encontrado');
-    }
-    verification.loginAttempts += 1;
-    await verification.save();
-    return verification.loginAttempts;
-};
+
 
 /**
  * Resetea el contador de intentos de inicio de sesión y elimina el bloqueo.
