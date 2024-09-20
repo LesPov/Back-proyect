@@ -15,6 +15,8 @@ import registerRouter from '../apiServices/Auth/register/registerRouter';
 import emailVerificationRoutes from '../apiServices/Auth/email/emailRoutes';
 import phoneVerificationRouter from '../apiServices/Auth/phone/phoneRoutes';
 import loginUserRouter from '../apiServices/Auth/login/loginRouter';
+import { Country } from '../middleware/models/paisModel';
+import countryPais from '../apiServices/Auth/pais/paisRouter';
 
 
 // Configurar las variables de entorno del archivo .env
@@ -56,7 +58,7 @@ class Server {
     routes() {
 
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter, loginUserRouter, emailVerificationRoutes, phoneVerificationRouter);
+        this.app.use('/api/users', registerRouter, loginUserRouter, emailVerificationRoutes, phoneVerificationRouter,countryPais);
 
     }
 
@@ -77,12 +79,11 @@ class Server {
      * Conecta a la base de datos y sincroniza los modelos de Product y User.
      */
     async dbConnect() {
-        try {
-
+        try { 
             await AuthModel.sync();
             await UserProfileModel.sync();
             await VerificationModel.sync();
-
+            await Country.sync();
         } catch (error) {
             console.error('Unable to connect to the database:', error);
         }

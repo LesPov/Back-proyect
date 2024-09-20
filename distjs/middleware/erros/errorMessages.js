@@ -27,7 +27,6 @@ exports.errorMessages = {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///Errores de phone 
     incorrectPhoneNumber: () => 'El número de teléfono no coincide con el registrado para este usuario',
-    ///Login 
     //Error de bloqueo
     accountBlocked: (remainingTime) => `La cuenta está bloqueada temporalmente. Intente nuevamente en ${remainingTime} minutos.`,
     maxAttemptsReached: 'Has alcanzado el máximo número de intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.',
@@ -40,12 +39,19 @@ exports.errorMessages = {
     invalidRandomPassword: () => 'Contraseña aleatoria incorrecta',
     incorrectPasswor1d: () => 'Contraseña incorrecta',
     phoneAlreadyVerified: () => 'El número de teléfono ya ha sido verificado previamente', //Login
-    //login
-    // Mensaje cuando la cuenta está bloqueada
-    // Mensaje cuando se alcanza el máximo de intentos de inicio de sesión
     //resentpasswordrestLogin
     unverifiedAccount: () => 'Tu correo electrónico o número teléfono no han sido verificados.',
     //requestPassword 
+    // Errores de validación de roles y tokens
+    tokenNotProvided: 'Acceso denegado, token no proporcionado',
+    accessDenied: 'Acceso denegado, no tienes permisos para acceder a esta ruta',
     invalidToken: 'Token no válido',
-    accessDeniedNoToken: 'Acceso denegado no tines autorizacion',
+    accessDeniedNoToken: 'Acceso denegado',
+    serverError: 'servidor error',
+    ////////////////////imagenes msg de errror ////////////////
+    noFileUploaded: 'Acesso denegado ussuraio ahi un archivo xd',
+    userProfileNotFound: 'Perfil de usuario no encontrado',
+    invalidImageFormat: 'Formato de imagen inválido. Por favor, sube una imagen válida en formato JPG, JPEG, PNG o GIF',
+    unexpectedError: 'Ocurrió un error inesperado al procesar la imagen',
+    serverErrorr: 'Error interno del servidor al procesar la imagen',
 };

@@ -66,15 +66,15 @@ export const validatePassword = (password: string): string[] => {
     console.log('Contraseña recibida:', password);  // Agrega esta línea para depuración
     const errors: string[] = [];
 
-    validationRules.forEach(rule => {
+    for (const rule of validationRules) {
         if (!rule.test(password)) {
-            errors.push(rule.errorMessage);
+            errors.push("La contraseña es inválida y no cumple con los requisitos.");
+            break; // Detener la validación después del primer error
         }
-    });
+    }
 
     return errors;
 };
-
 
 
 /**

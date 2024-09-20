@@ -26,6 +26,8 @@ const registerRouter_1 = __importDefault(require("../apiServices/Auth/register/r
 const emailRoutes_1 = __importDefault(require("../apiServices/Auth/email/emailRoutes"));
 const phoneRoutes_1 = __importDefault(require("../apiServices/Auth/phone/phoneRoutes"));
 const loginRouter_1 = __importDefault(require("../apiServices/Auth/login/loginRouter"));
+const paisModel_1 = require("../middleware/models/paisModel");
+const paisRouter_1 = __importDefault(require("../apiServices/Auth/pais/paisRouter"));
 // Configurar las variables de entorno del archivo .env
 dotenv_1.default.config();
 class Server {
@@ -53,7 +55,7 @@ class Server {
      */
     routes() {
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter_1.default, loginRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default);
+        this.app.use('/api/users', registerRouter_1.default, loginRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default, paisRouter_1.default);
     }
     /**
      * Configura los middlewares de la aplicación.
@@ -73,6 +75,7 @@ class Server {
                 yield authModel_1.AuthModel.sync();
                 yield userProfileModel_1.UserProfileModel.sync();
                 yield VerificationModel_1.VerificationModel.sync();
+                yield paisModel_1.Country.sync();
             }
             catch (error) {
                 console.error('Unable to connect to the database:', error);
