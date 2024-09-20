@@ -23,6 +23,7 @@ phoneVerificationRouter .put('/verify/phone', verifyPhoneNumber);
 
 
 
+
 /**
  * POST /api/user/verify/resend
  * Ruta para reenviar el código de verificación por SMS.
