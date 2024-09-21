@@ -8,14 +8,10 @@ import { checkUserVerificationStatusPhoneLogin, handlePhoneLoginNotVerificationE
 import { validatePassword } from './utils/validations/validatePasswordLogin';
 import { handleLoginAttempts } from './utils/loginAttempts/loginAttemptsService';
 import { handleSuccessfulLogin } from './utils/handleSuccessfu/handleSuccessfulLogin';
-import { checkVerificationCodeExpiration } from '../email/utils/check/checkVerificationCodeExpiration';
-import { handleVerificationCodeExpirationErrorReset } from './resetPassword/utils/errors/handleVerificationCodeExpirationError';
+import { handleRandomPasswordValidation } from './utils/validations/handleRandomPasswordValidation';
 
 /**
  * Controlador para manejar la solicitud de inicio de sesión de un usuario.
- * 
- * @param req - La solicitud HTTP que contiene las credenciales del usuario (nombre de usuario y contraseña).
- * @param res - La respuesta HTTP que será enviada al cliente, con mensajes de éxito o error.
  */
 export const loginUser = async (req: Request, res: Response) => {
     try {
@@ -39,20 +35,25 @@ export const loginUser = async (req: Request, res: Response) => {
         const isPhoneNumberVerified = checkUserVerificationStatusPhoneLogin(user);
         handlePhoneLoginNotVerificationErroruser(isPhoneNumberVerified, res);
 
-        // 5. Validar la contraseña y manejar los intentos de inicio de sesión
+        // 5. Determinar si se está usando una contraseña aleatoria
+        const isRandomPassword = passwordorrandomPassword.length === 8;
+
+        // 6. Si es una contraseña aleatoria, manejar la validación
+        if (isRandomPassword) {
+            const isValid = await handleRandomPasswordValidation(user, passwordorrandomPassword, res);
+            if (!isValid) return; // Si no es válida, salir
+        }
+
+        // 7. Validar la contraseña y manejar los intentos de inicio de sesión
         const isPasswordValid = await validatePassword(user, passwordorrandomPassword);
         const loginSuccess = await handleLoginAttempts(user.id, isPasswordValid, res);
-        // Verifica si el randomPassword de verificación ha expirado
-        const currentDate = new Date();
-        const isCodeExpire = checkVerificationCodeExpiration(user, currentDate);
-        handleVerificationCodeExpirationErrorReset(isCodeExpire, res);
-        // 6. Si el inicio de sesión es exitoso
+
+        // 8. Si el inicio de sesión es exitoso
         if (loginSuccess) {
             await handleSuccessfulLogin(user, res, passwordorrandomPassword);
         }
-
     } catch (error) {
-        // 7. Manejo de errores de servidor
+        // 9. Manejo de errores de servidor
         handleServerErrorLogin(error, res);
     }
 };
