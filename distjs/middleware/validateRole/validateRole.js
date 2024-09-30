@@ -30,7 +30,7 @@ const verifyToken = (token) => {
  * @returns true si el rol es válido, false en caso contrario
  */
 const isRoleValid = (userRole, requiredRole) => {
-    return userRole === requiredRole || userRole === 'admin';
+    return userRole === requiredRole;
 };
 /**
  * Middleware que valida el rol del usuario.

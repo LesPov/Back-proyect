@@ -30,7 +30,7 @@ const verifyToken = (token: string): any => {
  * @returns true si el rol es válido, false en caso contrario
  */
 const isRoleValid = (userRole: string, requiredRole: string): boolean => {
-  return userRole === requiredRole || userRole === 'admin';
+  return userRole === requiredRole;
 };
 
 /**
