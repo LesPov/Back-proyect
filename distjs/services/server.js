@@ -28,6 +28,7 @@ const phoneRoutes_1 = __importDefault(require("../apiServices/Auth/phone/phoneRo
 const loginRouter_1 = __importDefault(require("../apiServices/Auth/login/loginRouter"));
 const paisModel_1 = require("../middleware/models/paisModel");
 const paisRouter_1 = __importDefault(require("../apiServices/Auth/pais/paisRouter"));
+const adminRouter_1 = __importDefault(require("../apiServices/Admin/adminRouter"));
 // Configurar las variables de entorno del archivo .env
 dotenv_1.default.config();
 class Server {
@@ -55,7 +56,7 @@ class Server {
      */
     routes() {
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter_1.default, loginRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default, paisRouter_1.default);
+        this.app.use('/api/users', registerRouter_1.default, loginRouter_1.default, adminRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default, paisRouter_1.default);
     }
     /**
      * Configura los middlewares de la aplicación.

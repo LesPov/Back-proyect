@@ -17,6 +17,7 @@ import phoneVerificationRouter from '../apiServices/Auth/phone/phoneRoutes';
 import loginUserRouter from '../apiServices/Auth/login/loginRouter';
 import { Country } from '../middleware/models/paisModel';
 import countryPais from '../apiServices/Auth/pais/paisRouter';
+import adminRouter from '../apiServices/Admin/adminRouter';
 
 
 // Configurar las variables de entorno del archivo .env
@@ -58,7 +59,7 @@ class Server {
     routes() {
 
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter, loginUserRouter, emailVerificationRoutes, phoneVerificationRouter,countryPais);
+        this.app.use('/api/users', registerRouter, loginUserRouter,adminRouter, emailVerificationRoutes, phoneVerificationRouter,countryPais);
 
     }
 
