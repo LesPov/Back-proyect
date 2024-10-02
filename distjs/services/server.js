@@ -20,16 +20,16 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const authModel_1 = require("../middleware/models/authModel");
-const userProfileModel_1 = require("../apiServices/Auth/profile/models/userProfileModel");
 const VerificationModel_1 = require("../middleware/models/VerificationModel");
-const registerRouter_1 = __importDefault(require("../apiServices/Auth/register/registerRouter"));
-const emailRoutes_1 = __importDefault(require("../apiServices/Auth/email/emailRoutes"));
-const phoneRoutes_1 = __importDefault(require("../apiServices/Auth/phone/phoneRoutes"));
-const loginRouter_1 = __importDefault(require("../apiServices/Auth/login/loginRouter"));
 const paisModel_1 = require("../middleware/models/paisModel");
-const paisRouter_1 = __importDefault(require("../apiServices/Auth/pais/paisRouter"));
 const adminRouter_1 = __importDefault(require("../apiServices/Admin/adminRouter"));
 const userRouter_1 = __importDefault(require("../apiServices/Users/userRouter"));
+const emailRoutes_1 = __importDefault(require("../apiServices/Admin/Auth/email/emailRoutes"));
+const loginRouter_1 = __importDefault(require("../apiServices/Admin/Auth/login/loginRouter"));
+const paisRouter_1 = __importDefault(require("../apiServices/Admin/Auth/pais/paisRouter"));
+const phoneRoutes_1 = __importDefault(require("../apiServices/Admin/Auth/phone/phoneRoutes"));
+const userProfileModel_1 = require("../apiServices/Admin/Auth/profile/models/userProfileModel");
+const registerRouter_1 = __importDefault(require("../apiServices/Admin/Auth/register/registerRouter"));
 // Configurar las variables de entorno del archivo .env
 dotenv_1.default.config();
 class Server {

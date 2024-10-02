@@ -7,18 +7,18 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import { newUser } from '../apiServices/Auth/register/registerController';
 import { AuthModel } from '../middleware/models/authModel';
-import { UserProfileModel } from '../apiServices/Auth/profile/models/userProfileModel';
 import { VerificationModel } from '../middleware/models/VerificationModel';
-import registerRouter from '../apiServices/Auth/register/registerRouter';
-import emailVerificationRoutes from '../apiServices/Auth/email/emailRoutes';
-import phoneVerificationRouter from '../apiServices/Auth/phone/phoneRoutes';
-import loginUserRouter from '../apiServices/Auth/login/loginRouter';
+
 import { Country } from '../middleware/models/paisModel';
-import countryPais from '../apiServices/Auth/pais/paisRouter';
 import adminRouter from '../apiServices/Admin/adminRouter';
 import userRouter from '../apiServices/Users/userRouter';
+import emailVerificationRoutes from '../apiServices/Admin/Auth/email/emailRoutes';
+import loginUserRouter from '../apiServices/Admin/Auth/login/loginRouter';
+import countryPais from '../apiServices/Admin/Auth/pais/paisRouter';
+import phoneVerificationRouter from '../apiServices/Admin/Auth/phone/phoneRoutes';
+import { UserProfileModel } from '../apiServices/Admin/Auth/profile/models/userProfileModel';
+import registerRouter from '../apiServices/Admin/Auth/register/registerRouter';
 
 
 // Configurar las variables de entorno del archivo .env
