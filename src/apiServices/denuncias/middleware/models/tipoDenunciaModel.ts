@@ -4,9 +4,11 @@ import sequelize from "../../../../database/connnection";
 // Interfaz para TipoDenuncia
 export interface TipoDenunciaInterface extends Model {
     id: number;
+    flagImage: string;  // Asegúrate de tener esta propiedad
     nombre: string;
     descripcion?: string;
     esAnonimaOficial: 'Anónima' | 'Oficial' | 'Ambas';
+    
   }
   
   // Definición del modelo para Tipos de Denuncias
@@ -15,6 +17,10 @@ export interface TipoDenunciaInterface extends Model {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+    },
+    flagImage: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     nombre: {
       type: DataTypes.STRING,

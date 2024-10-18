@@ -14,20 +14,23 @@ const tipoDenunciaModel_1 = require("../middleware/models/tipoDenunciaModel");
 const subtipoDenunciaModel_1 = require("../middleware/models/subtipoDenunciaModel ");
 const addTipoDenuncia = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { nombre, descripcion, esAnonimaOficial, subtipos } = req.body;
+        const { nombre, descripcion, esAnonimaOficial, flagImage, subtipos } = req.body;
         // Crear el tipo de denuncia
         const tipoDenuncia = yield tipoDenunciaModel_1.TipoDenunciaModel.create({
             nombre,
             descripcion,
-            esAnonimaOficial
+            esAnonimaOficial,
+            flagImage,
         });
         // Crear los subtipos asociados
         if (subtipos && Array.isArray(subtipos)) {
             for (const subtipo of subtipos) {
+                // Agregar flagImage si es necesario para los subtipos
                 yield subtipoDenunciaModel_1.SubtipoDenunciaModel.create({
                     nombre: subtipo.nombre,
                     descripcion: subtipo.descripcion,
-                    tipoDenunciaId: tipoDenuncia.id
+                    tipoDenunciaId: tipoDenuncia.id,
+                    flagImage: subtipo.flagImage || 'default-image.jpg' // Agregar una imagen predeterminada si no se proporciona
                 });
             }
         }

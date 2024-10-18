@@ -7,6 +7,8 @@ export interface SubtipoDenunciaInterface extends Model {
   id: number;
   nombre: string;
   tipoDenunciaId: number;
+  flagImage: string;  // Asegúrate de tener esta propiedad
+
 }
 
 // Definición del modelo para Subtipos de Denuncias
@@ -15,6 +17,10 @@ export const SubtipoDenunciaModel = sequelize.define<SubtipoDenunciaInterface>('
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+  },
+  flagImage: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   nombre: {
     type: DataTypes.STRING,

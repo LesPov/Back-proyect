@@ -13,6 +13,10 @@ exports.TipoDenunciaModel = connnection_1.default.define('TipoDenuncia', {
         primaryKey: true,
         autoIncrement: true,
     },
+    flagImage: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     nombre: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,

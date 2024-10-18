@@ -14,6 +14,10 @@ exports.SubtipoDenunciaModel = connnection_1.default.define('SubtipoDenuncia', {
         primaryKey: true,
         autoIncrement: true,
     },
+    flagImage: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     nombre: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,

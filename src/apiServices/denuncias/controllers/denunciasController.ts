@@ -1,25 +1,27 @@
 import { Request, Response } from 'express';
 import { TipoDenunciaModel, TipoDenunciaInterface } from '../middleware/models/tipoDenunciaModel';
 import { SubtipoDenunciaModel } from '../middleware/models/subtipoDenunciaModel ';
-
 export const addTipoDenuncia = async (req: Request, res: Response) => {
     try {
-        const { nombre, descripcion, esAnonimaOficial, subtipos } = req.body;
+        const { nombre, descripcion, esAnonimaOficial, flagImage, subtipos } = req.body;
 
         // Crear el tipo de denuncia
         const tipoDenuncia = await TipoDenunciaModel.create({
             nombre,
             descripcion,
-            esAnonimaOficial
+            esAnonimaOficial,
+            flagImage,
         });
 
         // Crear los subtipos asociados
         if (subtipos && Array.isArray(subtipos)) {
             for (const subtipo of subtipos) {
+                // Agregar flagImage si es necesario para los subtipos
                 await SubtipoDenunciaModel.create({
                     nombre: subtipo.nombre,
                     descripcion: subtipo.descripcion,
-                    tipoDenunciaId: tipoDenuncia.id
+                    tipoDenunciaId: tipoDenuncia.id,
+                    flagImage: subtipo.flagImage || 'default-image.jpg'  // Agregar una imagen predeterminada si no se proporciona
                 });
             }
         }
@@ -30,6 +32,7 @@ export const addTipoDenuncia = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error al crear tipo de denuncia', error });
     }
 };
+ 
 
 // Controlador para obtener todos los tipos de denuncias
 export const getTiposDenuncia = async (req: Request, res: Response) => {
