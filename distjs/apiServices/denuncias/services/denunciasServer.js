@@ -16,14 +16,15 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const tipoDenunciaModel_1 = require("../middleware/models/tipoDenunciaModel");
-const denunciasRoutes_1 = __importDefault(require("../routes/denunciasRoutes"));
 const subtipoDenunciaModel_1 = require("../middleware/models/subtipoDenunciaModel ");
+const denunciasRoutes_1 = __importDefault(require("../routes/denunciasRoutes"));
 dotenv_1.default.config();
 class DenunciasServer {
     constructor() {
         this.app = (0, express_1.default)();
         this.middlewares();
         this.routes();
+        this.dbConnect();
     }
     routes() {
         this.app.use('/', denunciasRoutes_1.default);

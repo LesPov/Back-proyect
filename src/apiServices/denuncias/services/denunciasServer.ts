@@ -1,10 +1,10 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
-import express, { Application } from 'express';
+import express, { Application, Router } from 'express';
 import cors from 'cors';
 import { TipoDenunciaModel } from '../middleware/models/tipoDenunciaModel';
-import denunciasRoutes from '../routes/denunciasRoutes';
 import { SubtipoDenunciaModel } from '../middleware/models/subtipoDenunciaModel ';
+import denunciasRoutes from '../routes/denunciasRoutes';
 
 dotenv.config();
 
@@ -15,8 +15,8 @@ class DenunciasServer {
         this.app = express();
         this.middlewares();
         this.routes();
+        this.dbConnect();
     }
-
     routes() {
         this.app.use('/', denunciasRoutes);
     }

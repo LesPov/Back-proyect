@@ -21,7 +21,7 @@ export const SubtipoDenunciaModel = sequelize.define<SubtipoDenunciaInterface>('
     allowNull: false,
   },
    descripcion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: true,
   },
   tipoDenunciaId: {

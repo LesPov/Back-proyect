@@ -8,4 +8,6 @@ const denunciasController_1 = require("../controllers/denunciasController");
 const router = express_1.default.Router();
 router.post('/agregar_tipos', denunciasController_1.addTipoDenuncia);
 router.get('/tipos', denunciasController_1.getTiposDenuncia);
+router.get('/tipos/anonimas', denunciasController_1.getTiposDenunciaAnonimas);
+// Nueva ruta para obtener subtipos de denuncias
 exports.default = router;

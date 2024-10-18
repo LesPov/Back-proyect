@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTiposDenuncia = exports.addTipoDenuncia = void 0;
+exports.getTiposDenunciaAnonimas = exports.getTiposDenuncia = exports.addTipoDenuncia = void 0;
 const tipoDenunciaModel_1 = require("../middleware/models/tipoDenunciaModel");
 const subtipoDenunciaModel_1 = require("../middleware/models/subtipoDenunciaModel ");
 const addTipoDenuncia = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,19 +39,29 @@ const addTipoDenuncia = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.addTipoDenuncia = addTipoDenuncia;
+// Controlador para obtener todos los tipos de denuncias
 const getTiposDenuncia = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tiposDenuncia = yield tipoDenunciaModel_1.TipoDenunciaModel.findAll({
-            include: [{
-                    model: subtipoDenunciaModel_1.SubtipoDenunciaModel,
-                    as: 'subtipos'
-                }]
-        });
-        res.status(200).json(tiposDenuncia);
+        const tipos = yield tipoDenunciaModel_1.TipoDenunciaModel.findAll(); // Consulta a la base de datos para obtener todos los tipos de denuncias
+        res.status(200).json(tipos);
     }
     catch (error) {
-        console.error('Error al obtener tipos de denuncia:', error);
-        res.status(500).json({ message: 'Error al obtener tipos de denuncia', error });
+        res.status(500).json({ message: 'Error al obtener los tipos de denuncias', error });
     }
 });
 exports.getTiposDenuncia = getTiposDenuncia;
+const getTiposDenunciaAnonimas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const tiposDenuncias = yield tipoDenunciaModel_1.TipoDenunciaModel.findAll({
+            where: {
+                esAnonimaOficial: ['Anónima', 'Ambas'] // Filtra denuncias que sean 'Anónima' o 'Ambas'
+            }
+        });
+        res.json(tiposDenuncias);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al obtener los tipos de denuncias anónimas' });
+    }
+});
+exports.getTiposDenunciaAnonimas = getTiposDenunciaAnonimas;

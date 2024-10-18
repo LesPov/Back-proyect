@@ -19,7 +19,7 @@ exports.SubtipoDenunciaModel = connnection_1.default.define('SubtipoDenuncia', {
         allowNull: false,
     },
     descripcion: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
         allowNull: true,
     },
     tipoDenunciaId: {

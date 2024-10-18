@@ -21,7 +21,7 @@ export interface TipoDenunciaInterface extends Model {
       allowNull: false,
     },
     descripcion: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     esAnonimaOficial: {

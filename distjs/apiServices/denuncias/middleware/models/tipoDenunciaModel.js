@@ -18,7 +18,7 @@ exports.TipoDenunciaModel = connnection_1.default.define('TipoDenuncia', {
         allowNull: false,
     },
     descripcion: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
         allowNull: true,
     },
     esAnonimaOficial: {
