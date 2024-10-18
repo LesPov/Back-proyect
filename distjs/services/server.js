@@ -30,6 +30,7 @@ const paisRouter_1 = __importDefault(require("../apiServices/Admin/Auth/pais/pai
 const phoneRoutes_1 = __importDefault(require("../apiServices/Admin/Auth/phone/phoneRoutes"));
 const userProfileModel_1 = require("../apiServices/Admin/Auth/profile/models/userProfileModel");
 const registerRouter_1 = __importDefault(require("../apiServices/Admin/Auth/register/registerRouter"));
+const denunciasServer_1 = __importDefault(require("../apiServices/denuncias/services/denunciasServer"));
 // Configurar las variables de entorno del archivo .env
 dotenv_1.default.config();
 class Server {
@@ -39,6 +40,7 @@ class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '1001';
+        this.denunciasServer = new denunciasServer_1.default();
         this.listen();
         this.middlewares();
         this.routes();
@@ -58,6 +60,7 @@ class Server {
     routes() {
         // Ruta para registrar nuevos usuarios
         this.app.use('/api/users', registerRouter_1.default, loginRouter_1.default, adminRouter_1.default, userRouter_1.default, emailRoutes_1.default, phoneRoutes_1.default, paisRouter_1.default);
+        this.app.use('/api/denuncias', this.denunciasServer.getApp());
     }
     /**
      * Configura los middlewares de la aplicación.

@@ -19,6 +19,7 @@ import countryPais from '../apiServices/Admin/Auth/pais/paisRouter';
 import phoneVerificationRouter from '../apiServices/Admin/Auth/phone/phoneRoutes';
 import { UserProfileModel } from '../apiServices/Admin/Auth/profile/models/userProfileModel';
 import registerRouter from '../apiServices/Admin/Auth/register/registerRouter';
+import DenunciasServer from '../apiServices/denuncias/services/denunciasServer';
 
 
 // Configurar las variables de entorno del archivo .env
@@ -29,6 +30,7 @@ class Server {
 
     private app: Application;
     private port: string;
+    private denunciasServer: DenunciasServer;
 
 
     /**
@@ -37,6 +39,7 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '1001';
+        this.denunciasServer = new DenunciasServer();
         this.listen();
         this.middlewares();
         this.routes();
@@ -61,6 +64,7 @@ class Server {
 
         // Ruta para registrar nuevos usuarios
         this.app.use('/api/users', registerRouter, loginUserRouter,adminRouter,userRouter, emailVerificationRoutes, phoneVerificationRouter,countryPais);
+        this.app.use('/api/denuncias', this.denunciasServer.getApp());
 
     }
 
