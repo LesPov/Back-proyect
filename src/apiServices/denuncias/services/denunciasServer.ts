@@ -5,6 +5,7 @@ import cors from 'cors';
 import { TipoDenunciaModel } from '../middleware/models/tipoDenunciaModel';
 import { SubtipoDenunciaModel } from '../middleware/models/subtipoDenunciaModel ';
 import denunciasRoutes from '../routes/denunciasRoutes';
+import { DenunciaAnonimaModel } from '../middleware/models/denunciasAnonimasModel';
 
 dotenv.config();
 
@@ -30,6 +31,9 @@ class DenunciasServer {
         try {
             await TipoDenunciaModel.sync();
             await SubtipoDenunciaModel.sync();
+            await DenunciaAnonimaModel.sync();
+            
+
             console.log('Modelos de denuncias sincronizados correctamente.');
         } catch (error) {
             console.error('Error al sincronizar los modelos de denuncias:', error);

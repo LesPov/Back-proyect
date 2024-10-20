@@ -34,15 +34,6 @@ export const addTipoDenuncia = async (req: Request, res: Response) => {
 };
  
 
-// Controlador para obtener todos los tipos de denuncias
-export const getTiposDenuncia = async (req: Request, res: Response) => {
-    try {
-        const tipos = await TipoDenunciaModel.findAll(); // Consulta a la base de datos para obtener todos los tipos de denuncias
-        res.status(200).json(tipos);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los tipos de denuncias', error });
-    }
-};
 
 export const getTiposDenunciaAnonimas = async (req: Request, res: Response) => {
     try {
@@ -58,3 +49,20 @@ export const getTiposDenunciaAnonimas = async (req: Request, res: Response) => {
       res.status(500).json({ message: 'Error al obtener los tipos de denuncias anónimas' });
     }
   };
+
+
+
+export const getTiposDenunciaOficiales = async (req: Request, res: Response) => {
+    try {
+        const tiposDenuncias = await TipoDenunciaModel.findAll({
+            where: {
+                esAnonimaOficial: ['Oficial', 'Ambas'] // Filtra denuncias que sean 'Oficial' o 'Ambas'
+            }
+        });
+
+        res.json(tiposDenuncias);
+    } catch (error) {
+        console.error('Error al obtener los tipos de denuncias oficiales:', error);
+        res.status(500).json({ message: 'Error al obtener los tipos de denuncias oficiales' });
+    }
+};

@@ -18,6 +18,7 @@ const cors_1 = __importDefault(require("cors"));
 const tipoDenunciaModel_1 = require("../middleware/models/tipoDenunciaModel");
 const subtipoDenunciaModel_1 = require("../middleware/models/subtipoDenunciaModel ");
 const denunciasRoutes_1 = __importDefault(require("../routes/denunciasRoutes"));
+const denunciasAnonimasModel_1 = require("../middleware/models/denunciasAnonimasModel");
 dotenv_1.default.config();
 class DenunciasServer {
     constructor() {
@@ -38,6 +39,7 @@ class DenunciasServer {
             try {
                 yield tipoDenunciaModel_1.TipoDenunciaModel.sync();
                 yield subtipoDenunciaModel_1.SubtipoDenunciaModel.sync();
+                yield denunciasAnonimasModel_1.DenunciaAnonimaModel.sync();
                 console.log('Modelos de denuncias sincronizados correctamente.');
             }
             catch (error) {
