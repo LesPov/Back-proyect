@@ -86,8 +86,8 @@ export const addTipoDenuncia = async (req: Request, res: Response) => {
         if (tipoDenunciaExistente) {
             return handleDuplicateError(res, `El tipo de denuncia '${nombre}' ya existe.`);
         }
-       // Validar subtipos
-       await validarSubtipos(subtipos, res);
+        // Validar subtipos
+        await validarSubtipos(subtipos, res);
 
         const tipoDenuncia = await crearTipoDenuncia(nombre, descripcion, esAnonimaOficial, flagImage);
         await crearSubtiposDenuncia(subtipos, tipoDenuncia.id);
@@ -180,7 +180,7 @@ export const handleServerErrorDenuncaiAnonima = (error: any, res: Response) => {
     }
 };
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Controlador para obtener los tipos de denuncias anónimas.
@@ -201,23 +201,3 @@ export const getTiposDenunciaAnonimas = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error al obtener los tipos de denuncias anónimas' });
     }
 };
-
-// /**
-//  * Controlador para obtener los tipos de denuncias oficiales.
-//  * @param req - Objeto de solicitud.
-//  * @param res - Objeto de respuesta.
-//  */
-// export const getTiposDenunciaOficiales = async (req: Request, res: Response) => {
-//     try {
-//         const tiposDenuncias = await TipoDenunciaModel.findAll({
-//             where: {
-//                 esAnonimaOficial: ['Oficial', 'Ambas']  // Filtra denuncias que sean 'Oficial' o 'Ambas'
-//             }
-//         });
-
-//         res.json(tiposDenuncias);  // Respuesta con los tipos de denuncias oficiales
-//     } catch (error) {
-//         console.error('Error al obtener los tipos de denuncias oficiales:', error);
-//         res.status(500).json({ message: 'Error al obtener los tipos de denuncias oficiales' });
-//     }
-// };

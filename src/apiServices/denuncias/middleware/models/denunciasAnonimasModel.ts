@@ -6,66 +6,78 @@ import { randomBytes } from 'crypto'; // Para generar la clave única
 
 // Interfaz para DenunciaAnonima
 export interface DenunciaAnonimaInterface extends Model {
-  id: number;
-  descripcion: string;
-  direccion: string;
-  status: 'Pendiente' | 'En Proceso' | 'Cerrada'; // Estado de la denuncia
-  tipoDenunciaId: number; // Relación con TipoDenuncia
-  subtipoDenunciaId: number; // Relación con SubtipoDenuncia
-  claveUnica: string; // Nueva columna para la clave única
-  pruebas?: string; // Columna de pruebas, opcional
-}
+    id: number;
+    descripcion: string;
+    direccion: string;
+    status: 'Pendiente' | 'En Proceso' | 'Cerrada'; // Estado de la denuncia
+    tipoDenunciaId: number; // Relación con TipoDenuncia
+    subtipoDenunciaId: number; // Relación con SubtipoDenuncia
+    claveUnica: string; // Nueva columna para la clave única
+    pruebas?: string; // Columna opcional para archivos multimedia (imágenes o videos)
+    audio?: string; // Columna opcional para archivos de audio
+    tieneEvidencia: boolean; // Indica si la denuncia tiene pruebas (imágenes, videos o audio)
+  }
 
 // Definición del modelo para Denuncias Anónimas
+// Modificación del modelo para agregar columnas opcionales
 export const DenunciaAnonimaModel = sequelize.define<DenunciaAnonimaInterface>('DenunciaAnonima', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  descripcion: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  direccion: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  status: {
-    type: DataTypes.ENUM('Pendiente', 'En Proceso', 'Cerrada'),
-    allowNull: false,
-    defaultValue: 'Pendiente', // Todas las denuncias empiezan como pendientes
-  },
-  tipoDenunciaId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'tipos_denuncias', // Relación con TipoDenuncia
-      key: 'id',
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    allowNull: false,
-  },
-  subtipoDenunciaId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'subtipos_denuncias', // Relación con SubtipoDenuncia
-      key: 'id',
+    descripcion: {
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
-    allowNull: false,
-  },
-  claveUnica: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true, // Asegura que cada clave es única
-  },
-  pruebas: {
-    type: DataTypes.STRING,
-    allowNull: true, // Esta columna es opcional
-  },
-}, {
-  tableName: 'denuncias_anonimas',
-  timestamps: true, // Para createdAt y updatedAt
-});
-
+    direccion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM('Pendiente', 'En Proceso', 'Cerrada'),
+      allowNull: false,
+      defaultValue: 'Pendiente',
+    },
+    tipoDenunciaId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'tipos_denuncias',
+        key: 'id',
+      },
+      allowNull: false,
+    },
+    subtipoDenunciaId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'subtipos_denuncias',
+        key: 'id',
+      },
+      allowNull: false,
+    },
+    claveUnica: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    pruebas: {
+      type: DataTypes.STRING,
+      allowNull: true, // Opcional, aquí almacenarías la ruta o nombre del archivo multimedia
+    },
+    audio: {
+      type: DataTypes.STRING,
+      allowNull: true, // Opcional, aquí almacenarías la ruta o nombre del archivo de audio
+    },
+    tieneEvidencia: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false, // Por defecto será false
+    },
+  }, {
+    tableName: 'denuncias_anonimas',
+    timestamps: true,
+  });
+  
 // Relación entre DenunciaAnonima y TipoDenuncia
 TipoDenunciaModel.hasMany(DenunciaAnonimaModel, {
   foreignKey: 'tipoDenunciaId',

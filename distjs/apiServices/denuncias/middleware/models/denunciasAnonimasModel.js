@@ -9,6 +9,7 @@ const connnection_1 = __importDefault(require("../../../../database/connnection"
 const tipoDenunciaModel_1 = require("./tipoDenunciaModel");
 const subtipoDenunciaModel_1 = require("./subtipoDenunciaModel");
 // Definición del modelo para Denuncias Anónimas
+// Modificación del modelo para agregar columnas opcionales
 exports.DenunciaAnonimaModel = connnection_1.default.define('DenunciaAnonima', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -26,12 +27,12 @@ exports.DenunciaAnonimaModel = connnection_1.default.define('DenunciaAnonima', {
     status: {
         type: sequelize_1.DataTypes.ENUM('Pendiente', 'En Proceso', 'Cerrada'),
         allowNull: false,
-        defaultValue: 'Pendiente', // Todas las denuncias empiezan como pendientes
+        defaultValue: 'Pendiente',
     },
     tipoDenunciaId: {
         type: sequelize_1.DataTypes.INTEGER,
         references: {
-            model: 'tipos_denuncias', // Relación con TipoDenuncia
+            model: 'tipos_denuncias',
             key: 'id',
         },
         allowNull: false,
@@ -39,7 +40,7 @@ exports.DenunciaAnonimaModel = connnection_1.default.define('DenunciaAnonima', {
     subtipoDenunciaId: {
         type: sequelize_1.DataTypes.INTEGER,
         references: {
-            model: 'subtipos_denuncias', // Relación con SubtipoDenuncia
+            model: 'subtipos_denuncias',
             key: 'id',
         },
         allowNull: false,
@@ -47,15 +48,24 @@ exports.DenunciaAnonimaModel = connnection_1.default.define('DenunciaAnonima', {
     claveUnica: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true, // Asegura que cada clave es única
+        unique: true,
     },
     pruebas: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true, // Esta columna es opcional
+        allowNull: true, // Opcional, aquí almacenarías la ruta o nombre del archivo multimedia
+    },
+    audio: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true, // Opcional, aquí almacenarías la ruta o nombre del archivo de audio
+    },
+    tieneEvidencia: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false, // Por defecto será false
     },
 }, {
     tableName: 'denuncias_anonimas',
-    timestamps: true, // Para createdAt y updatedAt
+    timestamps: true,
 });
 // Relación entre DenunciaAnonima y TipoDenuncia
 tipoDenunciaModel_1.TipoDenunciaModel.hasMany(exports.DenunciaAnonimaModel, {

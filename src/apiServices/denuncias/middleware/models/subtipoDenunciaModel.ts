@@ -6,6 +6,7 @@ import { TipoDenunciaModel } from './tipoDenunciaModel';
 export interface SubtipoDenunciaInterface extends Model {
   id: number;
   nombre: string;
+  descripcion: string;
   tipoDenunciaId: number;
   flagImage: string;  
  

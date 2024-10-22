@@ -175,6 +175,7 @@ const handleServerErrorDenuncaiAnonima = (error, res) => {
     }
 };
 exports.handleServerErrorDenuncaiAnonima = handleServerErrorDenuncaiAnonima;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Controlador para obtener los tipos de denuncias anónimas.
  * @param req - Objeto de solicitud.
@@ -195,21 +196,3 @@ const getTiposDenunciaAnonimas = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.getTiposDenunciaAnonimas = getTiposDenunciaAnonimas;
-// /**
-//  * Controlador para obtener los tipos de denuncias oficiales.
-//  * @param req - Objeto de solicitud.
-//  * @param res - Objeto de respuesta.
-//  */
-// export const getTiposDenunciaOficiales = async (req: Request, res: Response) => {
-//     try {
-//         const tiposDenuncias = await TipoDenunciaModel.findAll({
-//             where: {
-//                 esAnonimaOficial: ['Oficial', 'Ambas']  // Filtra denuncias que sean 'Oficial' o 'Ambas'
-//             }
-//         });
-//         res.json(tiposDenuncias);  // Respuesta con los tipos de denuncias oficiales
-//     } catch (error) {
-//         console.error('Error al obtener los tipos de denuncias oficiales:', error);
-//         res.status(500).json({ message: 'Error al obtener los tipos de denuncias oficiales' });
-//     }
-// };

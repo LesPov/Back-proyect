@@ -5,11 +5,28 @@ import { errorMessages } from "../../../middleware/erros/errorMessages";
 import { DenunciaAnonimaModel } from '../middleware/models/denunciasAnonimasModel';
 import { randomBytes } from 'crypto'; // Importar para generar la clave única
 import { successMessages } from '../../../middleware/success/successMessages';
+// Nueva función para validar tipo y subtipo de denuncia
+export const validateDenunciaTipoYSubtipo = async (nombreTipo: string, nombreSubtipo: string, res: Response) => {
+    // Validar tipo de denuncia
+    const tipoDenuncia = await findTipoDenuncia(nombreTipo);
+    if (!tipoDenuncia) {
+        handleNotFoundError('Tipo de denuncia', nombreTipo, res, errorMessages.invalidTipoDenuncia);
+        return { tipoDenuncia: null, subtipoDenuncia: null };
+    }
 
+    // Validar subtipo de denuncia
+    const subtipoDenuncia = await findSubtipoDenuncia(nombreSubtipo, tipoDenuncia.id);
+    if (!subtipoDenuncia) {
+        handleNotFoundError('Subtipo de denuncia', nombreSubtipo, res, errorMessages.invalidSubtipoDenuncia);
+        return { tipoDenuncia, subtipoDenuncia: null };
+    }
+
+    return { tipoDenuncia, subtipoDenuncia };
+};
 // Crear denuncia anónima y validar tipo y subtipo de denuncia
 export const crearDenunciaAnonima = async (req: Request, res: Response) => {
     try {
-        const { descripcion, direccion, nombreTipo, nombreSubtipo } = req.body;
+        const { descripcion, direccion, nombreTipo, nombreSubtipo, pruebas, audio } = req.body;
 
         // Validar entrada
         const inputValidationErrors = validateInput(descripcion, direccion, nombreTipo, nombreSubtipo);
@@ -17,20 +34,17 @@ export const crearDenunciaAnonima = async (req: Request, res: Response) => {
             return handleInputValidationErrors(inputValidationErrors, res);
         }
 
-        // Validar tipo de denuncia
-        const tipoDenuncia = await findTipoDenuncia(nombreTipo);
-        if (!tipoDenuncia) {
-            return handleNotFoundError('Tipo de denuncia', nombreTipo, res, errorMessages.invalidTipoDenuncia);
+        // Validar tipo y subtipo de denuncia
+        const { tipoDenuncia, subtipoDenuncia } = await validateDenunciaTipoYSubtipo(nombreTipo, nombreSubtipo, res);
+        if (!tipoDenuncia || !subtipoDenuncia) {
+            return; // Ya se manejó el error dentro de validateDenunciaTipoYSubtipo
         }
 
-        // Validar subtipo de denuncia
-        const subtipoDenuncia = await findSubtipoDenuncia(nombreSubtipo, tipoDenuncia.id);
-        if (!subtipoDenuncia) {
-            return handleNotFoundError('Subtipo de denuncia', nombreSubtipo, res, errorMessages.invalidSubtipoDenuncia);
-        }
 
         // Generar una clave única
         const claveUnica = randomBytes(16).toString('hex'); // Genera una cadena hexagonal de 32 caracteres
+        // Determinar si tiene evidencia
+        const tieneEvidencia = !!pruebas || !!audio; // Si alguna de estas está presente, es true
 
         // Crear la denuncia
         const nuevaDenuncia = await DenunciaAnonimaModel.create({
@@ -38,7 +52,10 @@ export const crearDenunciaAnonima = async (req: Request, res: Response) => {
             direccion,
             tipoDenunciaId: tipoDenuncia.id,
             subtipoDenunciaId: subtipoDenuncia.id,
-            claveUnica // Almacena la clave única generada
+            claveUnica,
+            pruebas: pruebas || null, // Asignar 'null' si no hay pruebas
+            audio: audio || null, // Asignar 'null' si no hay audio
+            tieneEvidencia // Almacenar el estado de tieneEvidencia
         });
         handleSuccessMessage(res, nuevaDenuncia);
 
@@ -47,10 +64,12 @@ export const crearDenunciaAnonima = async (req: Request, res: Response) => {
     }
 };
 
+
+
 export const handleSuccessMessage = (res: Response, nuevaDenuncia: any) => {
-    res.status(201).json({ 
+    res.status(201).json({
         message: successMessages.denunciaCreada, // Mensaje de éxito específico
-        nuevaDenuncia 
+        nuevaDenuncia
     });
 };
 
