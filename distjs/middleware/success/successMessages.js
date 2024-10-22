@@ -18,4 +18,6 @@ exports.successMessages = {
     passwordResetEmailSent: () => 'Se ha enviado un correo electrónico con las instrucciones para restablecer la contraseña.',
     passwordUpdated: () => 'Contraseña actualizada con éxito.',
     profilePictureUploaded: 'la imagen fue actualizada',
+    // Éxito de creación de denuncia
+    denunciaCreada: 'Denuncia creada exitosamente.',
 };

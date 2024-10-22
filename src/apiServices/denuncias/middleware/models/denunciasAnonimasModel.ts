@@ -1,24 +1,19 @@
 import { DataTypes, Model } from 'sequelize';
+import sequelize from '../../../../database/connnection';
 import { TipoDenunciaModel } from './tipoDenunciaModel';
-import sequelize from "../../../../database/connnection";
-import { SubtipoDenunciaModel } from './subtipoDenunciaModel ';
+import { SubtipoDenunciaModel } from './subtipoDenunciaModel';
+import { randomBytes } from 'crypto'; // Para generar la clave única
 
-// Interfaz para Denuncias Anónimas
+// Interfaz para DenunciaAnonima
 export interface DenunciaAnonimaInterface extends Model {
   id: number;
-  tipoDenunciaId: number;
-  subtipoDenunciaId: number;
   descripcion: string;
-  pruebas: boolean;
-  evidenciasMultimedia?: string; 
-  audio?: string;
   direccion: string;
-  latitud: number;
-  longitud: number;
-  keyAnonima: string;
-  status: 'pendiente' | 'en proceso' | 'resuelta' | 'rechazada';
-  createdAt?: Date;
-  updatedAt?: Date;
+  status: 'Pendiente' | 'En Proceso' | 'Cerrada'; // Estado de la denuncia
+  tipoDenunciaId: number; // Relación con TipoDenuncia
+  subtipoDenunciaId: number; // Relación con SubtipoDenuncia
+  claveUnica: string; // Nueva columna para la clave única
+  pruebas?: string; // Columna de pruebas, opcional
 }
 
 // Definición del modelo para Denuncias Anónimas
@@ -28,78 +23,61 @@ export const DenunciaAnonimaModel = sequelize.define<DenunciaAnonimaInterface>('
     primaryKey: true,
     autoIncrement: true,
   },
-  tipoDenunciaId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: TipoDenunciaModel,
-      key: 'id',
-    },
-    allowNull: false,
-    onDelete: 'CASCADE',
-  },
-  subtipoDenunciaId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: SubtipoDenunciaModel,
-      key: 'id',
-    },
-    allowNull: false,
-    onDelete: 'CASCADE',
-  },
   descripcion: {
     type: DataTypes.TEXT,
     allowNull: false,
-  },
-  pruebas: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
-  evidenciasMultimedia: {
-    type: DataTypes.TEXT, // Cambiado a TEXT para almacenar JSON
-    allowNull: true,
-    get() {
-      const rawValue = this.getDataValue('evidenciasMultimedia');
-      return rawValue ? JSON.parse(rawValue) : [];
-    },
-    set(value: string[]) {
-      this.setDataValue('evidenciasMultimedia', JSON.stringify(value));
-    },
-  },
-  audio: {
-    type: DataTypes.STRING,
-    allowNull: true,
   },
   direccion: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  latitud: {
-    type: DataTypes.FLOAT,
+  status: {
+    type: DataTypes.ENUM('Pendiente', 'En Proceso', 'Cerrada'),
+    allowNull: false,
+    defaultValue: 'Pendiente', // Todas las denuncias empiezan como pendientes
+  },
+  tipoDenunciaId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'tipos_denuncias', // Relación con TipoDenuncia
+      key: 'id',
+    },
     allowNull: false,
   },
-  longitud: {
-    type: DataTypes.FLOAT,
+  subtipoDenunciaId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'subtipos_denuncias', // Relación con SubtipoDenuncia
+      key: 'id',
+    },
     allowNull: false,
   },
-  keyAnonima: {
+  claveUnica: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: true, // Asegura que cada clave es única
   },
-  status: {
-    type: DataTypes.ENUM('pendiente', 'en proceso', 'resuelta', 'rechazada'),
-    allowNull: false,
-    defaultValue: 'pendiente',
+  pruebas: {
+    type: DataTypes.STRING,
+    allowNull: true, // Esta columna es opcional
   },
 }, {
   tableName: 'denuncias_anonimas',
-  timestamps: true,
+  timestamps: true, // Para createdAt y updatedAt
 });
 
-// Establecer relaciones
-TipoDenunciaModel.hasMany(DenunciaAnonimaModel, { foreignKey: 'tipoDenunciaId' });
-DenunciaAnonimaModel.belongsTo(TipoDenunciaModel, { foreignKey: 'tipoDenunciaId' });
+// Relación entre DenunciaAnonima y TipoDenuncia
+TipoDenunciaModel.hasMany(DenunciaAnonimaModel, {
+  foreignKey: 'tipoDenunciaId',
+});
+DenunciaAnonimaModel.belongsTo(TipoDenunciaModel, {
+  foreignKey: 'tipoDenunciaId',
+});
 
-SubtipoDenunciaModel.hasMany(DenunciaAnonimaModel, { foreignKey: 'subtipoDenunciaId' });
-DenunciaAnonimaModel.belongsTo(SubtipoDenunciaModel, { foreignKey: 'subtipoDenunciaId' });
+// Relación entre DenunciaAnonima y SubtipoDenuncia
+SubtipoDenunciaModel.hasMany(DenunciaAnonimaModel, {
+  foreignKey: 'subtipoDenunciaId',
+});
+DenunciaAnonimaModel.belongsTo(SubtipoDenunciaModel, {
+  foreignKey: 'subtipoDenunciaId',
+});

@@ -24,5 +24,9 @@ export const successMessages = {
     passwordUpdated:() => 'Contraseña actualizada con éxito.',
   
     profilePictureUploaded: 'la imagen fue actualizada',
+
+      // Éxito de creación de denuncia
+      denunciaCreada: 'Denuncia creada exitosamente.',
+  
   };
   

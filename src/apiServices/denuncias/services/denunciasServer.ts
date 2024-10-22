@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import express, { Application, Router } from 'express';
 import cors from 'cors';
 import { TipoDenunciaModel } from '../middleware/models/tipoDenunciaModel';
-import { SubtipoDenunciaModel } from '../middleware/models/subtipoDenunciaModel ';
+import { SubtipoDenunciaModel } from '../middleware/models/subtipoDenunciaModel';
 import denunciasRoutes from '../routes/denunciasRoutes';
 import { DenunciaAnonimaModel } from '../middleware/models/denunciasAnonimasModel';
 
@@ -31,8 +31,8 @@ class DenunciasServer {
         try {
             await TipoDenunciaModel.sync();
             await SubtipoDenunciaModel.sync();
-            await DenunciaAnonimaModel.sync();
             
+            await DenunciaAnonimaModel.sync();
 
             console.log('Modelos de denuncias sincronizados correctamente.');
         } catch (error) {

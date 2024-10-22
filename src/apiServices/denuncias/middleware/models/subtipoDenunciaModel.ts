@@ -7,9 +7,9 @@ export interface SubtipoDenunciaInterface extends Model {
   id: number;
   nombre: string;
   tipoDenunciaId: number;
-  flagImage: string;  // Asegúrate de tener esta propiedad
-
-}
+  flagImage: string;  
+ 
+} 
 
 // Definición del modelo para Subtipos de Denuncias
 export const SubtipoDenunciaModel = sequelize.define<SubtipoDenunciaInterface>('SubtipoDenuncia', {
@@ -46,11 +46,10 @@ export const SubtipoDenunciaModel = sequelize.define<SubtipoDenunciaInterface>('
 // Definir la relación entre Tipos de Denuncias y Subtipos de Denuncias
 TipoDenunciaModel.hasMany(SubtipoDenunciaModel, {
   foreignKey: 'tipoDenunciaId',
-  sourceKey: 'id',
-  as: 'subtipos',
+
 });
 SubtipoDenunciaModel.belongsTo(TipoDenunciaModel, {
   foreignKey: 'tipoDenunciaId',
-  targetKey: 'id',
-  as: 'tipoDenuncia',
+
 });
+ 
