@@ -69,5 +69,10 @@ export const errorMessages = {
   missingSubtipoDenunciaId: 'El campo subtipo de denuncia es obligatorio.',
   missingDescripcion: 'La descripción es obligatoria.',
   missingDireccion: 'La dirección es obligatoria.',
-  duplicateTipoDenuncia:'SE DUPLICA LA DENUNCIA ERROR ',
+  duplicateTipoDenuncia: 'SE DUPLICA LA DENUNCIA ERROR ',
+
+
+  denunciaNotFound: 'No se encontró la denuncia',
+  inputValidationError: 'Error en la validación de datos',
+  invalidClaveUnica: 'La clave única proporcionada no es válida'
 };

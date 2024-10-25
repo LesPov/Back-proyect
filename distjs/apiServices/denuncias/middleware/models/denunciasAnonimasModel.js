@@ -70,14 +70,18 @@ exports.DenunciaAnonimaModel = connnection_1.default.define('DenunciaAnonima', {
 // Relación entre DenunciaAnonima y TipoDenuncia
 tipoDenunciaModel_1.TipoDenunciaModel.hasMany(exports.DenunciaAnonimaModel, {
     foreignKey: 'tipoDenunciaId',
+    as: 'Denuncias'
 });
 exports.DenunciaAnonimaModel.belongsTo(tipoDenunciaModel_1.TipoDenunciaModel, {
     foreignKey: 'tipoDenunciaId',
+    as: 'TipoDenuncia' // Este alias debe coincidir con el usado en la consulta
 });
 // Relación entre DenunciaAnonima y SubtipoDenuncia
 subtipoDenunciaModel_1.SubtipoDenunciaModel.hasMany(exports.DenunciaAnonimaModel, {
     foreignKey: 'subtipoDenunciaId',
+    as: 'Denuncias'
 });
 exports.DenunciaAnonimaModel.belongsTo(subtipoDenunciaModel_1.SubtipoDenunciaModel, {
     foreignKey: 'subtipoDenunciaId',
+    as: 'SubtipoDenuncia' // Este alias debe coincidir con el usado en la consulta
 });

@@ -81,15 +81,21 @@ export const DenunciaAnonimaModel = sequelize.define<DenunciaAnonimaInterface>('
 // Relación entre DenunciaAnonima y TipoDenuncia
 TipoDenunciaModel.hasMany(DenunciaAnonimaModel, {
   foreignKey: 'tipoDenunciaId',
+  as: 'Denuncias'
 });
+
 DenunciaAnonimaModel.belongsTo(TipoDenunciaModel, {
   foreignKey: 'tipoDenunciaId',
+  as: 'TipoDenuncia'  // Este alias debe coincidir con el usado en la consulta
 });
 
 // Relación entre DenunciaAnonima y SubtipoDenuncia
 SubtipoDenunciaModel.hasMany(DenunciaAnonimaModel, {
   foreignKey: 'subtipoDenunciaId',
+  as: 'Denuncias'
 });
+
 DenunciaAnonimaModel.belongsTo(SubtipoDenunciaModel, {
   foreignKey: 'subtipoDenunciaId',
+  as: 'SubtipoDenuncia'  // Este alias debe coincidir con el usado en la consulta
 });

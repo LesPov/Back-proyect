@@ -28,5 +28,6 @@ export const successMessages = {
       // Éxito de creación de denuncia
       denunciaCreada: 'Denuncia creada exitosamente.',
   
+      consultaExitosa: 'Consulta realizada exitosamente',
+      denunciaEncontrada: 'Denuncia encontrada correctamente'
   };
-  
