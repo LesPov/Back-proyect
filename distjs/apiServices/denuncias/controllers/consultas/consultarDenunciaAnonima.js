@@ -110,7 +110,7 @@ const handleDenunciaNotFound = (res) => {
 // Controlador principal
 const consultarDenunciaAnonima = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { claveUnica } = req.body;
+        const { claveUnica } = req.query; // Cambiamos a req.query
         // Validar la entrada de datos (claveUnica)
         const inputValidationErrors = validateClaveUnica(claveUnica);
         // Manejar cualquier error de validación de la entrada de datos

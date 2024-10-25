@@ -106,7 +106,7 @@ const handleDenunciaNotFound = (res: Response) => {
 // Controlador principal
 export const consultarDenunciaAnonima = async (req: Request, res: Response) => {
     try {
-        const { claveUnica } = req.body;
+        const { claveUnica } = req.query as { claveUnica: string }; // Cambiamos a req.query
 
         // Validar la entrada de datos (claveUnica)
         const inputValidationErrors = validateClaveUnica(claveUnica);
@@ -136,4 +136,4 @@ export const handleServerError = (error: any, res: Response) => {
         message: errorMessages.serverError,
         error: error.message
     });
-};
+}; 
