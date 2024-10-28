@@ -21,6 +21,7 @@ import { UserProfileModel } from '../apiServices/Admin/Auth/profile/models/userP
 import registerRouter from '../apiServices/Admin/Auth/register/registerRouter';
 import DenunciasServer from '../apiServices/denuncias/services/denunciasServer';
 
+import path from 'path';
 
 // Configurar las variables de entorno del archivo .env
 dotenv.config();
@@ -63,11 +64,11 @@ class Server {
     routes() {
 
         // Ruta para registrar nuevos usuarios
-        this.app.use('/api/users', registerRouter, loginUserRouter,adminRouter,userRouter, emailVerificationRoutes, phoneVerificationRouter,countryPais);
+        this.app.use('/api/users', registerRouter, loginUserRouter, adminRouter, userRouter, emailVerificationRoutes, phoneVerificationRouter, countryPais);
         this.app.use('/api/denuncias', this.denunciasServer.getApp());
 
     }
-
+ 
 
     /**
      * Configura los middlewares de la aplicación.
@@ -75,17 +76,22 @@ class Server {
     middlewares() {
         // Parseo body   
         this.app.use(express.json());
-
+        // Middleware para servir archivos estáticos desde la carpeta uploads
+        this.app.use('/uploads', express.static(path.join(__dirname, '..', '..', 'uploads'), {
+            setHeaders: (res, path) => {
+                console.log(`Accediendo a: ${path}`);  // Aquí se agrega el console.log
+            }
+        }));
         // Cors
         this.app.use(cors());
-    }
+    } 
 
 
     /**
      * Conecta a la base de datos y sincroniza los modelos de Product y User.
      */
     async dbConnect() {
-        try { 
+        try {
             await AuthModel.sync();
             await UserProfileModel.sync();
             await VerificationModel.sync();

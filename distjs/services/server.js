@@ -31,6 +31,7 @@ const phoneRoutes_1 = __importDefault(require("../apiServices/Admin/Auth/phone/p
 const userProfileModel_1 = require("../apiServices/Admin/Auth/profile/models/userProfileModel");
 const registerRouter_1 = __importDefault(require("../apiServices/Admin/Auth/register/registerRouter"));
 const denunciasServer_1 = __importDefault(require("../apiServices/denuncias/services/denunciasServer"));
+const path_1 = __importDefault(require("path"));
 // Configurar las variables de entorno del archivo .env
 dotenv_1.default.config();
 class Server {
@@ -68,6 +69,12 @@ class Server {
     middlewares() {
         // Parseo body   
         this.app.use(express_1.default.json());
+        // Middleware para servir archivos estáticos desde la carpeta uploads
+        this.app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '..', '..', 'uploads'), {
+            setHeaders: (res, path) => {
+                console.log(`Accediendo a: ${path}`); // Aquí se agrega el console.log
+            }
+        }));
         // Cors
         this.app.use((0, cors_1.default)());
     }
