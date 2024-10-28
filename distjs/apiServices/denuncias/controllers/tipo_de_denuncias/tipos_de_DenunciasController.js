@@ -12,27 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleServerErrorDenuncaiAnonima = exports.creaTiposDenunciaAnonimas = exports.validateImageUpload = exports.handleInputValidationErrors = exports.validateInput = exports.handleDuplicateError = exports.findTipoDenuncia = void 0;
+exports.handleServerErrorDenuncaiAnonima = exports.creaTiposDenunciaAnonimas = exports.handleImageUploadError = exports.validateImageUpload = exports.handleInputValidationErrors = exports.validateInput = exports.handleDuplicateError = exports.findTipoDenuncia = void 0;
 const tipoDenunciaModel_1 = require("../../middleware/models/tipoDenunciaModel");
 const errorMessages_1 = require("../../../../middleware/erros/errorMessages");
 const uploadConfig_1 = __importDefault(require("../../utils/uploadConfig"));
 // Función para buscar tipo de denuncia por nombre
 const findTipoDenuncia = (nombre) => __awaiter(void 0, void 0, void 0, function* () {
     return yield tipoDenunciaModel_1.TipoDenunciaModel.findOne({
-        where: { nombre: nombre }
+        where: { nombre }
     });
 });
 exports.findTipoDenuncia = findTipoDenuncia;
 // Función para manejar el error si el tipo o subtipo ya existe
 const handleDuplicateError = (res, message) => {
     res.status(400).json({
-        message: message,
+        message,
         errors: `Error: Ya existe un registro con esos datos.`,
     });
     throw new Error("Duplicate validation failed");
 };
 exports.handleDuplicateError = handleDuplicateError;
-// Middleware para la subida de la imagen
 // Validación de campos de entrada
 const validateInput = (nombre, descripcion, esAnonimaOficial) => {
     const errors = [];
@@ -80,35 +79,31 @@ const crearTipoDenuncia = (nombre, descripcion, esAnonimaOficial, flagImage) => 
         flagImage,
     });
 });
+// Manejo de errores de subida de imagen
+const handleImageUploadError = (err, res) => {
+    console.error(`Error en la subida de la imagen: ${err.message}`);
+    res.status(400).json({
+        msg: `Error en la subida de la imagen: ${err.message}`,
+        errors: 'Error al cargar la imagen',
+    });
+};
+exports.handleImageUploadError = handleImageUploadError;
 // Controlador para crear el tipo de denuncia con subida de imagen
 const creaTiposDenunciaAnonimas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        (0, uploadConfig_1.default)(req, res, (err) => __awaiter(void 0, void 0, void 0, function* () {
+        handleImageUpload(req, res, () => __awaiter(void 0, void 0, void 0, function* () {
             var _a;
-            if (err) {
-                console.error(`Error en la subida de la imagen: ${err.message}`);
-                return res.status(400).json({
-                    msg: `Error en la subida de la imagen: ${err.message}`,
-                    errors: 'Error al cargar la imagen',
-                });
-            }
-            // Validación de la imagen subida
-            if (!(0, exports.validateImageUpload)(req, res)) {
-                return; // Si la imagen no es válida, se detiene aquí
-            }
+            if (!(0, exports.validateImageUpload)(req, res))
+                return;
             const { nombre, descripcion, esAnonimaOficial } = req.body;
-            const flagImage = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.filename) || null; // Uso de optional chaining
-            // Validación de la entrada
+            const flagImage = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.filename) || null;
             const inputValidationErrors = (0, exports.validateInput)(nombre, descripcion, esAnonimaOficial);
             (0, exports.handleInputValidationErrors)(inputValidationErrors, res);
-            // Verificar si el tipo de denuncia ya existe
             const tipoDenunciaExistente = yield (0, exports.findTipoDenuncia)(nombre);
             if (tipoDenunciaExistente) {
                 return (0, exports.handleDuplicateError)(res, `El tipo de denuncia '${nombre}' ya existe.`);
             }
-            // Crear tipo de denuncia
             const tipoDenuncia = yield crearTipoDenuncia(nombre, descripcion, esAnonimaOficial, flagImage);
-            // Respuesta de éxito
             res.status(201).json({ message: 'Tipo de denuncia creado con éxito', tipoDenuncia });
         }));
     }
@@ -117,6 +112,15 @@ const creaTiposDenunciaAnonimas = (req, res) => __awaiter(void 0, void 0, void 0
     }
 });
 exports.creaTiposDenunciaAnonimas = creaTiposDenunciaAnonimas;
+// Encapsular la lógica de subida de imagen para reducir complejidad
+const handleImageUpload = (req, res, callback) => {
+    (0, uploadConfig_1.default)(req, res, (err) => {
+        if (err) {
+            return (0, exports.handleImageUploadError)(err, res);
+        }
+        callback();
+    });
+};
 // Manejo de errores en el controlador
 const handleServerErrorDenuncaiAnonima = (error, res) => {
     console.error("Error en el controlador DenunciaAnonima:", error);

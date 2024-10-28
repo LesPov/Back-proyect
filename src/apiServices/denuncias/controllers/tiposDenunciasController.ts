@@ -182,6 +182,7 @@ export const handleServerErrorDenuncaiAnonima = (error: any, res: Response) => {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 /**
  * Controlador para obtener los tipos de denuncias anónimas.
  * @param req - Objeto de solicitud.
