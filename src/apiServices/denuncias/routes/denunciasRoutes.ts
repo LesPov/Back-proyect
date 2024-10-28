@@ -4,10 +4,13 @@ import { addTipoDenuncia, getTiposDenunciaAnonimas } from '../controllers/tiposD
 import { getSubtiposDenuncia } from '../controllers/subtiposDenunciasController';
 import { consultarDenunciaAnonima } from '../controllers/consultas/consultarDenunciaAnonima';
 import { creaTiposDenunciaAnonimas } from '../controllers/tipo_de_denuncias/tipos_de_DenunciasController';
+import { creaSubtipoDenuncia } from '../controllers/subtipo_de_denuncias/subtipos_de_DenunciasController';
 
 const router = express.Router();
 
 router.post('/agregar_tipos', creaTiposDenunciaAnonimas);
+router.get('/agregar_subtipo', creaSubtipoDenuncia);
+
 router.get('/tipos/anonimas', getTiposDenunciaAnonimas);
 // Nueva ruta para obtener los subtipos según el tipo de denuncia
 router.get('/tipos/subtiposdenuncia/:nombreTipoDenuncia', getSubtiposDenuncia);

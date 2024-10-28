@@ -27,13 +27,14 @@ const manejarError = (res: Response, statusCode: number, message: string) => {
         message
     });
 };
+
 /**
  * Función para buscar todos los subtipos asociados a un tipo de denuncia
  * @param tipoDenunciaId - ID del tipo de denuncia para buscar sus subtipos
- * @returns Un array de subtipos de denuncia
+ * @returns Un array de subtipos de denuncia con URLs de las imágenes
  */
 const buscarSubtiposPorTipoDenuncia = async (tipoDenunciaId: number) => {
-    return await SubtipoDenunciaModel.findAll({
+    const subtipos = await SubtipoDenunciaModel.findAll({
         where: { tipoDenunciaId },
         attributes: ['id', 'nombre', 'descripcion', 'flagImage'],
         include: [{
@@ -41,6 +42,12 @@ const buscarSubtiposPorTipoDenuncia = async (tipoDenunciaId: number) => {
             attributes: ['nombre', 'esAnonimaOficial', 'descripcion']
         }]
     });
+
+    // Agregar URL completa para cada imagen de subtipo
+    return subtipos.map((subtipo) => ({
+        ...subtipo.toJSON(),
+        imageUrl: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/${subtipo.flagImage}`
+    }));
 };
 /**
  * Función para estructurar la respuesta del controlador
@@ -53,7 +60,8 @@ const estructurarRespuesta = (tipoDenuncia: any, subtipos: any[]) => {
         ok: true,
         tipoDenuncia: {
             ...tipoDenuncia.toJSON(),
-            cantidadSubtipos: subtipos.length
+            cantidadSubtipos: subtipos.length,
+            imageUrl: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/${tipoDenuncia.flagImage}`
         },
         subtipos
     };
@@ -92,31 +100,26 @@ export const getSubtiposDenuncia = async (req: Request, res: Response): Promise<
     try {
         const { nombreTipoDenuncia } = req.params;
 
-        // Llamamos a la función para buscar el tipo de denuncia
+        // Buscar el tipo de denuncia
         const tipoDenuncia = await buscarTipoDenunciaPorNombre(nombreTipoDenuncia);
 
-        // Si no existe el tipo de denuncia, manejamos el error
         if (!tipoDenuncia) {
             return manejarError(res, 404, `No se encontró el tipo de denuncia con nombre: ${nombreTipoDenuncia}`);
         }
 
-        // Llamamos a la nueva función para buscar los subtipos
+        // Buscar subtipos del tipo de denuncia
         const subtipos = await buscarSubtiposPorTipoDenuncia(tipoDenuncia.id);
 
-
-        // Estructuramos la respuesta usando la nueva función
+        // Estructurar y enviar la respuesta
         const response = estructurarRespuesta(tipoDenuncia, subtipos);
 
-        // Si no hay subtipos, manejamos la respuesta con mensaje informativo
         if (subtipos.length === 0) {
             return manejarRespuestaSinSubtipos(res, response, nombreTipoDenuncia);
         }
 
-       // Enviamos la respuesta exitosa con los datos usando la nueva función
-       enviarRespuestaExitosa(res, response, 'Subtipos de denuncia recuperados exitosamente');
+        enviarRespuestaExitosa(res, response, 'Subtipos de denuncia recuperados exitosamente');
 
     } catch (error) {
-        // Manejo de errores del servidor
         handleServerErrorsubtiposDenuncaiAnonima(error, res);
     }
 };
@@ -133,6 +136,5 @@ export const handleServerErrorsubtiposDenuncaiAnonima = (error: any, res: Respon
             msg: error.message || errorMessages.databaseError,
             error,
         });
-        throw new Error("Controller subtiposDenunciaAnonima error");
     }
 };
