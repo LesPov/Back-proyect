@@ -1,8 +1,8 @@
+import { errorMessages } from "../../../../middleware/erros/errorMessages";
 import { SubtipoDenunciaModel } from "../../middleware/models/subtipoDenunciaModel";
 import { TipoDenunciaModel } from "../../middleware/models/tipoDenunciaModel";
 import upload from "../../utils/uploadConfig";
 import { validateImageUpload } from "../tipo_de_denuncias/tipos_de_DenunciasController";
-import { handleServerErrorDenuncaiAnonima } from "../tiposDenunciasController";
 import { Request, Response } from 'express';
 
 // Función para buscar tipo de denuncia por ID
@@ -62,5 +62,20 @@ export const creaSubtipoDenuncia = async (req: Request, res: Response) => {
         });
     } catch (error) {
         handleServerErrorDenuncaiAnonima(error, res);
+    }
+};
+/**
+ * Manejo de errores en el controlador DenunciaAnonima.
+ * @param error - Error capturado.
+ * @param res - Objeto de respuesta.
+ */
+export const handleServerErrorDenuncaiAnonima = (error: any, res: Response) => {
+    console.error("Error en el controlador DenunciaAnonima:", error);
+    if (!res.headersSent) {
+        res.status(400).json({
+            msg: error.message || errorMessages.databaseError,
+            error,
+        });
+        throw new Error("Controller DenunciaAnonima error");
     }
 };

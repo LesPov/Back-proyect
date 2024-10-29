@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTiposDenunciaAnonimas = void 0;
-const tipoDenunciaModel_1 = require("../middleware/models/tipoDenunciaModel");
+const tipoDenunciaModel_1 = require("../../middleware/models/tipoDenunciaModel");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Controlador para obtener los tipos de denuncias anónimas.

@@ -5,17 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const denunciasAnonimas_1 = require("../controllers/denunciasAnonimas");
-const tiposDenunciasController_1 = require("../controllers/tiposDenunciasController");
-const subtiposDenunciasController_1 = require("../controllers/subtiposDenunciasController");
 const consultarDenunciaAnonima_1 = require("../controllers/consultas/consultarDenunciaAnonima");
 const tipos_de_DenunciasController_1 = require("../controllers/tipo_de_denuncias/tipos_de_DenunciasController");
 const subtipos_de_DenunciasController_1 = require("../controllers/subtipo_de_denuncias/subtipos_de_DenunciasController");
+const obtenerTipos_de_DenunciasController_1 = require("../controllers/tipo_de_denuncias/obtenerTipos_de_DenunciasController");
+const obtenerSubtipos_de_DenunciasController_1 = require("../controllers/subtipo_de_denuncias/obtenerSubtipos_de_DenunciasController");
 const router = express_1.default.Router();
 router.post('/agregar_tipos', tipos_de_DenunciasController_1.creaTiposDenunciaAnonimas);
 router.get('/agregar_subtipo', subtipos_de_DenunciasController_1.creaSubtipoDenuncia);
-router.get('/tipos/anonimas', tiposDenunciasController_1.getTiposDenunciaAnonimas);
+router.get('/tipos/anonimas', obtenerTipos_de_DenunciasController_1.getTiposDenunciaAnonimas);
 // Nueva ruta para obtener los subtipos según el tipo de denuncia
-router.get('/tipos/subtiposdenuncia/:nombreTipoDenuncia', subtiposDenunciasController_1.getSubtiposDenuncia);
+router.get('/tipos/subtiposdenuncia/:nombreTipoDenuncia', obtenerSubtipos_de_DenunciasController_1.getSubtiposDenuncia);
 // Ruta para crear denuncia anónima
 router.post('/denuncias', denunciasAnonimas_1.crearDenunciaAnonima);
 router.get('/denuncias/consultas_anonimas', consultarDenunciaAnonima_1.consultarDenunciaAnonima);

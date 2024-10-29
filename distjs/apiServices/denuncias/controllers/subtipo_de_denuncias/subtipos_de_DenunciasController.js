@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.creaSubtipoDenuncia = exports.handleImageUploadError = exports.findTipoDenunciaById = void 0;
+exports.handleServerErrorDenuncaiAnonima = exports.creaSubtipoDenuncia = exports.handleImageUploadError = exports.findTipoDenunciaById = void 0;
+const errorMessages_1 = require("../../../../middleware/erros/errorMessages");
 const subtipoDenunciaModel_1 = require("../../middleware/models/subtipoDenunciaModel");
 const tipoDenunciaModel_1 = require("../../middleware/models/tipoDenunciaModel");
 const uploadConfig_1 = __importDefault(require("../../utils/uploadConfig"));
 const tipos_de_DenunciasController_1 = require("../tipo_de_denuncias/tipos_de_DenunciasController");
-const tiposDenunciasController_1 = require("../tiposDenunciasController");
 // Función para buscar tipo de denuncia por ID
 const findTipoDenunciaById = (tipoDenunciaId) => __awaiter(void 0, void 0, void 0, function* () {
     return yield tipoDenunciaModel_1.TipoDenunciaModel.findByPk(tipoDenunciaId);
@@ -74,7 +74,23 @@ const creaSubtipoDenuncia = (req, res) => __awaiter(void 0, void 0, void 0, func
         }));
     }
     catch (error) {
-        (0, tiposDenunciasController_1.handleServerErrorDenuncaiAnonima)(error, res);
+        (0, exports.handleServerErrorDenuncaiAnonima)(error, res);
     }
 });
 exports.creaSubtipoDenuncia = creaSubtipoDenuncia;
+/**
+ * Manejo de errores en el controlador DenunciaAnonima.
+ * @param error - Error capturado.
+ * @param res - Objeto de respuesta.
+ */
+const handleServerErrorDenuncaiAnonima = (error, res) => {
+    console.error("Error en el controlador DenunciaAnonima:", error);
+    if (!res.headersSent) {
+        res.status(400).json({
+            msg: error.message || errorMessages_1.errorMessages.databaseError,
+            error,
+        });
+        throw new Error("Controller DenunciaAnonima error");
+    }
+};
+exports.handleServerErrorDenuncaiAnonima = handleServerErrorDenuncaiAnonima;
