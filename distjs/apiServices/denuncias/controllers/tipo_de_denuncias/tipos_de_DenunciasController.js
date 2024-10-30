@@ -29,7 +29,6 @@ const handleDuplicateError = (res, message) => {
         message,
         errors: `Error: Ya existe un registro con esos datos.`,
     });
-    throw new Error("Duplicate validation failed");
 };
 exports.handleDuplicateError = handleDuplicateError;
 // Validación de campos de entrada
