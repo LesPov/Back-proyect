@@ -13,3 +13,4 @@ adminRouter.get('/admin', validateToken, validateRole('admin'), (req, res) => {
 });
 
 export default adminRouter;
+
