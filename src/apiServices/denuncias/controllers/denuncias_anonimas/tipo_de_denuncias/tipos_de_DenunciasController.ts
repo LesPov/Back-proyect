@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { TipoDenunciaModel } from '../../middleware/models/tipoDenunciaModel';
-import { errorMessages } from '../../../../middleware/erros/errorMessages';
-import upload from '../../utils/uploadConfig';
+import { TipoDenunciaModel } from '../../../middleware/models/tipoDenunciaModel';
+import { errorMessages } from '../../../../../middleware/erros/errorMessages';
+import upload from '../../../utils/uploadConfig';
 
 // Función para buscar tipo de denuncia por nombre
 export const findTipoDenuncia = async (nombre: string) => {

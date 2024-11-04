@@ -1,19 +1,29 @@
-import { Request, Response } from 'express';
-import { TipoDenunciaModel } from '../../middleware/models/tipoDenunciaModel';
-import { SubtipoDenunciaModel } from '../../middleware/models/subtipoDenunciaModel';
-import { DenunciaAnonimaModel } from '../../middleware/models/denunciasAnonimasModel';
-import { errorMessages } from '../../../../middleware/erros/errorMessages';
-import { successMessages } from '../../../../middleware/success/successMessages';
-
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleServerError = exports.consultarDenunciaAnonima = exports.handleInputValidationErrors = void 0;
+const tipoDenunciaModel_1 = require("../../../middleware/models/tipoDenunciaModel");
+const subtipoDenunciaModel_1 = require("../../../middleware/models/subtipoDenunciaModel");
+const denunciasAnonimasModel_1 = require("../../../middleware/models/denunciasAnonimasModel");
+const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
+const successMessages_1 = require("../../../../../middleware/success/successMessages");
 // Función para validar la clave única
-const validateClaveUnica = (claveUnica: string): string[] => {
-    const errors: string[] = [];
+const validateClaveUnica = (claveUnica) => {
+    const errors = [];
     if (!claveUnica) {
-        errors.push(errorMessages.requiredFields);
+        errors.push(errorMessages_1.errorMessages.requiredFields);
     }
     return errors;
 };
-export const handleInputValidationErrors = (errors: string[], res: Response): void => {
+const handleInputValidationErrors = (errors, res) => {
     if (errors.length > 0) {
         res.status(400).json({
             msg: errors,
@@ -22,20 +32,21 @@ export const handleInputValidationErrors = (errors: string[], res: Response): vo
         throw new Error("Input validation failed");
     }
 };
+exports.handleInputValidationErrors = handleInputValidationErrors;
 // Función para buscar la denuncia con sus relaciones
 // Función mejorada para buscar la denuncia con sus relaciones
-const findDenunciaWithRelations = async (claveUnica: string) => {
-    return await DenunciaAnonimaModel.findOne({
+const findDenunciaWithRelations = (claveUnica) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield denunciasAnonimasModel_1.DenunciaAnonimaModel.findOne({
         where: { claveUnica },
         include: [
             {
-                model: TipoDenunciaModel,
+                model: tipoDenunciaModel_1.TipoDenunciaModel,
                 as: 'TipoDenuncia', // Asegúrate de que este alias coincida con tu definición de relación
                 attributes: ['id', 'nombre'], // Incluimos el ID también para referencia
                 required: true // INNER JOIN para asegurar que siempre tengamos el tipo
             },
             {
-                model: SubtipoDenunciaModel,
+                model: subtipoDenunciaModel_1.SubtipoDenunciaModel,
                 as: 'SubtipoDenuncia', // Asegúrate de que este alias coincida con tu definición de relación
                 attributes: ['id', 'nombre'], // Incluimos el ID también para referencia
                 required: true // INNER JOIN para asegurar que siempre tengamos el subtipo
@@ -56,18 +67,16 @@ const findDenunciaWithRelations = async (claveUnica: string) => {
             'subtipoDenunciaId'
         ]
     });
-}; 
-
+});
 // Función mejorada para manejar la respuesta exitosa
-const handleSuccessResponse = (res: Response, denuncia: any) => {
+const handleSuccessResponse = (res, denuncia) => {
     // Verificamos que tengamos acceso a los datos de tipo y subtipo
     if (!denuncia.TipoDenuncia || !denuncia.SubtipoDenuncia) {
         throw new Error('No se pudo obtener la información completa de tipo o subtipo de denuncia');
     }
-
     res.status(200).json({
         success: true,
-        message: successMessages.consultaExitosa,
+        message: successMessages_1.successMessages.consultaExitosa,
         denuncia: {
             id: denuncia.id,
             descripcion: denuncia.descripcion,
@@ -90,50 +99,42 @@ const handleSuccessResponse = (res: Response, denuncia: any) => {
         }
     });
 };
-
-
-
 // Función para manejar denuncia no encontrada
-const handleDenunciaNotFound = (res: Response) => {
+const handleDenunciaNotFound = (res) => {
     res.status(404).json({
         success: false,
-        message: errorMessages.denunciaNotFound,
+        message: errorMessages_1.errorMessages.denunciaNotFound,
         error: 'No se encontró ninguna denuncia con la clave proporcionada'
     });
 };
-
-
 // Controlador principal
-export const consultarDenunciaAnonima = async (req: Request, res: Response) => {
+const consultarDenunciaAnonima = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { claveUnica } = req.query as { claveUnica: string }; // Cambiamos a req.query
-
+        const { claveUnica } = req.query; // Cambiamos a req.query
         // Validar la entrada de datos (claveUnica)
         const inputValidationErrors = validateClaveUnica(claveUnica);
         // Manejar cualquier error de validación de la entrada de datos
-        handleInputValidationErrors(inputValidationErrors, res);
-
-         // Buscar la denuncia
-         const denuncia = await findDenunciaWithRelations(claveUnica);
-        
-         // Verificar si se encontró la denuncia
-         if (!denuncia) {
-             return handleDenunciaNotFound(res);
-         }
-
+        (0, exports.handleInputValidationErrors)(inputValidationErrors, res);
+        // Buscar la denuncia
+        const denuncia = yield findDenunciaWithRelations(claveUnica);
+        // Verificar si se encontró la denuncia
+        if (!denuncia) {
+            return handleDenunciaNotFound(res);
+        }
         // Enviar respuesta exitosa
         handleSuccessResponse(res, denuncia);
-
-    } catch (error) {
-        handleServerError(error, res);
     }
-};
-
+    catch (error) {
+        (0, exports.handleServerError)(error, res);
+    }
+});
+exports.consultarDenunciaAnonima = consultarDenunciaAnonima;
 // Manejador de errores del servidor
-export const handleServerError = (error: any, res: Response) => {
+const handleServerError = (error, res) => {
     console.error("Error en el controlador de consulta denuncia anónima:", error);
     res.status(500).json({
-        message: errorMessages.serverError,
+        message: errorMessages_1.errorMessages.serverError,
         error: error.message
     });
-}; 
+};
+exports.handleServerError = handleServerError;

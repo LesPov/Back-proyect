@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { TipoDenunciaModel, TipoDenunciaInterface } from '../../middleware/models/tipoDenunciaModel';
-import { SubtipoDenunciaModel } from '../../middleware/models/subtipoDenunciaModel';
-import { errorMessages } from '../../../../middleware/erros/errorMessages';
+import { TipoDenunciaModel, TipoDenunciaInterface } from '../../../middleware/models/tipoDenunciaModel';
+import { SubtipoDenunciaModel } from '../../../middleware/models/subtipoDenunciaModel';
+import { errorMessages } from '../../../../../middleware/erros/errorMessages';
 
 
 

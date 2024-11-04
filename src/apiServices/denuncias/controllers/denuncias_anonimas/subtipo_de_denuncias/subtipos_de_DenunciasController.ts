@@ -1,7 +1,7 @@
-import { errorMessages } from "../../../../middleware/erros/errorMessages";
-import { SubtipoDenunciaModel } from "../../middleware/models/subtipoDenunciaModel";
-import { TipoDenunciaModel } from "../../middleware/models/tipoDenunciaModel";
-import upload from "../../utils/uploadConfig";
+import { errorMessages } from "../../../../../middleware/erros/errorMessages";
+import { SubtipoDenunciaModel } from "../../../middleware/models/subtipoDenunciaModel";
+import { TipoDenunciaModel } from "../../../middleware/models/tipoDenunciaModel";
+import upload from "../../../utils/uploadConfig";
 import { validateImageUpload } from "../tipo_de_denuncias/tipos_de_DenunciasController";
 import { Request, Response } from 'express';
 
@@ -41,8 +41,8 @@ export const creaSubtipoDenuncia = async (req: Request, res: Response) => {
             // Verificar si el tipo de denuncia existe
             const tipoDenuncia = await findTipoDenunciaById(tipoDenunciaId);
             if (!tipoDenuncia) {
-                res.status(404).json({ 
-                    message: `El tipo de denuncia con ID ${tipoDenunciaId} no existe.` 
+                res.status(404).json({
+                    message: `El tipo de denuncia con ID ${tipoDenunciaId} no existe.`
                 });
                 return; // Agregar `return` aquí para evitar que devuelva algo
             }
@@ -55,9 +55,9 @@ export const creaSubtipoDenuncia = async (req: Request, res: Response) => {
                 flagImage,
             });
 
-            res.status(201).json({ 
-                message: 'Subtipo de denuncia creado con éxito', 
-                subtipoDenuncia 
+            res.status(201).json({
+                message: 'Subtipo de denuncia creado con éxito',
+                subtipoDenuncia
             });
         });
     } catch (error) {

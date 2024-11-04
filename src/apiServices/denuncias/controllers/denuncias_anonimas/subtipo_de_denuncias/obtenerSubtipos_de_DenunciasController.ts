@@ -1,6 +1,6 @@
-import { errorMessages } from "../../../../middleware/erros/errorMessages";
-import { SubtipoDenunciaModel } from "../../middleware/models/subtipoDenunciaModel";
-import { TipoDenunciaModel } from "../../middleware/models/tipoDenunciaModel";
+import { errorMessages } from "../../../../../middleware/erros/errorMessages";
+import { SubtipoDenunciaModel } from "../../../middleware/models/subtipoDenunciaModel";
+import { TipoDenunciaModel } from "../../../middleware/models/tipoDenunciaModel";
 import { Request, Response } from 'express';
 
 /**

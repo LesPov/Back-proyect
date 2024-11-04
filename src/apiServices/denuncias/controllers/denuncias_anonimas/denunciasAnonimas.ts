@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { TipoDenunciaModel } from '../middleware/models/tipoDenunciaModel';
-import { SubtipoDenunciaModel } from '../middleware/models/subtipoDenunciaModel';
-import { errorMessages } from "../../../middleware/erros/errorMessages";
-import { DenunciaAnonimaModel } from '../middleware/models/denunciasAnonimasModel';
+import { TipoDenunciaModel } from '../../middleware/models/tipoDenunciaModel';
+import { SubtipoDenunciaModel } from '../../middleware/models/subtipoDenunciaModel';
+import { errorMessages } from "../../../../middleware/erros/errorMessages";
+import { DenunciaAnonimaModel } from '../../middleware/models/denunciasAnonimasModel';
 import { randomBytes } from 'crypto'; // Importar para generar la clave única
-import { successMessages } from '../../../middleware/success/successMessages';
+import { successMessages } from '../../../../middleware/success/successMessages';
 // Nueva función para validar tipo y subtipo de denuncia
 export const validateDenunciaTipoYSubtipo = async (nombreTipo: string, nombreSubtipo: string, res: Response) => {
     // Validar tipo de denuncia
