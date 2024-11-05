@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleServerErrorDenuncaiAnonima = exports.creaTiposDenunciaAnonimas = exports.handleImageUploadError = exports.validateImageUpload = exports.handleInputValidationErrors = exports.validateInput = exports.handleDuplicateError = exports.findTipoDenuncia = void 0;
+exports.handleServerErrorDenuncaiAnonima = exports.handleImageUploadError = exports.validateImageUpload = exports.creaTiposDenunciaAnonimas = exports.handleInputValidationErrors = exports.validateInput = exports.handleDuplicateError = exports.findTipoDenuncia = void 0;
 const tipoDenunciaModel_1 = require("../../../middleware/models/tipoDenunciaModel");
 const errorMessages_1 = require("../../../../../middleware/erros/errorMessages");
 const uploadConfig_1 = __importDefault(require("../../../utils/uploadConfig"));
@@ -57,18 +57,6 @@ const handleInputValidationErrors = (errors, res) => {
     }
 };
 exports.handleInputValidationErrors = handleInputValidationErrors;
-// Validación de la imagen subida
-const validateImageUpload = (req, res) => {
-    if (!req.file) {
-        res.status(400).json({
-            msg: 'Error: La imagen no fue subida.',
-            errors: 'Se requiere una imagen para el tipo de denuncia.',
-        });
-        return false;
-    }
-    return true;
-};
-exports.validateImageUpload = validateImageUpload;
 // Crear tipo de denuncia
 const crearTipoDenuncia = (nombre, descripcion, esAnonimaOficial, flagImage) => __awaiter(void 0, void 0, void 0, function* () {
     return yield tipoDenunciaModel_1.TipoDenunciaModel.create({
@@ -78,17 +66,9 @@ const crearTipoDenuncia = (nombre, descripcion, esAnonimaOficial, flagImage) => 
         flagImage,
     });
 });
-// Manejo de errores de subida de imagen
-const handleImageUploadError = (err, res) => {
-    console.error(`Error en la subida de la imagen: ${err.message}`);
-    res.status(400).json({
-        msg: `Error en la subida de la imagen: ${err.message}`,
-        errors: 'Error al cargar la imagen',
-    });
-};
-exports.handleImageUploadError = handleImageUploadError;
 // Controlador para crear el tipo de denuncia con subida de imagen
 const creaTiposDenunciaAnonimas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    req.body.tipo = 'tipo'; // Marca este registro como tipo de denuncia
     try {
         handleImageUpload(req, res, () => __awaiter(void 0, void 0, void 0, function* () {
             var _a;
@@ -111,7 +91,28 @@ const creaTiposDenunciaAnonimas = (req, res) => __awaiter(void 0, void 0, void 0
     }
 });
 exports.creaTiposDenunciaAnonimas = creaTiposDenunciaAnonimas;
-// Encapsular la lógica de subida de imagen para reducir complejidad
+// Validación de la imagen subida
+const validateImageUpload = (req, res) => {
+    if (!req.file) {
+        res.status(400).json({
+            msg: 'Error: La imagen no fue subida.',
+            errors: 'Se requiere una imagen para el tipo de denuncia.',
+        });
+        return false;
+    }
+    return true;
+};
+exports.validateImageUpload = validateImageUpload;
+// Manejo de errores de subida de imagen
+const handleImageUploadError = (err, res) => {
+    console.error(`Error en la subida de la imagen: ${err.message}`);
+    res.status(400).json({
+        msg: `Error en la subida de la imagen: ${err.message}`,
+        errors: 'Error al cargar la imagen',
+    });
+};
+exports.handleImageUploadError = handleImageUploadError;
+// Encapsular la lógica de subida de imagen
 const handleImageUpload = (req, res, callback) => {
     (0, uploadConfig_1.default)(req, res, (err) => {
         if (err) {

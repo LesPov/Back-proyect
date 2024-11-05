@@ -22,7 +22,6 @@ export const handleInputValidationErrors = (errors: string[], res: Response): vo
         throw new Error("Input validation failed");
     }
 };
-// Función para buscar la denuncia con sus relaciones
 // Función mejorada para buscar la denuncia con sus relaciones
 const findDenunciaWithRelations = async (claveUnica: string) => {
     return await DenunciaAnonimaModel.findOne({

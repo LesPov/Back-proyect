@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { TipoDenunciaModel } from '../../middleware/models/tipoDenunciaModel';
-import { SubtipoDenunciaModel } from '../../middleware/models/subtipoDenunciaModel';
-import { errorMessages } from "../../../../middleware/erros/errorMessages";
-import { DenunciaAnonimaModel } from '../../middleware/models/denunciasAnonimasModel';
+import { TipoDenunciaModel } from '../../../middleware/models/tipoDenunciaModel';
+import { SubtipoDenunciaModel } from '../../../middleware/models/subtipoDenunciaModel';
+import { errorMessages } from "../../../../../middleware/erros/errorMessages";
+import { DenunciaAnonimaModel } from '../../../middleware/models/denunciasAnonimasModel';
 import { randomBytes } from 'crypto'; // Importar para generar la clave única
-import { successMessages } from '../../../../middleware/success/successMessages';
+import { successMessages } from '../../../../../middleware/success/successMessages';
+import upload from '../../../utils/uploadConfig';
+
 // Nueva función para validar tipo y subtipo de denuncia
 export const validateDenunciaTipoYSubtipo = async (nombreTipo: string, nombreSubtipo: string, res: Response) => {
     // Validar tipo de denuncia
@@ -23,6 +25,19 @@ export const validateDenunciaTipoYSubtipo = async (nombreTipo: string, nombreSub
 
     return { tipoDenuncia, subtipoDenuncia };
 };
+// Función para manejar la subida de archivos
+const handleFilesUpload = (req: Request, res: Response, callback: () => Promise<void>) => {
+    upload(req, res, (err) => {
+        if (err) {
+            console.error(`Error en la subida de archivos: ${err.message}`);
+            return res.status(400).json({
+                message: `Error en la subida de archivos: ${err.message}`
+            });
+        }
+        callback();
+    });
+};
+
 // Crear denuncia anónima y validar tipo y subtipo de denuncia
 export const crearDenunciaAnonima = async (req: Request, res: Response) => {
     try {

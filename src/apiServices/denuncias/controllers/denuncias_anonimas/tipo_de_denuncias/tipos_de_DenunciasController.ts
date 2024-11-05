@@ -45,17 +45,7 @@ export const handleInputValidationErrors = (errors: string[], res: Response): vo
     }
 };
 
-// Validación de la imagen subida
-export const validateImageUpload = (req: Request, res: Response): boolean => {
-    if (!req.file) {
-        res.status(400).json({
-            msg: 'Error: La imagen no fue subida.',
-            errors: 'Se requiere una imagen para el tipo de denuncia.',
-        });
-        return false;
-    }
-    return true;
-};
+
 
 // Crear tipo de denuncia
 const crearTipoDenuncia = async (nombre: string, descripcion: string, esAnonimaOficial: string, flagImage: string | null) => {
@@ -67,17 +57,12 @@ const crearTipoDenuncia = async (nombre: string, descripcion: string, esAnonimaO
     });
 };
 
-// Manejo de errores de subida de imagen
-export const handleImageUploadError = (err: any, res: Response) => {
-    console.error(`Error en la subida de la imagen: ${err.message}`);
-    res.status(400).json({
-        msg: `Error en la subida de la imagen: ${err.message}`,
-        errors: 'Error al cargar la imagen',
-    });
-};
+
 
 // Controlador para crear el tipo de denuncia con subida de imagen
 export const creaTiposDenunciaAnonimas = async (req: Request, res: Response) => {
+    req.body.tipo = 'tipo'; // Marca este registro como tipo de denuncia
+
     try {
         handleImageUpload(req, res, async () => {
             if (!validateImageUpload(req, res)) return;
@@ -101,7 +86,29 @@ export const creaTiposDenunciaAnonimas = async (req: Request, res: Response) => 
     }
 };
 
-// Encapsular la lógica de subida de imagen para reducir complejidad
+// Validación de la imagen subida
+export const validateImageUpload = (req: Request, res: Response): boolean => {
+    if (!req.file) {
+        res.status(400).json({
+            msg: 'Error: La imagen no fue subida.',
+            errors: 'Se requiere una imagen para el tipo de denuncia.',
+        });
+        return false;
+    }
+    return true;
+};
+
+
+// Manejo de errores de subida de imagen
+export const handleImageUploadError = (err: any, res: Response) => {
+    console.error(`Error en la subida de la imagen: ${err.message}`);
+    res.status(400).json({
+        msg: `Error en la subida de la imagen: ${err.message}`,
+        errors: 'Error al cargar la imagen',
+    });
+};
+
+// Encapsular la lógica de subida de imagen
 const handleImageUpload = (req: Request, res: Response, callback: () => Promise<void>) => {
     upload(req, res, (err) => {
         if (err) {

@@ -27,10 +27,13 @@ export const handleImageUploadError = (err: any, res: Response) => {
     });
 };
 
+
 // Controlador para crear un subtipo de denuncia con imagen// Controlador para crear un subtipo de denuncia con imagen
 export const creaSubtipoDenuncia = async (req: Request, res: Response) => {
+    req.body.subtipo = 'subtipo'; // Marca este registro como subtipo de denuncia
     try {
         // Maneja la subida de imagen
+
         handleImageUpload(req, res, async () => {
             // Valida si la imagen fue subida
             if (!validateImageUpload(req, res)) return;

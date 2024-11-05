@@ -33,7 +33,6 @@ const handleInputValidationErrors = (errors, res) => {
     }
 };
 exports.handleInputValidationErrors = handleInputValidationErrors;
-// Función para buscar la denuncia con sus relaciones
 // Función mejorada para buscar la denuncia con sus relaciones
 const findDenunciaWithRelations = (claveUnica) => __awaiter(void 0, void 0, void 0, function* () {
     return yield denunciasAnonimasModel_1.DenunciaAnonimaModel.findOne({
