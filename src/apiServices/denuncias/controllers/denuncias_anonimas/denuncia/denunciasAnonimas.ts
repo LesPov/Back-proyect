@@ -58,6 +58,7 @@ export const crearDenunciaAnonima = async (req: Request, res: Response) => {
                 return;
             }
 
+            
             // Generar una clave única
             const claveUnica = randomBytes(16).toString('hex');
             let pruebas: string[] | null = null;

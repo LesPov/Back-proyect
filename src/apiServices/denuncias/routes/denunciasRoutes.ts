@@ -8,10 +8,10 @@ import { getSubtiposDenuncia } from '../controllers/denuncias_anonimas/subtipo_d
 
 const router = express.Router();
 
-router.get('/agregar_tipos', creaTiposDenunciaAnonimas);
+router.post('/agregar_tipos', creaTiposDenunciaAnonimas);
 router.get('/tipos/anonimas', getTiposDenunciaAnonimas);
 
-router.get('/agregar_subtipo', creaSubtipoDenuncia);
+router.post('/agregar_subtipo', creaSubtipoDenuncia);
 // Nueva ruta para obtener los subtipos según el tipo de denuncia
 router.get('/tipos/subtiposdenuncia/:nombreTipoDenuncia', getSubtiposDenuncia);
 
