@@ -23,7 +23,8 @@ const storage = multer.diskStorage({
             uploadPath = path.join('uploads/tipoDenuncias', tipo);
         } else if (subtipo) {
             uploadPath = path.join('uploads/subtipoDenuncias', subtipo);
-        } else {
+        } 
+         else {
             return cb(new Error("Tipo o subtipo de denuncia no especificado"), '');
         }
     
@@ -31,7 +32,7 @@ const storage = multer.diskStorage({
         cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, `${file.originalname}`);
     }
 });
 

@@ -5,7 +5,7 @@ import { errorMessages } from "../../../../../middleware/erros/errorMessages";
 import { DenunciaAnonimaModel } from '../../../middleware/models/denunciasAnonimasModel';
 import { randomBytes } from 'crypto'; // Importar para generar la clave única
 import { successMessages } from '../../../../../middleware/success/successMessages';
-import upload from '../../../utils/uploadConfig';
+import upload from '../../../utils/uploadConfigEvidencia';
 
 // Nueva función para validar tipo y subtipo de denuncia
 export const validateDenunciaTipoYSubtipo = async (nombreTipo: string, nombreSubtipo: string, res: Response) => {
@@ -26,7 +26,7 @@ export const validateDenunciaTipoYSubtipo = async (nombreTipo: string, nombreSub
     return { tipoDenuncia, subtipoDenuncia };
 };
 // Función para manejar la subida de archivos
-const handleFilesUpload = (req: Request, res: Response, callback: () => Promise<void>) => {
+const handleFilesEvidenciaUpload = (req: Request, res: Response, callback: () => Promise<void>) => {
     upload(req, res, (err) => {
         if (err) {
             console.error(`Error en la subida de archivos: ${err.message}`);
@@ -40,40 +40,51 @@ const handleFilesUpload = (req: Request, res: Response, callback: () => Promise<
 
 // Crear denuncia anónima y validar tipo y subtipo de denuncia
 export const crearDenunciaAnonima = async (req: Request, res: Response) => {
+    req.body.evidenciaDenuncias = 'evidenciaDenuncias';
+
     try {
-        const { descripcion, direccion, nombreTipo, nombreSubtipo, pruebas, audio } = req.body;
+        handleFilesEvidenciaUpload(req, res, async () => {
+            const { descripcion, direccion, nombreTipo, nombreSubtipo } = req.body;
 
-        // Validar entrada
-        const inputValidationErrors = validateInput(descripcion, direccion, nombreTipo, nombreSubtipo);
-        if (inputValidationErrors.length > 0) {
-            return handleInputValidationErrors(inputValidationErrors, res);
-        }
+            // Validar entrada
+            const inputValidationErrors = validateInput(descripcion, direccion, nombreTipo, nombreSubtipo);
+            if (inputValidationErrors.length > 0) {
+                return handleInputValidationErrors(inputValidationErrors, res);
+            }
 
-        // Validar tipo y subtipo de denuncia
-        const { tipoDenuncia, subtipoDenuncia } = await validateDenunciaTipoYSubtipo(nombreTipo, nombreSubtipo, res);
-        if (!tipoDenuncia || !subtipoDenuncia) {
-            return; // Ya se manejó el error dentro de validateDenunciaTipoYSubtipo
-        }
+            // Validar tipo y subtipo de denuncia
+            const { tipoDenuncia, subtipoDenuncia } = await validateDenunciaTipoYSubtipo(nombreTipo, nombreSubtipo, res);
+            if (!tipoDenuncia || !subtipoDenuncia) {
+                return;
+            }
 
+            // Generar una clave única
+            const claveUnica = randomBytes(16).toString('hex');
+            let pruebas: string[] | null = null;
+            let audio: string[] | null = null;
 
-        // Generar una clave única
-        const claveUnica = randomBytes(16).toString('hex'); // Genera una cadena hexagonal de 32 caracteres
-        // Determinar si tiene evidencia
-        const tieneEvidencia = !!pruebas || !!audio; // Si alguna de estas está presente, es true
+            // Verificar si hay archivos de 'pruebas' y 'audio'
+            if (req.files && 'pruebas' in req.files) {
+                pruebas = (req.files['pruebas'] as Express.Multer.File[]).map(file => file.originalname);
+            }
+            if (req.files && 'audio' in req.files) {
+                audio = (req.files['audio'] as Express.Multer.File[]).map(file => file.originalname);
+            }
 
-        // Crear la denuncia
-        const nuevaDenuncia = await DenunciaAnonimaModel.create({
-            descripcion,
-            direccion,
-            tipoDenunciaId: tipoDenuncia.id,
-            subtipoDenunciaId: subtipoDenuncia.id,
-            claveUnica,
-            pruebas: pruebas || null, // Asignar 'null' si no hay pruebas
-            audio: audio || null, // Asignar 'null' si no hay audio
-            tieneEvidencia // Almacenar el estado de tieneEvidencia
+            // Cambia la asignación de pruebas y audio en el controlador a un string
+            const nuevaDenuncia = await DenunciaAnonimaModel.create({
+                descripcion,
+                direccion,
+                tipoDenunciaId: tipoDenuncia.id,
+                subtipoDenunciaId: subtipoDenuncia.id,
+                claveUnica,
+                pruebas: pruebas ? pruebas.join(', ') : null,  // Convierte el array en una cadena separada por comas
+                audio: audio ? audio.join(', ') : null,        // Convierte el array en una cadena separada por comas
+                tieneEvidencia: !!(pruebas || audio),
+            });
+
+            handleSuccessMessage(res, nuevaDenuncia);
         });
-        handleSuccessMessage(res, nuevaDenuncia);
-
     } catch (error) {
         handleServerError(error, res);
     }
