@@ -25,7 +25,7 @@ export const getTiposDenunciaAnonimas = async (req: Request, res: Response) => {
         const tiposDenunciasConImagen = tiposDenuncias.map((tipo) => {
             return {
                 ...tipo.toJSON(),
-                imageUrl: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/${tipo.flagImage}` // URL completa de la imagen
+                imageUrl: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/tipoDenuncias/tipo/${tipo.flagImage}` // URL completa de la imagen
             };
         });
 

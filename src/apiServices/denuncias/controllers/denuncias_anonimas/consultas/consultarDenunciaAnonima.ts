@@ -8,20 +8,25 @@ import { successMessages } from '../../../../../middleware/success/successMessag
 // Función para validar la clave única
 const validateClaveUnica = (claveUnica: string): string[] => {
     const errors: string[] = [];
-    if (!claveUnica) {
-        errors.push(errorMessages.requiredFields);
+    if (!claveUnica || claveUnica.trim() === '') { // Verifica si está vacía o mal formada
+        errors.push('La clave única es requerida y no puede estar vacía.');
     }
     return errors;
 };
-export const handleInputValidationErrors = (errors: string[], res: Response): void => {
+// Función para manejar errores de validación sin lanzar una excepción// Función para manejar errores de validación sin lanzar una excepción
+const handleInputValidationErrors = (errors: string[], res: Response): boolean => {
     if (errors.length > 0) {
         res.status(400).json({
-            msg: errors,
-            errors: `Error en la validación de la entrada de datos`,
+            success: false,
+            message: 'Error en la validación de los datos.',
+            errors: errors
         });
-        throw new Error("Input validation failed");
+        return true; // Indica que hubo un error de validación
     }
+    return false; // No hubo errores de validación
 };
+
+
 // Función mejorada para buscar la denuncia con sus relaciones
 const findDenunciaWithRelations = async (claveUnica: string) => {
     return await DenunciaAnonimaModel.findOne({
@@ -29,15 +34,15 @@ const findDenunciaWithRelations = async (claveUnica: string) => {
         include: [
             {
                 model: TipoDenunciaModel,
-                as: 'TipoDenuncia', // Asegúrate de que este alias coincida con tu definición de relación
-                attributes: ['id', 'nombre'], // Incluimos el ID también para referencia
-                required: true // INNER JOIN para asegurar que siempre tengamos el tipo
+                as: 'TipoDenuncia',
+                attributes: ['id', 'nombre'],
+                required: true,
             },
             {
                 model: SubtipoDenunciaModel,
-                as: 'SubtipoDenuncia', // Asegúrate de que este alias coincida con tu definición de relación
-                attributes: ['id', 'nombre'], // Incluimos el ID también para referencia
-                required: true // INNER JOIN para asegurar que siempre tengamos el subtipo
+                as: 'SubtipoDenuncia',
+                attributes: ['id', 'nombre'],
+                required: true,
             }
         ],
         attributes: [
@@ -52,17 +57,37 @@ const findDenunciaWithRelations = async (claveUnica: string) => {
             'createdAt',
             'updatedAt',
             'tipoDenunciaId',
-            'subtipoDenunciaId'
+            'subtipoDenunciaId',
         ]
     });
 };
 
-// Función mejorada para manejar la respuesta exitosa
+// Función para manejar la respuesta exitosa
 const handleSuccessResponse = (res: Response, denuncia: any) => {
-    // Verificamos que tengamos acceso a los datos de tipo y subtipo
     if (!denuncia.TipoDenuncia || !denuncia.SubtipoDenuncia) {
         throw new Error('No se pudo obtener la información completa de tipo o subtipo de denuncia');
     }
+    const pruebasUrls = denuncia.pruebas
+    ? denuncia.pruebas.split(',').map((file: string) => {
+        if (file.trim().endsWith('.mp4')) {
+            return {
+                type: 'video',
+                url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/videos/${file.trim()}`
+            };
+        } else {
+            return {
+                type: 'image',
+                url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/imagenes/${file.trim()}`
+            };
+        }
+    })
+    : [];
+
+    const audioUrl = denuncia.audio
+        ? `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/audios/${denuncia.audio}`
+        : null;
+
+
 
     res.status(200).json({
         success: true,
@@ -75,33 +100,31 @@ const handleSuccessResponse = (res: Response, denuncia: any) => {
             claveUnica: denuncia.claveUnica,
             tipoDenuncia: {
                 id: denuncia.TipoDenuncia.id,
-                nombre: denuncia.TipoDenuncia.nombre
+                nombre: denuncia.TipoDenuncia.nombre,
             },
             subtipoDenuncia: {
                 id: denuncia.SubtipoDenuncia.id,
-                nombre: denuncia.SubtipoDenuncia.nombre
+                nombre: denuncia.SubtipoDenuncia.nombre,
             },
-            pruebas: denuncia.pruebas,
-            audio: denuncia.audio,
+            pruebas: pruebasUrls,
+            audio: audioUrl,
             tieneEvidencia: denuncia.tieneEvidencia,
             fechaCreacion: denuncia.createdAt,
-            fechaActualizacion: denuncia.updatedAt
-        }
+            fechaActualizacion: denuncia.updatedAt,
+        },
     });
 };
-
-
 
 // Función para manejar denuncia no encontrada
 const handleDenunciaNotFound = (res: Response) => {
     res.status(404).json({
         success: false,
         message: errorMessages.denunciaNotFound,
-        error: 'No se encontró ninguna denuncia con la clave proporcionada'
+        error: 'No se encontró ninguna denuncia con la clave proporcionada',
     });
 };
 
-
+// Controlador principal
 // Controlador principal
 export const consultarDenunciaAnonima = async (req: Request, res: Response) => {
     try {
@@ -109,8 +132,11 @@ export const consultarDenunciaAnonima = async (req: Request, res: Response) => {
 
         // Validar la entrada de datos (claveUnica)
         const inputValidationErrors = validateClaveUnica(claveUnica);
+
         // Manejar cualquier error de validación de la entrada de datos
-        handleInputValidationErrors(inputValidationErrors, res);
+        if (handleInputValidationErrors(inputValidationErrors, res)) {
+            return; // Detenemos la ejecución si hubo un error de validación
+        }
 
         // Buscar la denuncia
         const denuncia = await findDenunciaWithRelations(claveUnica);
@@ -133,6 +159,6 @@ export const handleServerError = (error: any, res: Response) => {
     console.error("Error en el controlador de consulta denuncia anónima:", error);
     res.status(500).json({
         message: errorMessages.serverError,
-        error: error.message
+        error: error.message,
     });
-}; 
+};

@@ -21,3 +21,4 @@ router.post('/denuncias', crearDenunciaAnonima);
 router.get('/denuncias/consultas_anonimas', consultarDenunciaAnonima);
 
 export default router;
+
