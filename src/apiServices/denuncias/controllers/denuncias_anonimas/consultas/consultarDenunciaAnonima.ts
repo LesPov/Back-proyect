@@ -82,6 +82,7 @@ const handleSuccessResponse = (res: Response, denuncia: any) => {
         }
     })
     : [];
+    
 
     const audioUrl = denuncia.audio
         ? `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/audios/${denuncia.audio}`
