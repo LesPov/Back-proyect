@@ -69,7 +69,7 @@ const handleSuccessResponse = (res: Response, denuncia: any) => {
     }
     const pruebasUrls = denuncia.pruebas
     ? denuncia.pruebas.split(',').map((file: string) => {
-        if (file.trim().endsWith('.mp4')) {
+        if (file.trim().endsWith('.webm')) {
             return {
                 type: 'video',
                 url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/videos/${file.trim()}`
