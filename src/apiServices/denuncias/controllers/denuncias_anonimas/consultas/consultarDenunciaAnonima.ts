@@ -68,21 +68,23 @@ const handleSuccessResponse = (res: Response, denuncia: any) => {
         throw new Error('No se pudo obtener la información completa de tipo o subtipo de denuncia');
     }
     const pruebasUrls = denuncia.pruebas
-    ? denuncia.pruebas.split(',').map((file: string) => {
-        if (file.trim().endsWith('.webm')) {
-            return {
-                type: 'video',
-                url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/videos/${file.trim()}`
-            };
-        } else {
-            return {
-                type: 'image',
-                url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/imagenes/${file.trim()}`
-            };
-        }
-    })
-    : [];
-    
+        ? denuncia.pruebas.split(',').map((file: string) => {
+            const trimmedFile = file.trim();
+            // Verifica si el archivo es de video o imagen según la extensión
+            if (trimmedFile.endsWith('.webm') || trimmedFile.endsWith('.mp4')) {
+                               return {
+                    type: 'video',
+                    url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/videos/${trimmedFile}`
+                };
+            } else {
+                return {
+                    type: 'image',
+                    url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/imagenes/${trimmedFile}`
+                };
+            }
+        })
+        : [];
+
 
     const audioUrl = denuncia.audio
         ? `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/audios/${denuncia.audio}`

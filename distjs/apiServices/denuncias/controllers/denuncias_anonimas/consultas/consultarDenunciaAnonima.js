@@ -76,16 +76,18 @@ const handleSuccessResponse = (res, denuncia) => {
     }
     const pruebasUrls = denuncia.pruebas
         ? denuncia.pruebas.split(',').map((file) => {
-            if (file.trim().endsWith('.webm')) {
+            const trimmedFile = file.trim();
+            // Verifica si el archivo es de video o imagen según la extensión
+            if (trimmedFile.endsWith('.webm') || trimmedFile.endsWith('.mp4')) {
                 return {
                     type: 'video',
-                    url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/videos/${file.trim()}`
+                    url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/videos/${trimmedFile}`
                 };
             }
             else {
                 return {
                     type: 'image',
-                    url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/imagenes/${file.trim()}`
+                    url: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/evidenciasDenuncias/imagenes/${trimmedFile}`
                 };
             }
         })

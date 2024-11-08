@@ -1,10 +1,10 @@
 import express from 'express';
 import { crearDenunciaAnonima } from '../controllers/denuncias_anonimas/denuncia/denunciasAnonimas';
 import { consultarDenunciaAnonima } from '../controllers/denuncias_anonimas/consultas/consultarDenunciaAnonima';
-import { creaTiposDenunciaAnonimas } from '../controllers/denuncias_anonimas/tipo_de_denuncias/tipos_de_DenunciasController';
-import { creaSubtipoDenuncia } from '../controllers/denuncias_anonimas/subtipo_de_denuncias/subtipos_de_DenunciasController';
-import { getTiposDenunciaAnonimas } from '../controllers/denuncias_anonimas/tipo_de_denuncias/obtenerTipos_de_DenunciasController';
-import { getSubtiposDenuncia } from '../controllers/denuncias_anonimas/subtipo_de_denuncias/obtenerSubtipos_de_DenunciasController';
+import { creaTiposDenunciaAnonimas } from '../controllers/tipo_de_denuncias/tipos_de_DenunciasController';
+import { creaSubtipoDenuncia } from '../controllers/subtipo_de_denuncias/subtipos_de_DenunciasController';
+import { getTiposDenunciaAnonimas } from '../controllers/tipo_de_denuncias/obtenerTipos_de_DenunciasController';
+import { getSubtiposDenuncia } from '../controllers/subtipo_de_denuncias/obtenerSubtipos_de_DenunciasController';
 
 const router = express.Router();
 

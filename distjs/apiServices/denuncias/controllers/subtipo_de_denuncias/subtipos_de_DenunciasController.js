@@ -43,6 +43,7 @@ const handleImageUploadError = (err, res) => {
 exports.handleImageUploadError = handleImageUploadError;
 // Controlador para crear un subtipo de denuncia con imagen// Controlador para crear un subtipo de denuncia con imagen
 const creaSubtipoDenuncia = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    req.body.subtipo = 'subtipo'; // Marca este registro como subtipo de denuncia
     try {
         // Maneja la subida de imagen
         handleImageUpload(req, res, () => __awaiter(void 0, void 0, void 0, function* () {

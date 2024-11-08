@@ -26,7 +26,7 @@ const getTiposDenunciaAnonimas = (req, res) => __awaiter(void 0, void 0, void 0,
         });
         // Construye el objeto de respuesta con URLs de las imágenes
         const tiposDenunciasConImagen = tiposDenuncias.map((tipo) => {
-            return Object.assign(Object.assign({}, tipo.toJSON()), { imageUrl: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/${tipo.flagImage}` // URL completa de la imagen
+            return Object.assign(Object.assign({}, tipo.toJSON()), { imageUrl: `https://g7hr118t-1001.use2.devtunnels.ms/uploads/tipoDenuncias/tipo/${tipo.flagImage}` // URL completa de la imagen
              });
         });
         res.json(tiposDenunciasConImagen); // Respuesta con los tipos de denuncias anónimas y URLs de imágenes
