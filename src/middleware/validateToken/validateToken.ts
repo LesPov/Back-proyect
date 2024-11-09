@@ -6,12 +6,11 @@ import { errorMessages } from '../erros/errorMessages';
 
 // Definición de la interfaz CustomRequest que extiende la interfaz de Request de Express.
 // Se agrega una propiedad opcional `user` que almacenará información del usuario, como `userId` y `rol`.
-interface CustomRequest extends Request {
+export interface CustomRequest extends Request {
     user?: {
         userId: number;  // ID del usuario autenticado.
         rol: string;     // Rol del usuario (admin, user, etc.).
-        // Otras propiedades se pueden agregar según sea necesario.
-    };
+    } | null; // Permitir que sea 'null' además de 'undefined'
 }
 
 // Función que extrae el token Bearer del encabezado de autorización.
@@ -25,6 +24,7 @@ const extractBearerToken = (headerToken: string | undefined): string | null => {
     // Si no se encuentra el token o no sigue el formato, retorna null.
     return null;
 };
+
 
 // Función que verifica el token JWT utilizando la clave secreta almacenada en las variables de entorno.
 // Si no se encuentra la clave secreta en las variables de entorno, usa un valor por defecto ('pepito123').
@@ -48,15 +48,17 @@ const validateToken = (req: CustomRequest, res: Response, next: NextFunction) =>
     const bearerToken = extractBearerToken(headerToken);
 
     // Si no se encuentra el token, responde con un mensaje de acceso denegado.
+    // Si no se proporciona un token, asignar `null` a `req.user` y continuar sin error
     if (!bearerToken) {
-        return handleAuthError(res, errorMessages.accessDeniedNoToken);
+        req.user = null;
+        return next();
     }
 
     try {
         // Verifica y decodifica el token.
         const decodedToken = verifyToken(bearerToken);
         // Almacena la información del usuario en `req.user` para su uso posterior en otras funciones.
-        req.user = decodedToken;
+        req.user = { userId: decodedToken.userId, rol: decodedToken.rol };
         // Llama a la siguiente función middleware si el token es válido.
         next();
     } catch (error) {

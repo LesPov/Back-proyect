@@ -52,7 +52,6 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     allowNull: false,
     unique: true,
   },
-
   /**
    * Número de teléfono del usuario.
    * Este campo es opcional y puede ser nulo.
@@ -82,4 +81,7 @@ export const AuthModel = sequelize.define<AuthInterface>('auth', {
     allowNull: false,
     defaultValue: false,
   },
+}, {
+  tableName: 'auth',
+  timestamps: true, // No agregamos las columnas createdAt y updatedAt
 });

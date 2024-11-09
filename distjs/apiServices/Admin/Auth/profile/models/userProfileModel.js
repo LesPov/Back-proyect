@@ -18,7 +18,7 @@ exports.UserProfileModel = connnection_1.default.define('userProfile', {
         allowNull: false,
         unique: true,
         references: {
-            model: authModel_1.AuthModel,
+            model: 'auth',
             key: 'id',
         },
     },

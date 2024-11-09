@@ -8,6 +8,7 @@ const sequelize_1 = require("sequelize");
 const connnection_1 = __importDefault(require("../../../../database/connnection"));
 const tipoDenunciaModel_1 = require("./tipoDenunciaModel");
 const subtipoDenunciaModel_1 = require("./subtipoDenunciaModel");
+const authModel_1 = require("../../../../middleware/models/authModel");
 // Definición del modelo para Denuncias Anónimas
 // Modificación del modelo para agregar columnas opcionales
 exports.DenunciaAnonimaModel = connnection_1.default.define('DenunciaAnonima', {
@@ -63,9 +64,26 @@ exports.DenunciaAnonimaModel = connnection_1.default.define('DenunciaAnonima', {
         allowNull: false,
         defaultValue: false, // Por defecto será false
     },
+    userId: {
+        type: sequelize_1.DataTypes.INTEGER,
+        references: {
+            model: 'auth',
+            key: 'id',
+        },
+        allowNull: true,
+    },
 }, {
     tableName: 'denuncias_anonimas',
     timestamps: true,
+});
+// Relación entre AuthModel y DenunciaAnonimaModel para que cada usuario pueda realizar múltiples denuncias
+authModel_1.AuthModel.hasMany(exports.DenunciaAnonimaModel, {
+    foreignKey: 'userId',
+    as: 'Denuncias',
+});
+exports.DenunciaAnonimaModel.belongsTo(authModel_1.AuthModel, {
+    foreignKey: 'userId',
+    as: 'Usuario',
 });
 // Relación entre DenunciaAnonima y TipoDenuncia
 tipoDenunciaModel_1.TipoDenunciaModel.hasMany(exports.DenunciaAnonimaModel, {

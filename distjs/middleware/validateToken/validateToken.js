@@ -35,14 +35,16 @@ const validateToken = (req, res, next) => {
     // Extrae el token Bearer.
     const bearerToken = extractBearerToken(headerToken);
     // Si no se encuentra el token, responde con un mensaje de acceso denegado.
+    // Si no se proporciona un token, asignar `null` a `req.user` y continuar sin error
     if (!bearerToken) {
-        return handleAuthError(res, errorMessages_1.errorMessages.accessDeniedNoToken);
+        req.user = null;
+        return next();
     }
     try {
         // Verifica y decodifica el token.
         const decodedToken = verifyToken(bearerToken);
         // Almacena la información del usuario en `req.user` para su uso posterior en otras funciones.
-        req.user = decodedToken;
+        req.user = { userId: decodedToken.userId, rol: decodedToken.rol };
         // Llama a la siguiente función middleware si el token es válido.
         next();
     }

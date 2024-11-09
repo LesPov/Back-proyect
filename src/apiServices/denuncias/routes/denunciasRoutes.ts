@@ -5,6 +5,7 @@ import { creaTiposDenunciaAnonimas } from '../controllers/tipo_de_denuncias/tipo
 import { creaSubtipoDenuncia } from '../controllers/subtipo_de_denuncias/subtipos_de_DenunciasController';
 import { getTiposDenunciaAnonimas } from '../controllers/tipo_de_denuncias/obtenerTipos_de_DenunciasController';
 import { getSubtiposDenuncia } from '../controllers/subtipo_de_denuncias/obtenerSubtipos_de_DenunciasController';
+import validateToken from '../../../middleware/validateToken/validateToken';
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.post('/agregar_subtipo', creaSubtipoDenuncia);
 router.get('/tipos/subtiposdenuncia/:nombreTipoDenuncia', getSubtiposDenuncia);
 
 // Ruta para crear denuncia anónima
-router.post('/denuncias', crearDenunciaAnonima);
+router.post('/denuncias',validateToken, crearDenunciaAnonima);
 
 router.get('/denuncias/consultas_anonimas', consultarDenunciaAnonima);
 

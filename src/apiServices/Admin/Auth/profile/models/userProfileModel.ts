@@ -14,7 +14,7 @@ export const UserProfileModel = sequelize.define<UserProfileinterface>('userProf
     allowNull: false,
     unique: true,
     references: {
-      model: AuthModel,
+      model: 'auth',
       key: 'id',
     },
   },

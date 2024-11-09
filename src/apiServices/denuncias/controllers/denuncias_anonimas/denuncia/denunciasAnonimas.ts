@@ -6,6 +6,7 @@ import { DenunciaAnonimaModel } from '../../../middleware/models/denunciasAnonim
 import { randomBytes } from 'crypto'; // Importar para generar la clave única
 import { successMessages } from '../../../../../middleware/success/successMessages';
 import upload from '../../../utils/uploadConfigEvidencia';
+import { CustomRequest } from '../../../../../middleware/validateToken/validateToken';
 
 // Nueva función para validar tipo y subtipo de denuncia
 export const validateDenunciaTipoYSubtipo = async (nombreTipo: string, nombreSubtipo: string, res: Response) => {
@@ -38,8 +39,9 @@ const handleFilesEvidenciaUpload = (req: Request, res: Response, callback: () =>
     });
 };
 
+
 // Crear denuncia anónima y validar tipo y subtipo de denuncia
-export const crearDenunciaAnonima = async (req: Request, res: Response) => {
+export const crearDenunciaAnonima = async (req: CustomRequest, res: Response) => {
     req.body.evidenciaDenuncias = 'evidenciaDenuncias';
 
     try {
@@ -58,7 +60,12 @@ export const crearDenunciaAnonima = async (req: Request, res: Response) => {
                 return;
             }
 
-            
+            // Obtener userId del token decodificado
+            // 4. Obtener `userId` desde el token decodificado (si está disponible)
+            const userId = req.user ? req.user.userId : null;
+            console.log('User ID:', userId); // Debug
+
+
             // Generar una clave única
             const claveUnica = randomBytes(16).toString('hex');
             let pruebas: string[] | null = null;
@@ -82,6 +89,8 @@ export const crearDenunciaAnonima = async (req: Request, res: Response) => {
                 pruebas: pruebas ? pruebas.join(', ') : null,  // Convierte el array en una cadena separada por comas
                 audio: audio ? audio.join(', ') : null,        // Convierte el array en una cadena separada por comas
                 tieneEvidencia: !!(pruebas || audio),
+                userId // Asigna el userId aquí
+
             });
 
             handleSuccessMessage(res, nuevaDenuncia);

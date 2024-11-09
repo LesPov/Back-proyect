@@ -65,6 +65,10 @@ const crearDenunciaAnonima = (req, res) => __awaiter(void 0, void 0, void 0, fun
             if (!tipoDenuncia || !subtipoDenuncia) {
                 return;
             }
+            // Obtener userId del token decodificado
+            // 4. Obtener `userId` desde el token decodificado (si está disponible)
+            const userId = req.user ? req.user.userId : null;
+            console.log('User ID:', userId); // Debug
             // Generar una clave única
             const claveUnica = (0, crypto_1.randomBytes)(16).toString('hex');
             let pruebas = null;
@@ -86,6 +90,7 @@ const crearDenunciaAnonima = (req, res) => __awaiter(void 0, void 0, void 0, fun
                 pruebas: pruebas ? pruebas.join(', ') : null, // Convierte el array en una cadena separada por comas
                 audio: audio ? audio.join(', ') : null, // Convierte el array en una cadena separada por comas
                 tieneEvidencia: !!(pruebas || audio),
+                userId // Asigna el userId aquí
             });
             (0, exports.handleSuccessMessage)(res, nuevaDenuncia);
         }));

@@ -78,4 +78,7 @@ exports.AuthModel = connnection_1.default.define('auth', {
         allowNull: false,
         defaultValue: false,
     },
+}, {
+    tableName: 'auth',
+    timestamps: true, // No agregamos las columnas createdAt y updatedAt
 });

@@ -10,6 +10,7 @@ const tipos_de_DenunciasController_1 = require("../controllers/tipo_de_denuncias
 const subtipos_de_DenunciasController_1 = require("../controllers/subtipo_de_denuncias/subtipos_de_DenunciasController");
 const obtenerTipos_de_DenunciasController_1 = require("../controllers/tipo_de_denuncias/obtenerTipos_de_DenunciasController");
 const obtenerSubtipos_de_DenunciasController_1 = require("../controllers/subtipo_de_denuncias/obtenerSubtipos_de_DenunciasController");
+const validateToken_1 = __importDefault(require("../../../middleware/validateToken/validateToken"));
 const router = express_1.default.Router();
 router.post('/agregar_tipos', tipos_de_DenunciasController_1.creaTiposDenunciaAnonimas);
 router.get('/tipos/anonimas', obtenerTipos_de_DenunciasController_1.getTiposDenunciaAnonimas);
@@ -17,6 +18,6 @@ router.post('/agregar_subtipo', subtipos_de_DenunciasController_1.creaSubtipoDen
 // Nueva ruta para obtener los subtipos según el tipo de denuncia
 router.get('/tipos/subtiposdenuncia/:nombreTipoDenuncia', obtenerSubtipos_de_DenunciasController_1.getSubtiposDenuncia);
 // Ruta para crear denuncia anónima
-router.post('/denuncias', denunciasAnonimas_1.crearDenunciaAnonima);
+router.post('/denuncias', validateToken_1.default, denunciasAnonimas_1.crearDenunciaAnonima);
 router.get('/denuncias/consultas_anonimas', consultarDenunciaAnonima_1.consultarDenunciaAnonima);
 exports.default = router;

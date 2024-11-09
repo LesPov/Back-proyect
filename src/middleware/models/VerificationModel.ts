@@ -23,7 +23,7 @@ export const VerificationModel = sequelize.define<VerificationInterface>('verifi
     allowNull: false,
     unique: true, // Un usuario debe tener una única entrada de verificación
     references: {
-      model: AuthModel, // Modelo al que hace referencia
+      model: 'auth', 
       key: 'id', // Clave primaria en el modelo AuthModel
     },
   },
@@ -109,3 +109,4 @@ export const VerificationModel = sequelize.define<VerificationInterface>('verifi
  */
 AuthModel.hasOne(VerificationModel, { foreignKey: 'userId' });
 VerificationModel.belongsTo(AuthModel, { foreignKey: 'userId' });
+

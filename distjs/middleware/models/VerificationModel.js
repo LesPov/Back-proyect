@@ -26,7 +26,7 @@ exports.VerificationModel = connnection_1.default.define('verification', {
         allowNull: false,
         unique: true, // Un usuario debe tener una única entrada de verificación
         references: {
-            model: authModel_1.AuthModel, // Modelo al que hace referencia
+            model: 'auth',
             key: 'id', // Clave primaria en el modelo AuthModel
         },
     },
