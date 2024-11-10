@@ -42,16 +42,6 @@ exports.UserProfileModel = connnection_1.default.define('userProfile', {
         type: sequelize_1.DataTypes.TEXT,
         allowNull: true,
     },
-    profileType: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-    },
-    messageType: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-    },
     status: {
         type: sequelize_1.DataTypes.ENUM('Activado', 'Desactivado'), // Define un enum para limitar los valores posibles
         allowNull: false,

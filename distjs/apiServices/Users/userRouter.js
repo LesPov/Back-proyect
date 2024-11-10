@@ -12,7 +12,7 @@ const userRouter = (0, express_1.Router)();
  *  Ruta protegida para los usuarios normales.
  *  Privado (solo para usuarios con rol 'user')
  */
-userRouter.get('/user', validateToken_1.default, (0, validateRole_1.default)('user'), (req, res) => {
+userRouter.get('/user', validateToken_1.default, (0, validateRole_1.default)('User'), (req, res) => {
     res.send('Bienvenido, eres un usuario normal');
 });
 exports.default = userRouter;

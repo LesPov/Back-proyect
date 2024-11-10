@@ -8,7 +8,7 @@ const userRouter = Router();
  *  Ruta protegida para los usuarios normales.
  *  Privado (solo para usuarios con rol 'user')
  */
-userRouter.get('/user', validateToken, validateRole('user'), (req, res) => {
+userRouter.get('/user', validateToken, validateRole('User'), (req, res) => {
     res.send('Bienvenido, eres un usuario normal');
 });
 

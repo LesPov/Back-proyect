@@ -38,17 +38,9 @@ export const UserProfileModel = sequelize.define<UserProfileinterface>('userProf
     type: DataTypes.TEXT,
     allowNull: true,
   },
-  profileType: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
-  messageType: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
-  status: {
+
+  
+status: {
     type: DataTypes.ENUM('Activado', 'Desactivado'), // Define un enum para limitar los valores posibles
     allowNull: false,
     defaultValue: 'Activado', // Puedes establecer el valor predeterminado según tus necesidades

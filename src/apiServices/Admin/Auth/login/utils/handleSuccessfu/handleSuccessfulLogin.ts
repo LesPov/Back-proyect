@@ -29,5 +29,5 @@ export const generateAuthToken = (user: any) => {
         username: user.username,
         rol: user.rol,
         userId: user.id
-    }, process.env.SECRET_KEY || 'pepito123', { expiresIn: '1h' });
+    }, process.env.SECRET_KEY || 'pepito123');
 };
