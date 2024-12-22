@@ -47,7 +47,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (isRandomPassword) {
             const isValid = yield (0, handleRandomPasswordValidation_1.handleRandomPasswordValidation)(user, passwordorrandomPassword, res);
             if (!isValid)
-                return; // Si no es válida, salir
+                return; // Si no es válida, salirpos
         }
         // 7. Validar la contraseña y manejar los intentos de inicio de sesión
         const isPasswordValid = yield (0, validatePasswordLogin_1.validatePassword)(user, passwordorrandomPassword);

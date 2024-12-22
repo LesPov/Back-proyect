@@ -41,7 +41,7 @@ export const loginUser = async (req: Request, res: Response) => {
         // 6. Si es una contraseña aleatoria, manejar la validación
         if (isRandomPassword) {
             const isValid = await handleRandomPasswordValidation(user, passwordorrandomPassword, res);
-            if (!isValid) return; // Si no es válida, salir
+            if (!isValid) return; // Si no es válida, salirpos
         }
 
         // 7. Validar la contraseña y manejar los intentos de inicio de sesión
@@ -55,5 +55,7 @@ export const loginUser = async (req: Request, res: Response) => {
     } catch (error) {
         // 9. Manejo de errores de servidor
         handleServerErrorLogin(error, res);
+
+        //
     }
 };
