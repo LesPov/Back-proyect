@@ -25,8 +25,6 @@ import path from 'path';
 
 // Configurar las variables de entorno del archivo .env
 dotenv.config();
-
-
 class Server {
 
     private app: Application;
