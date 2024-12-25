@@ -60,6 +60,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) {
         // 9. Manejo de errores de servidor
         (0, handleServerError_1.handleServerErrorLogin)(error, res);
+        //
     }
 });
 exports.loginUser = loginUser;
